@@ -2,7 +2,7 @@
     <div class="fixed-center text-center">
         <p>
             <img
-                    src="~assets/logo1.png"
+                    src="../../../assets/logo1.png"
                     style="width:30vw;max-width:150px;"
             >
         </p>
@@ -17,7 +17,7 @@
 
 <script>
     export default {
-        name: "404"
+        name: "Page404"
     }
 </script>
 
