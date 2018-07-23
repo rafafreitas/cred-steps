@@ -6,12 +6,15 @@ import routes from './routes'
 Vue.use(VueRouter)
 
 const Router = new VueRouter({
+    mode: 'history',
     routes
 })
 
 
 Router.beforeEach((to, from, next) => {
     console.log('Check Routers')
+    console.log('Store - isAuth', store.getters.isAuth)
+
     let requiresAuth = to.meta.auth
     let currentUser = store.getters.isAuth;
 
