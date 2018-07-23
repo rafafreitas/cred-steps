@@ -5,7 +5,7 @@ export default [
     {
         path: '/',
         redirect: {
-            name: 'Home'
+            name: 'Contato'
         }
     },
     ...Public,
