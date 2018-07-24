@@ -1,11 +1,11 @@
 <template>
     <div class="container-contato">
-        <v-stepper v-model="e1">
+        <v-stepper v-model="tab">
             <v-stepper-header>
-                <v-stepper-step :complete="e1 > 1" step="1">Empréstimo Pessoal</v-stepper-step>
+                <v-stepper-step :complete="tab > 1" step="1">Empréstimo Pessoal</v-stepper-step>
                 <v-divider></v-divider>
 
-                <v-stepper-step :complete="e1 > 2" step="2">Qual o motivo?</v-stepper-step>
+                <v-stepper-step :complete="tab > 2" step="2">Qual o motivo?</v-stepper-step>
                 <v-divider></v-divider>
 
                 <v-stepper-step step="3">Finalize</v-stepper-step>
@@ -13,7 +13,7 @@
 
             <v-stepper-items>
                 <v-stepper-content step="1">
-                    <page-1></page-1>
+                    <page-1 @alterTab="alterEl"></page-1>
                 </v-stepper-content>
                 <v-stepper-content step="2">
                     <page-2></page-2>
@@ -35,9 +35,16 @@
         name: "Contato",
         components: {Page1,Page2,Page3},
         data: () => ({
-            e1: 0,
+            tab: 0,
         }),
+        methods: {
+            alterEl() {
+                console.log('Cheguei aqui')
+                this.tab++
+            }
+        }
     }
+
 </script>
 
 <style scoped lang="scss">

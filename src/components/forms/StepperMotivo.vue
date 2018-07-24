@@ -8,7 +8,7 @@
                 Parcelas entre: *
                 <br/>
                 <label class="stepper-label-parc">
-                    R$ {{firstParcel}} e R$ {{secondParcel}}
+                    <!--R$ {{firstParcel}} e R$ {{secondParcel}}-->
                 </label>
             </p>
             <div class="card-content">

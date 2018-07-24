@@ -10,11 +10,11 @@
                     <v-flex xs12 sm6 class="container-flex">
                         <label>
                             Quanto você precisa? <br>
-                            <b>R$ {{(page1.initialValue).toLocaleString('pt-BR')}},00 </b>
+                            <b>R$ {{(itens.initialValue).toLocaleString('pt-BR')}},00 </b>
                         </label>
                         <v-slider
                                 class="slider-valor"
-                                v-model="page1.initialValue"
+                                v-model="itens.initialValue"
                                 thumb-size="40"
                                 thumb-label
                                 min="500"
@@ -29,8 +29,8 @@
                             <b></b>
                         </label>
                         <v-select
-                                v-model="page1.parcela"
-                                :items="page1.parcelas"
+                                v-model="itens.parcela"
+                                :items="itens.parcelas"
                                 label="Parcelas"
                         ></v-select>
                     </v-flex>
@@ -46,8 +46,8 @@
 
                 <v-text-field
                         v-validate="'required'"
-                        v-model="page1.nome"
-                        :rules="[() => validInput(page1.nome) || error]"
+                        v-model="itens.nome"
+                        :rules="[() => validInput(itens.nome) || error]"
                         :error-messages="errors.collect('name')"
                         data-vv-name="name"
                         label="Nome"
@@ -58,8 +58,8 @@
 
                 <v-text-field
                         v-validate="'required'"
-                        v-model="page1.telefone"
-                        :rules="[() => validInput(page1.telefone) || error]"
+                        v-model="itens.telefone"
+                        :rules="[() => validInput(itens.telefone) || error]"
                         :error-messages="errors.collect('telefone')"
                         data-vv-name="telefone"
                         placeholder="(__) ____-____"
@@ -70,8 +70,8 @@
 
                 <v-text-field
                         v-validate="'required'"
-                        v-model="page1.cpf"
-                        :rules="[() => validInput(page1.cpf) || error]"
+                        v-model="itens.cpf"
+                        :rules="[() => validInput(itens.cpf) || error]"
                         :error-messages="errors.collect('cpf')"
                         data-vv-name="cpf"
                         placeholder="___.___.___-__"
@@ -83,7 +83,7 @@
                 <v-dialog
                         ref="dialog"
                         v-model="modal"
-                        :return-value.sync="page1.nascimento"
+                        :return-value.sync="itens.nascimento"
                         persistent
                         lazy
                         full-width
@@ -92,18 +92,18 @@
                     <v-text-field
                             slot="activator"
                             v-validate="'required'"
-                            v-model="page1.nascimento"
-                            :rules="[() => validInput(page1.nascimento) || error]"
+                            v-model="itens.nascimento"
+                            :rules="[() => validInput(itens.nascimento) || error]"
                             :error-messages="errors.collect('nascimento')"
                             data-vv-name="nascimento"
                             label="Data de Nascimento"
                             prepend-icon="event"
                             readonly
                     ></v-text-field>
-                    <v-date-picker v-model="page1.nascimento" scrollable>
+                    <v-date-picker v-model="itens.nascimento" scrollable>
                         <v-spacer></v-spacer>
                         <v-btn flat color="primary" @click="modal = false">Cancel</v-btn>
-                        <v-btn flat color="primary" @click="$refs.dialog.save(page1.nascimento)">OK</v-btn>
+                        <v-btn flat color="primary" @click="$refs.dialog.save(itens.nascimento)">OK</v-btn>
                     </v-date-picker>
                 </v-dialog>
 
@@ -129,7 +129,7 @@
         data: () => ({
             modal: false,
             error:"",
-            page1:{
+            itens:{
                 initialValue: 5000,
                 parcelas: [
                     '12 Parcelas',
@@ -168,6 +168,7 @@
         },
         computed: {
             firstParcel: function () {
+                console.log(this.$store.getters.getStepperPessoal)
                 return this.calcularJuros(0.008)
 
             },
@@ -188,15 +189,17 @@
                 this.$validator.validateAll().then((result) =>{
                     console.log('Validate Scope', result)
                     if (result) {
-                        this.e1 = page
+                        this.$emit('alterTab', page)
+                        // this.$emit('alterTab')
+                        // this.e1 = page
                     }else{
                         // this.e1 = page
                     }
                 })
             },
             calcularJuros(taxa){
-                let qtd = parseInt(this.page1.parcela.split(" "))
-                let valor = this.page1.initialValue
+                let qtd = parseInt(this.itens.parcela.split(" "))
+                let valor = this.itens.initialValue
                 let juros = (valor * taxa * qtd );
 
                 return ((valor + juros) / qtd).toFixed(2).replace(".",",");
@@ -209,17 +212,17 @@
     .card-content{
         margin-top: 25px;
         padding: 15px;
-    .slider-valor{
-        padding: 5px;
-        padding-right: 20px;
-        margin-top: 27px;
-    }
-    .container-checkbox{
-        margin-top: 0px;
-    }
-    .card-content-row-credito{
-        margin-top: 30px;
-    }
+        .slider-valor{
+            padding: 5px;
+            padding-right: 20px;
+            margin-top: 27px;
+        }
+        .container-checkbox{
+            margin-top: 0px;
+        }
+        .card-content-row-credito{
+            margin-top: 30px;
+        }
     }
 
 </style>
