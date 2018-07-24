@@ -5,3 +5,7 @@ export const isAuth = (state) => {
 export const getUserType = (state) => {
     return state.userType
 }
+
+export const getStepperPessoal = (state) => {
+    return state.stepperPessoal
+}
