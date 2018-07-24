@@ -1,0 +1,36 @@
+.container-contato{
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 40px;
+  .card-content{
+    margin-top: 25px;
+    padding: 15px;
+    .slider-valor{
+      padding: 5px;
+      padding-right: 20px;
+      margin-top: 27px;
+    }
+    .container-checkbox{
+      margin-top: 0px;
+    }
+    .card-content-row-credito{
+      margin-top: 30px;
+    }
+  }
+  .stepper-text-p{
+    text-align: center;
+  }
+  .stepper-text-footer{
+    margin-top: 20px;
+    max-width: 500px;
+  }
+  .stepper-text-parc{
+    text-align: center;
+    margin-bottom: 30px;
+    label.stepper-label-parc{
+      font-size: 16pt;
+      color: #02a099;
+    }
+  }
+}
