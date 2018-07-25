@@ -6,6 +6,7 @@ import VeeValidate from 'vee-validate';
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import mixin from './helpers/mixin'
 
 Vue.config.productionTip = false
 
@@ -21,6 +22,7 @@ Vue.use(Vuetify, {
 
 new Vue({
     el: '#app',
+    mixins: [mixin],
     router,
     store,
     render: h => h(App)
