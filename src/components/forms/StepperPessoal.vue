@@ -128,7 +128,7 @@
         name: "Page-1",
         data: () => ({
             modal: false,
-            error:"",
+            error:"Este campo é obrigatório!",
             itens:{
                 initialValue: 5000,
                 parcelas: [
@@ -139,10 +139,10 @@
                     '36 Parcelas'
                 ],
                 parcela: "12 Parcelas",
-                nome: "",
-                telefone: "",
+                nome: "Rafael Freitas",
+                telefone: "81999919999",
                 cpf: "",
-                nascimento: ""
+                nascimento: "2018-07-31"
             },
             dictionary: {
                 custom: {
@@ -168,7 +168,6 @@
         },
         computed: {
             firstParcel: function () {
-                console.log(this.$store.getters.getStepperPessoal)
                 return this.calcularJuros(0.008)
 
             },
@@ -180,14 +179,6 @@
             }
         },
         methods: {
-            validInput(input){
-                if (input){
-                    return true
-                } else{
-                    this.error = 'Este campo é obrigatório!'
-                    return false
-                }
-            },
             nextPage(page){
                 this.$validator.validateAll().then((result) =>{
                     console.log('Validate Scope', result)
@@ -210,9 +201,15 @@
             },
             formatDate (date) {
                 if (!date) return null
-
                 const [year, month, day] = date.split('-')
                 return `${day}/${month}/${year}`
+            },
+            validInput(input){
+                if (input){
+                    return true
+                } else{
+                    return false
+                }
             },
         }
     }
