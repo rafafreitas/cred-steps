@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-card class="mb-5" height="auto" data-vv-scope="page2">
+        <v-card class="mb-5" height="auto">
             <p class="stepper-text-p">
                 Cada item respondido ajuda seu empréstimo a ser aprovado.
             </p>
@@ -12,6 +12,7 @@
                 </label>
             </p>
             <div class="card-content">
+
                 <v-layout row xs12 wrap>
                     <v-flex xs12 sm12>
                         <label>
@@ -19,7 +20,12 @@
                         </label>
                     </v-flex>
                     <v-flex xs12 sm6 class="container-flex">
-                        <v-radio-group v-model="page2.radios" :mandatory="false">
+                        <v-radio-group
+                                v-model="itens.radios"
+                                :mandatory="false"
+                                v-validate="'required'"
+                                data-vv-name="motivo"
+                                :error-messages="errors.collect('motivo')" >
                             <v-radio label="Tratamento Médico" value="1"></v-radio>
                             <v-radio label="Tratamento Odontológico" value="2"></v-radio>
                             <v-radio label="Construção/Reforma ou Decoração" value="3"></v-radio>
@@ -30,7 +36,12 @@
                     </v-flex>
 
                     <v-flex xs12 sm6>
-                        <v-radio-group v-model="page2.radios" :mandatory="false">
+                        <v-radio-group
+                                v-model="itens.radios"
+                                v-validate="'required'"
+                                data-vv-name="motivo"
+                                :mandatory="false"
+                                :error-messages="errors.collect('motivo')" >
                             <v-radio label="Empréstimo Pessoal" value="7"></v-radio>
                             <v-radio label="Pagar Cartão de Crédito" value="8"></v-radio>
                             <v-radio label="Pagar Cheque Especial" value="9"></v-radio>
@@ -38,30 +49,59 @@
                             <v-radio label="Outro" value="radio-2"></v-radio>
                         </v-radio-group>
                     </v-flex>
+
+                    <v-flex xs12 sm12>
+
+                        <div v-if="itens.radios == parseInt(1) || itens.radios == parseInt(2)" >
+                            <label>
+                                Qual o tratamento? <br><br>
+                            </label>
+                            <v-text-field
+                                    v-validate="'required'"
+                                    v-model="itens.tratamento"
+                                    :rules="[() => validInput(itens.tratamento) || error]"
+                                    :error-messages="errors.collect('tratamento')"
+                                    data-vv-name="tratamento"
+                                    placeholder="Descreva o procedimento."
+                                    label="Tratamento"
+                                    required
+                            ></v-text-field>
+                        </div>
+
+                        <div v-if="itens.radios == parseInt(5)" >
+                            <label>
+                                Qual a data da Festa/Casamento? <br><br>
+                            </label>
+                            <v-dialog
+                                    ref="dialog"
+                                    v-model="modal"
+                                    :return-value.sync="itens.datepicker"
+                                    persistent
+                                    lazy
+                                    full-width
+                                    width="290px"
+                            >
+                                <v-text-field
+                                        slot="activator"
+                                        v-validate="'required'"
+                                        v-model="compDateFormated"
+                                        :rules="[() => validInput(compDateFormated) || error]"
+                                        :error-messages="errors.collect('nascimento')"
+                                        data-vv-name="nascimento"
+                                        label="Data de Nascimento"
+                                        prepend-icon="event"
+                                        readonly
+                                ></v-text-field>
+                                <v-date-picker v-model="itens.nascimento" scrollable locale="pt-br">
+                                    <v-spacer></v-spacer>
+                                    <v-btn flat color="primary" @click="modal = false">Cancelar</v-btn>
+                                    <v-btn flat color="primary" @click="$refs.dialog.save(itens.nascimento)">OK</v-btn>
+                                </v-date-picker>
+                            </v-dialog>
+                        </div>
+
+                    </v-flex>
                 </v-layout>
-
-                <div v-if="page2.radios == parseInt(1) || page2.radios == parseInt(2)" >
-                    <label>
-                        Qual o tratamento? <br><br>
-                    </label>
-                    <v-text-field
-                            v-validate="'required'"
-                            v-model="page2.tratamento"
-                            :rules="[() => validInput(page2.tratamento) || error]"
-                            :error-messages="errors.collect('tratamento')"
-                            data-vv-name="tratamento"
-                            placeholder="Descreva o procedimento."
-                            label="Tratamento"
-                            required
-                    ></v-text-field>
-                </div>
-
-                <div v-if="page2.radios == parseInt(5)" >
-                    <label>
-                        Qual a data da Festa/Casamento? <br><br>
-                    </label>
-                    <v-date-picker v-model="page2.datepicker" locale="pt-br"></v-date-picker>
-                </div>
 
                 <v-layout class="card-content-row-credito" row xs12 wrap>
                     <v-flex xs12 sm12>
@@ -69,39 +109,40 @@
                             Como pretende conseguir o crédito? <br>
                         </label>
                     </v-flex>
-                    <v-flex xs12 sm12 class="container-flex">
-                        <v-checkbox class="container-checkbox" v-model="page2.checkbox" label="Crédito Consignado P/ Aposentado, Pensionista, Funcionário Público ou Forças Armadas" value="1"></v-checkbox>
-                        <v-checkbox class="container-checkbox" v-model="page2.checkbox" label="Pelo Limite do Cartão de Crédito." value="2"></v-checkbox>
-                        <div v-if="page2.checkbox.includes('2')" >
+                    <v-flex xs12 sm12 class="container-flex container-checkbox-credito">
+                        <v-checkbox v-validate="'required'" data-vv-name="credito" :error-messages="errors.collect('credito')" class="container-checkbox" v-model="itens.checkbox" label="Crédito Consignado P/ Aposentado, Pensionista, Funcionário Público ou Forças Armadas" value="1"></v-checkbox>
+                        <v-checkbox v-validate="'required'" data-vv-name="credito" :error-messages="errors.collect('credito')" class="container-checkbox" v-model="itens.checkbox" label="Pelo Limite do Cartão de Crédito." value="2"></v-checkbox>
+                        <div v-if="itens.checkbox.includes('2')" >
                             <label>
-                                Qual o limite?<br><br>
+                                Qual o limite?<br>
                             </label>
                             <v-text-field
                                     v-validate="'required'"
-                                    v-model="page2.limite"
-                                    :rules="[() => validInput(page2.limite) || error]"
+                                    class="text-field-limite"
+                                    v-model="itens.limite"
+                                    :rules="[() => validInput(itens.limite) || error]"
                                     :error-messages="errors.collect('limite')"
-                                    data-vv-name="tratamento"
-                                    label="Limite"
+                                    data-vv-name="limite"
                                     prefix="R$"
+                                    mask="#"
                                     required
                             ></v-text-field>
                         </div>
-                        <v-checkbox class="container-checkbox" v-model="page2.checkbox" label="Desconto em Folha de Pagamento " value="3"></v-checkbox>
-                        <v-checkbox class="container-checkbox" v-model="page2.checkbox" label="Cheque" value="4"></v-checkbox>
-                        <v-checkbox class="container-checkbox" v-model="page2.checkbox" label="Boleto" value="5"></v-checkbox>
-                        <v-checkbox class="container-checkbox" v-model="page2.checkbox" label="Débito em Conta" value="6"></v-checkbox>
+                        <v-checkbox v-validate="'required'" data-vv-name="credito" :error-messages="errors.collect('credito')" class="container-checkbox" v-model="itens.checkbox" label="Desconto em Folha de Pagamento " value="3"></v-checkbox>
+                        <v-checkbox v-validate="'required'" data-vv-name="credito" :error-messages="errors.collect('credito')" class="container-checkbox" v-model="itens.checkbox" label="Cheque" value="4"></v-checkbox>
+                        <v-checkbox v-validate="'required'" data-vv-name="credito" :error-messages="errors.collect('credito')" class="container-checkbox" v-model="itens.checkbox" label="Boleto" value="5"></v-checkbox>
+                        <v-checkbox v-validate="'required'" data-vv-name="credito" :error-messages="errors.collect('credito')" class="container-checkbox" v-model="itens.checkbox" label="Débito em Conta" value="6"></v-checkbox>
+
+                        <p class="error-credito" v-if="checkArray">Informe como pretende conseguir o crédito!</p>
                     </v-flex>
 
                 </v-layout>
-
-
 
             </div>
 
         </v-card>
 
-        <v-btn color="primary" @click="e1 = 3" >
+        <v-btn color="primary" @click="nextPage(3)" >
             Continuar
         </v-btn>
 
@@ -114,8 +155,10 @@
         name: "Page-2",
         data: () => ({
             error:"",
-            page2:{
-                radios: "",
+            errorCredito: false,
+            modal: false,
+            itens:{
+                radios: null,
                 tratamento: "",
                 datepicker: "",
                 checkbox: [],
@@ -126,13 +169,90 @@
                     tratamento: {
                         required: () => 'Informe o tratamento!',
                     },
+                    motivo: {
+                        required: () => 'Informe o motivo do empréstimo!',
+                    },
+                    credito: {
+                        required: () => '',
+                    },
+                    creditoLast: {
+                        required: () => 'Informe o como pretende conseguir o crédito!',
+                    },
+                    limite: {
+                        required: () => 'Informe o limite atual do seu cartão!',
+                    },
 
                 }
             }
         }),
+        mounted () {
+            this.$validator.localize('en', this.dictionary)
+        },
+        computed: {
+            compDateFormated: function () {
+                return this.formatDate(this.itens.nascimento)
+            },
+            checkArray: function () {
+                if (this.itens.checkbox.length === 0 && this.errorCredito){
+                    return true
+                }else{
+                    return false
+                }
+            }
+        },
+        methods: {
+            validInput(input){
+                if (input){
+                    return true
+                } else{
+                    this.error = 'Este campo é obrigatório!'
+                    return false
+                }
+            },
+            nextPage(page){
+                this.$validator.validateAll().then((result) =>{
+                    console.log('Validate Motivo', result)
+                    if (result) {
+                        // this.$store.commit('setStepperPessoal', this.itens)
+                        // this.$emit('alterTab', page)
+
+                    }else{
+                        if (this.itens.checkbox.length === 0){
+                            this.errorCredito = true;
+                        }
+                    }
+                })
+            },
+            formatDate (date) {
+                if (!date) return null
+                const [year, month, day] = date.split('-')
+                return `${day}/${month}/${year}`
+            },
+            validInput(input){
+                if (input){
+                    return true
+                } else{
+                    return false
+                }
+            },
+        }
     }
 </script>
 
-<style scoped>
-
+<style lang="scss">
+    .error-credito{
+        color: #b74343;
+        font-size: 9pt;
+    }
+    .text-field-limite{
+        max-width: 200px;
+    }
+    .v-text-field__prefix{
+        padding-right: 22px!important;
+    }
+    .container-checkbox-credito .container-checkbox{
+        .v-messages{
+            display: none!important;
+        }
+    }
 </style>
