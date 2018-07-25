@@ -38,9 +38,10 @@
             tab: 0,
         }),
         methods: {
-            alterEl() {
-                console.log('Cheguei aqui')
-                this.tab++
+            alterEl(page) {
+                console.log('Cheguei aqui', page)
+                // this.tab++
+                this.tab = page
             }
         }
     }

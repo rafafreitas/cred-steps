@@ -92,17 +92,17 @@
                     <v-text-field
                             slot="activator"
                             v-validate="'required'"
-                            v-model="itens.nascimento"
-                            :rules="[() => validInput(itens.nascimento) || error]"
+                            v-model="compDateFormated"
+                            :rules="[() => validInput(compDateFormated) || error]"
                             :error-messages="errors.collect('nascimento')"
                             data-vv-name="nascimento"
                             label="Data de Nascimento"
                             prepend-icon="event"
                             readonly
                     ></v-text-field>
-                    <v-date-picker v-model="itens.nascimento" scrollable>
+                    <v-date-picker v-model="itens.nascimento" scrollable locale="pt-br">
                         <v-spacer></v-spacer>
-                        <v-btn flat color="primary" @click="modal = false">Cancel</v-btn>
+                        <v-btn flat color="primary" @click="modal = false">Cancelar</v-btn>
                         <v-btn flat color="primary" @click="$refs.dialog.save(itens.nascimento)">OK</v-btn>
                     </v-date-picker>
                 </v-dialog>
@@ -142,7 +142,7 @@
                 nome: "",
                 telefone: "",
                 cpf: "",
-                nascimento: "",
+                nascimento: ""
             },
             dictionary: {
                 custom: {
@@ -175,6 +175,9 @@
             secondParcel: function () {
                 return this.calcularJuros(0.05)
             },
+            compDateFormated: function () {
+                return this.formatDate(this.itens.nascimento)
+            }
         },
         methods: {
             validInput(input){
@@ -189,6 +192,7 @@
                 this.$validator.validateAll().then((result) =>{
                     console.log('Validate Scope', result)
                     if (result) {
+                        this.$store.commit('setStepperPessoal', this.itens)
                         this.$emit('alterTab', page)
                         // this.$emit('alterTab')
                         // this.e1 = page
@@ -203,7 +207,13 @@
                 let juros = (valor * taxa * qtd );
 
                 return ((valor + juros) / qtd).toFixed(2).replace(".",",");
-            }
+            },
+            formatDate (date) {
+                if (!date) return null
+
+                const [year, month, day] = date.split('-')
+                return `${day}/${month}/${year}`
+            },
         }
     }
 </script>
