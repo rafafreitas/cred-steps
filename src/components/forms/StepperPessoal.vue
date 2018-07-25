@@ -48,20 +48,19 @@
                         v-validate="'required'"
                         v-model="itens.nome"
                         :rules="[() => validInput(itens.nome) || error]"
-                        :error-messages="errors.collect('name')"
-                        data-vv-name="name"
+                        :error-messages="errors.collect('Nome')"
+                        data-vv-name="Nome"
                         label="Nome"
                         placeholder="Informe seu nome completo."
                         required
                 ></v-text-field>
 
-
                 <v-text-field
                         v-validate="'required'"
                         v-model="itens.telefone"
                         :rules="[() => validInput(itens.telefone) || error]"
-                        :error-messages="errors.collect('telefone')"
-                        data-vv-name="telefone"
+                        :error-messages="errors.collect('Telefone')"
+                        data-vv-name="Telefone"
                         placeholder="(__) ____-____"
                         label="Telefone"
                         mask="(##) #####-####"
@@ -72,8 +71,8 @@
                         v-validate="'required'"
                         v-model="itens.cpf"
                         :rules="[() => validInput(itens.cpf) || error]"
-                        :error-messages="errors.collect('cpf')"
-                        data-vv-name="cpf"
+                        :error-messages="errors.collect('CPF')"
+                        data-vv-name="CPF"
                         placeholder="___.___.___-__"
                         label="CPF"
                         mask="###.###.###-##"
@@ -107,6 +106,60 @@
                     </v-date-picker>
                 </v-dialog>
 
+                <label class="stepper-label-parc">
+                    Qual a sua ocupação?
+                </label>
+
+                <v-radio-group
+                        v-model="itens.ocupacao.opcao"
+                        :mandatory="false"
+                        v-validate="'required'"
+                        data-vv-name="ocupacao"
+                        :error-messages="errors.collect('ocupacao')" >
+                    <v-radio label="Aposentado" value="1"></v-radio>
+                    <v-radio label="Pensionista" value="2"></v-radio>
+                    <v-radio label="Forças Armadas" value="3"></v-radio>
+                    <v-radio label="Funcionário Publico Federal" value="4"></v-radio>
+                    <v-radio label="Funcionário Publico Estadual" value="5"></v-radio>
+
+                    <v-radio label="Funcionário Publico Municipal" value="6"></v-radio>
+
+                    <v-radio label="Funcionário Empresa Privada" value="7"></v-radio>
+                    <v-radio label="Autônomo/Liberal" value="8"></v-radio>
+                    <v-radio label="Não trabalha/ Desempregado" value="9"></v-radio>
+                </v-radio-group>
+
+                <div v-if="itens.ocupacao.opcao === '5'" >
+                    <v-select
+                            v-validate="'required'"
+                            v-model="itens.ocupacao.estado"
+                            :items="states"
+                            :rules="[() => validInput(itens.ocupacao.estado) || error]"
+                            :error-messages="errors.collect('Estado')"
+                            data-vv-name="Estado"
+                            label="Qual o estado?"
+                    ></v-select>
+                </div>
+                <div v-if="itens.ocupacao.opcao === '6'" >
+                    <v-text-field
+                            v-validate="'required'"
+                            v-model="itens.ocupacao.cidade"
+                            :rules="[() => validInput(itens.ocupacao.cidade) || error]"
+                            :error-messages="errors.collect('Cidade')"
+                            data-vv-name="Cidade"
+                            label="Qual a cidade?"
+                    ></v-text-field>
+                </div>
+                <div v-if="itens.ocupacao.opcao === '7'" >
+                    <v-text-field
+                            v-validate="'required'"
+                            v-model="itens.ocupacao.empresa"
+                            :rules="[() => validInput(itens.ocupacao.empresa) || error]"
+                            :error-messages="errors.collect('empresa')"
+                            data-vv-name="empresa"
+                            label="Qual a empresa?"
+                    ></v-text-field>
+                </div>
 
             </div>
         </v-card>
@@ -124,6 +177,7 @@
 </template>
 
 <script>
+    import myDictionary from '../../helpers/dictionary'
     export default {
         name: "Page-1",
         data: () => ({
@@ -139,32 +193,22 @@
                     '36 Parcelas'
                 ],
                 parcela: "12 Parcelas",
-                nome: "Rafael Freitas",
-                telefone: "81999919999",
+                nome: "",
+                telefone: "",
                 cpf: "",
-                nascimento: "2018-07-31"
-            },
-            dictionary: {
-                custom: {
-                    name: {
-                        required: () => 'O nome deve ser informado!',
-                    },
-                    telefone: {
-                        required: () => 'Informe seu telefone!',
-                        min: 'Informe um número válido!'
-                    },
-                    cpf: {
-                        required: () => 'Informe seu CPF!',
-                        min: 'Informe um CPF válido!'
-                    },
-                    nascimento: {
-                        required: () => 'Informe a data de nascimento!',
-                    }
+                nascimento: "",
+                ocupacao: {
+                    opcao: null,
+                    estado: "",
+                    cidade: "",
+                    empresa: "",
                 }
-            }
+
+            },
+            states: ['Acre', 'Pernambuco'],
         }),
         mounted () {
-            this.$validator.localize('en', this.dictionary)
+            this.$validator.localize('en', myDictionary)
         },
         computed: {
             firstParcel: function () {
