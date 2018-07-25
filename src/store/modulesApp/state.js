@@ -8,6 +8,13 @@ export default {
         telefone: "",
         cpf: "",
         nascimento: "",
+        ocupacao: {
+            opcao: "",
+            estado: "",
+            cidade: "",
+            empresa: ""
+        }
+
     },
     stepperMotivo: {
         radios: "",

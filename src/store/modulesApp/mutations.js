@@ -13,6 +13,12 @@ export const setStepperPessoal = (state, itens) => {
     state.stepperPessoal.telefone = itens.telefone
     state.stepperPessoal.cpf = itens.cpf
     state.stepperPessoal.nascimento = itens.nascimento
+
+    state.stepperPessoal.ocupacao.opcao = itens.ocupacao.opcao
+    state.stepperPessoal.ocupacao.estado = itens.ocupacao.estado
+    state.stepperPessoal.ocupacao.cidade = itens.ocupacao.cidade
+    state.stepperPessoal.ocupacao.empresa = itens.ocupacao.empresa
+
 }
 
 export const setStepperMotivo = (state, itens) => {
