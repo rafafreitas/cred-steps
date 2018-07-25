@@ -8,5 +8,12 @@ export default {
         telefone: "",
         cpf: "",
         nascimento: "",
+    },
+    stepperMotivo: {
+        radios: "",
+        tratamento: "",
+        datepicker: "",
+        checkbox: [],
+        limite: ""
     }
 }

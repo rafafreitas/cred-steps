@@ -213,8 +213,8 @@
                 this.$validator.validateAll().then((result) =>{
                     console.log('Validate Motivo', result)
                     if (result) {
-                        // this.$store.commit('setStepperPessoal', this.itens)
-                        // this.$emit('alterTab', page)
+                        this.$store.commit('setStepperMotivo', this.itens)
+                        this.$emit('alterTab', page)
 
                     }else{
                         if (this.itens.checkbox.length === 0){
