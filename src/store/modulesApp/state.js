@@ -22,5 +22,26 @@ export default {
         datepicker: "",
         checkbox: [],
         limite: ""
-    }
+    },
+    stepperAdicionais: {
+        geral: {
+            pessoa: "",
+            nome: "",
+            cpf: "",
+            ocupacao: {
+                opcao: false,
+                estado: "",
+                cidade: "",
+                empresa: ""
+            },
+        },
+        estadual:{
+            margemRadio: null,
+            margem: "",
+            matricula: "",
+            password: "",
+            file: "",
+        },
+
+    },
 }
