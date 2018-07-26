@@ -138,6 +138,7 @@
                             :error-messages="errors.collect('Estado')"
                             data-vv-name="Estado"
                             label="Qual o estado?"
+                            key="input-pessoal-estado"
                     ></v-select>
                 </div>
                 <div v-else-if="itens.ocupacao.opcao === '6'" >
@@ -148,6 +149,7 @@
                             :error-messages="errors.collect('Cidade')"
                             data-vv-name="Cidade"
                             label="Qual a cidade?"
+                            key="input-pessoal-cidade"
                     ></v-text-field>
                 </div>
                 <div v-else-if="itens.ocupacao.opcao === '7'" >
@@ -158,6 +160,7 @@
                             :error-messages="errors.collect('empresa')"
                             data-vv-name="empresa"
                             label="Qual a empresa?"
+                            key="input-pessoal-empresa"
                     ></v-text-field>
                 </div>
 
