@@ -123,10 +123,11 @@
                                     :rules="[() => validInput(itens.limite) || error]"
                                     :error-messages="errors.collect('limite')"
                                     data-vv-name="limite"
-                                    prefix="R$"
-                                    mask="#"
+                                    v-money
                                     required
                             ></v-text-field>
+
+
                         </div>
                         <v-checkbox v-validate="'required'" data-vv-name="credito" :error-messages="errors.collect('credito')" class="container-checkbox" v-model="itens.checkbox" label="Desconto em Folha de Pagamento " value="3"></v-checkbox>
                         <v-checkbox v-validate="'required'" data-vv-name="credito" :error-messages="errors.collect('credito')" class="container-checkbox" v-model="itens.checkbox" label="Cheque" value="4"></v-checkbox>

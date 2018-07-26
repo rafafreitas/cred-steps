@@ -2,6 +2,7 @@ import '@babel/polyfill'
 import 'vuetify/dist/vuetify.min.css'
 import Vue from 'vue'
 import Vuetify from 'vuetify'
+import money from  './directives/v-money'
 import VeeValidate from 'vee-validate';
 import App from './App.vue'
 import router from './router'
@@ -11,6 +12,7 @@ import mixin from './helpers/mixin'
 Vue.config.productionTip = false
 
 Vue.use(VeeValidate);
+Vue.use(money);
 Vue.use(Vuetify, {
     theme: {
         primary: '#02a099',
