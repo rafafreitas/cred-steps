@@ -19,34 +19,34 @@
                             Quanto o motivo do empréstimo? <br>
                         </label>
                     </v-flex>
-                    <v-flex xs12 sm6 class="container-flex">
-                        <v-radio-group
-                                v-model="itens.radios"
-                                :mandatory="false"
-                                v-validate="'required'"
-                                data-vv-name="motivo"
-                                :error-messages="errors.collect('motivo')" >
-                            <v-radio label="Tratamento Médico" value="1"></v-radio>
-                            <v-radio label="Tratamento Odontológico" value="2"></v-radio>
-                            <v-radio label="Construção/Reforma ou Decoração" value="3"></v-radio>
-                            <v-radio label="Viagem" value="4"></v-radio>
-                            <v-radio label="Festa/Casamento" value="5"></v-radio>
-                            <v-radio label="Pagar uma dívida" value="6"></v-radio>
-                        </v-radio-group>
-                    </v-flex>
 
-                    <v-flex xs12 sm6>
+                    <v-flex xs12 sm12>
+
                         <v-radio-group
                                 v-model="itens.radios"
+                                :mandatory="false"
                                 v-validate="'required'"
                                 data-vv-name="motivo"
-                                :mandatory="false"
                                 :error-messages="errors.collect('motivo')" >
-                            <v-radio label="Empréstimo Pessoal" value="7"></v-radio>
-                            <v-radio label="Pagar Cartão de Crédito" value="8"></v-radio>
-                            <v-radio label="Pagar Cheque Especial" value="9"></v-radio>
-                            <v-radio label="Curso ou Intercâmbio" value="10"></v-radio>
-                            <v-radio label="Outro" value="radio-2"></v-radio>
+                            <v-layout row xs12 wrap>
+                                <v-flex xs12 sm6 class="container-flex">
+                                    <v-radio label="Tratamento Médico" value="1"></v-radio>
+                                    <v-radio label="Tratamento Odontológico" value="2"></v-radio>
+                                    <v-radio label="Construção/Reforma ou Decoração" value="3"></v-radio>
+                                    <v-radio label="Viagem" value="4"></v-radio>
+                                    <v-radio label="Festa/Casamento" value="5"></v-radio>
+                                    <v-radio label="Pagar uma dívida" value="6"></v-radio>
+                                </v-flex>
+
+                                <v-flex xs12 sm6>
+                                    <v-radio label="Empréstimo Pessoal" value="7"></v-radio>
+                                    <v-radio label="Pagar Cartão de Crédito" value="8"></v-radio>
+                                    <v-radio label="Pagar Cheque Especial" value="9"></v-radio>
+                                    <v-radio label="Curso ou Intercâmbio" value="10"></v-radio>
+                                    <v-radio label="Outro" value="11"></v-radio>
+                                </v-flex>
+                            </v-layout>
+
                         </v-radio-group>
                     </v-flex>
 
@@ -126,6 +126,7 @@
                                     v-money
                                     required
                             ></v-text-field>
+                            <p class="error-credito" v-if="showError">Informe o valor do limite.</p>
 
 
                         </div>
@@ -152,11 +153,13 @@
 </template>
 
 <script>
+    import myDictionary from '../../helpers/dictionary'
     export default {
         name: "Page-2",
         data: () => ({
             error:"",
             errorCredito: false,
+            showError: false,
             modal: false,
             itens:{
                 radios: null,
@@ -165,29 +168,9 @@
                 checkbox: [],
                 limite: "",
             },
-            dictionary: {
-                custom: {
-                    tratamento: {
-                        required: () => 'Informe o tratamento!',
-                    },
-                    motivo: {
-                        required: () => 'Informe o motivo do empréstimo!',
-                    },
-                    credito: {
-                        required: () => '',
-                    },
-                    creditoLast: {
-                        required: () => 'Informe o como pretende conseguir o crédito!',
-                    },
-                    limite: {
-                        required: () => 'Informe o limite atual do seu cartão!',
-                    },
-
-                }
-            }
         }),
         mounted () {
-            this.$validator.localize('en', this.dictionary)
+            this.$validator.localize('en', myDictionary)
         },
         computed: {
             compDateFormated: function () {
@@ -202,18 +185,10 @@
             }
         },
         methods: {
-            validInput(input){
-                if (input){
-                    return true
-                } else{
-                    this.error = 'Este campo é obrigatório!'
-                    return false
-                }
-            },
             nextPage(page){
                 this.$validator.validateAll().then((result) =>{
                     console.log('Validate Motivo', result)
-                    if (result) {
+                    if (result && this.checkMoney()) {
                         this.$store.commit('setStepperMotivo', this.itens)
                         this.$emit('alterTab', page)
 
@@ -221,6 +196,7 @@
                         if (this.itens.checkbox.length === 0){
                             this.errorCredito = true;
                         }
+
                     }
                 })
             },
@@ -236,6 +212,17 @@
                     return false
                 }
             },
+            checkMoney(){
+                if (this.itens.limite.includes("R$")){
+                    if (this.itens.limite === 'R$ 0,00'){
+                        this.showError = true
+                        return false
+                    }else{
+                        this.showError = false
+                        return true
+                    }
+                }
+            }
         }
     }
 </script>

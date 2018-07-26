@@ -140,7 +140,7 @@
                             label="Qual o estado?"
                     ></v-select>
                 </div>
-                <div v-if="itens.ocupacao.opcao === '6'" >
+                <div v-else-if="itens.ocupacao.opcao === '6'" >
                     <v-text-field
                             v-validate="'required'"
                             v-model="itens.ocupacao.cidade"
@@ -150,7 +150,7 @@
                             label="Qual a cidade?"
                     ></v-text-field>
                 </div>
-                <div v-if="itens.ocupacao.opcao === '7'" >
+                <div v-else-if="itens.ocupacao.opcao === '7'" >
                     <v-text-field
                             v-validate="'required'"
                             v-model="itens.ocupacao.empresa"
