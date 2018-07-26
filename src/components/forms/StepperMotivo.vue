@@ -214,26 +214,25 @@
             },
             checkMoney(){
                 if (this.itens.limite.includes("R$")){
-                    if (this.itens.limite === 'R$ 0,00'){
+                    if (this.itens.limite === 'R$ 0,00' && this.itens.checkbox.includes('2')){
                         this.showError = true
                         return false
                     }else{
                         this.showError = false
                         return true
                     }
+                }else{
+                    return true
                 }
             }
         }
     }
 </script>
 
-<style lang="scss">
+<style scope lang="scss">
     .error-credito{
         color: #b74343;
         font-size: 9pt;
-    }
-    .text-field-limite{
-        max-width: 200px;
     }
     .v-text-field__prefix{
         padding-right: 22px!important;
@@ -243,4 +242,5 @@
             display: none!important;
         }
     }
+
 </style>

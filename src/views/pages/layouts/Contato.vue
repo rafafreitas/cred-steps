@@ -22,7 +22,7 @@
                     <page-2 @alterTab="alterEl"></page-2>
                 </v-stepper-content>
                 <v-stepper-content step="3">
-                    <Page-3></Page-3>
+                    <Page-3 @alterTab="alterEl"></Page-3>
                 </v-stepper-content>
                 <v-stepper-content step="4">
                     <Page-4></Page-4>
@@ -42,7 +42,7 @@
         name: "Contato",
         components: {Page1,Page2,Page3,Page4},
         data: () => ({
-            tab: 3,
+            tab: 1,
         }),
         methods: {
             alterEl(page) {
