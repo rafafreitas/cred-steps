@@ -2,8 +2,9 @@
     <div>
         <v-card class="mb-5" height="auto" >
             <!--Para Func. Públicos Estaduais-->
-            <div>
+            <div class="container-data-public">
                 <h2>Dados necessários para Funcionários Públicos Estaduais</h2>
+                <br>
                 <p>
                     Selecione abaixo como vai nos informar sua margem de empréstimo livre: <br>
                     Para descobrir a margem ou ver contracheque acessar
@@ -97,6 +98,306 @@
 
             </div>
 
+            <!--Para Func Público Estadual / Municipal / EMPRESA PRIVADA / AUTONOMO OU LIBERAL / NÃO TRABALHA OU DESEMPREGADO -->
+            <!--Questões Financeiras-->
+            <div>
+                <hr>
+                <br>
+                <v-layout class="card-content-row-credito" row xs12 wrap>
+                    <v-flex xs12 sm12>
+                        <label>
+                            <b>Questões financeiras:</b>
+                        </label>
+                    </v-flex>
+
+                    <v-flex xs12 sm6>
+                        <label>Possui Restrição SPC/Serasa?</label>
+                        <v-radio-group
+                                v-model="itens.geral.financeiras.spc"
+                                :mandatory="false"
+                                v-validate="'required'"
+                                data-vv-name="SPC-Serasa"
+                                :error-messages="errors.collect('SPC-Serasa')" >
+                            <v-radio label="Sim" value="true"></v-radio>
+                            <v-radio label="Não" value="false"></v-radio>
+                        </v-radio-group>
+                    </v-flex>
+
+                    <v-flex xs12 sm6>
+                        <label>Emprego Carteira Assinada?</label>
+                        <v-radio-group
+                                v-model="itens.geral.financeiras.emprego"
+                                :mandatory="false"
+                                v-validate="'required'"
+                                data-vv-name="Emprego Carteira Assinada"
+                                :error-messages="errors.collect('Emprego Carteira Assinada')">
+                            <v-radio label="Sim, mais de 6 meses." value="1"></v-radio>
+                            <v-radio label="Sim, menos de 6 meses." value="2"></v-radio>
+                            <v-radio label="Não" value="3"></v-radio>
+                        </v-radio-group>
+                    </v-flex>
+
+                    <v-flex xs12 sm6>
+                        <label>Renda Comprovada?</label>
+                        <v-radio-group
+                                v-model="itens.geral.financeiras.rendaComprovada"
+                                :mandatory="false"
+                                v-validate="'required'"
+                                data-vv-name="Renda Comprovada"
+                                :error-messages="errors.collect('Renda Comprovada')">
+                            <v-radio label="Sim, contracheque." value="1"></v-radio>
+                            <v-radio label="Sim, Imposto de Renda." value="2"></v-radio>
+                            <v-radio label="Sim, Extrato  Bancário" value="3"></v-radio>
+                            <v-radio label="Não" value="4"></v-radio>
+                        </v-radio-group>
+                    </v-flex>
+
+                    <v-flex xs12 sm6>
+                        <v-layout class="card-content-row-credito" row xs12 wrap>
+                            <v-flex xs12 sm6>
+                                <label>Possui Cheque?</label>
+                                <v-radio-group
+                                        v-model="itens.geral.financeiras.cheque"
+                                        :mandatory="false"
+                                        v-validate="'required'"
+                                        data-vv-name="Possui Cheque"
+                                        :error-messages="errors.collect('Possui Cheque')" >
+                                    <v-radio label="Sim" value="true"></v-radio>
+                                    <v-radio label="Não" value="false"></v-radio>
+                                </v-radio-group>
+                            </v-flex>
+                            <v-flex xs12 sm6>
+                                <div v-if="itens.geral.financeiras.cheque === 'true'" >
+                                    <label>Cheques Devolvidos nos Últimos 6 meses?</label>
+                                    <v-radio-group
+                                            v-model="itens.geral.financeiras.chequeDev"
+                                            :mandatory="false"
+                                            v-validate="'required'"
+                                            data-vv-name="Cheques Devolvidos"
+                                            :error-messages="errors.collect('Cheques Devolvidos')"
+                                            key="input-add-cheque">
+                                        <v-radio label="Sim" value="true"></v-radio>
+                                        <v-radio label="Não" value="false"></v-radio>
+                                    </v-radio-group>
+                                </div>
+                            </v-flex>
+
+                        </v-layout>
+                    </v-flex>
+
+                    <v-flex xs12 sm6>
+                        <label>Conta em Banco?</label>
+                        <v-radio-group
+                                v-model="itens.geral.financeiras.banck.possui"
+                                :mandatory="false"
+                                v-validate="'required'"
+                                data-vv-name="Conta em Banco"
+                                :error-messages="errors.collect('Conta em Banco')"
+                                key="input-add-cheque">
+                            <v-radio label="Sim, Conta Corrente." value="1"></v-radio>
+                            <v-radio label="Sim, Conta Poupança." value="2"></v-radio>
+                            <v-radio label="Não" value="3"></v-radio>
+                        </v-radio-group>
+                    </v-flex>
+
+                    <v-flex xs12 sm6  v-if="hasBanck">
+                        <label>Tempo de Conta</label>
+                        <v-radio-group
+                                v-model="itens.geral.financeiras.banck.tempoConta"
+                                :mandatory="false"
+                                v-validate="'required'"
+                                data-vv-name="Tempo de Conta"
+                                :error-messages="errors.collect('Tempo de Conta')"
+                                key="input-add-banco-tempo">
+                            <v-radio label="Mais de 1 ano" value="true"></v-radio>
+                            <v-radio label="Menos de 1 ano" value="false"></v-radio>
+                        </v-radio-group>
+                    </v-flex>
+
+                    <v-flex xs12 sm4 class="v-flex-conainer-low" v-if="hasBanck">
+                        <v-select
+                                v-validate="'required'"
+                                v-model="itens.geral.financeiras.banck.banco"
+                                :items="banks"
+                                :rules="[() => validInput(itens.geral.financeiras.banck.banco) || error]"
+                                :error-messages="errors.collect('Banco')"
+                                data-vv-name="Banco"
+                                label="Qual o Banco?"
+                                key="input-add-banco-banck"
+                        ></v-select>
+                    </v-flex>
+
+                    <v-flex xs12 sm4 class="v-flex-conainer-low"  v-if="hasBanck">
+                        <v-text-field
+                                v-validate="'required'"
+                                v-model="itens.geral.financeiras.banck.agencia"
+                                :rules="[() => validInput(itens.geral.financeiras.banck.agencia) || error]"
+                                :error-messages="errors.collect('Agencia')"
+                                data-vv-name="Agencia"
+                                label="Agência"
+                                key="input-add-banco-agencia"
+                        ></v-text-field>
+                    </v-flex>
+
+                    <v-flex xs12 sm4 class="v-flex-conainer-low"  v-if="hasBanck">
+                        <v-text-field
+                                v-validate="'required'"
+                                v-model="itens.geral.financeiras.banck.conta"
+                                :rules="[() => validInput(itens.geral.financeiras.banck.conta) || error]"
+                                :error-messages="errors.collect('Conta')"
+                                data-vv-name="Conta"
+                                label="Conta"
+                                key="input-add-banco-Conta"
+                        ></v-text-field>
+                    </v-flex>
+
+                </v-layout>
+            </div>
+
+            <!--Para todas as categorias -->
+            <!--Dados de Pessoas proximas-->
+            <div>
+                <hr>
+                <br>
+                <v-layout class="card-content-row-credito" row xs12 wrap>
+                    <v-flex xs12 sm12>
+                        <b>Pessoas Proximas</b><br><br>
+                        <p>
+                            Poderemos melhorar as condições do seu crédito com uma maior quantidade de dados de pessoas próximas.
+                            preencha abaixo o máximo de dados possíveis para que agilizemos a aprovação do seu crédito
+                        </p>
+                    </v-flex>
+
+                    <v-flex xs12 sm6>
+                        <label>Dados</label>
+                        <v-text-field
+                                v-validate="'required'"
+                                v-model="itens.geral.parentesco.nome"
+                                :rules="[() => validInput(itens.geral.parentesco.nome) || error]"
+                                :error-messages="errors.collect('Nome')"
+                                data-vv-name="Nome"
+                                label="Nome"
+                                class="v-flex-conainer-med"
+                                key="input-add-parentesco-nome"
+                                required
+                        ></v-text-field>
+
+                        <v-text-field
+                                v-validate="'required'"
+                                v-model="itens.geral.parentesco.telefone"
+                                :rules="[() => validInput(itens.geral.parentesco.telefone) || error]"
+                                :error-messages="errors.collect('Telefone')"
+                                data-vv-name="Telefone"
+                                placeholder="(__) ____-____"
+                                label="Telefone"
+                                mask="(##) #####-####"
+                                class="text-field-limite"
+                                key="input-add-parentesco-telefone"
+                                required
+                        ></v-text-field>
+
+                        <v-text-field
+                                v-validate="'required'"
+                                v-model="itens.geral.parentesco.cpf"
+                                :rules="[() => validInput(itens.geral.parentesco.cpf) || error]"
+                                :error-messages="errors.collect('CPF')"
+                                data-vv-name="CPF"
+                                placeholder="___.___.___-__"
+                                label="CPF"
+                                mask="###.###.###-##"
+                                class="text-field-limite"
+                                key="input-add-parentesco-cpf"
+                                required
+                        ></v-text-field>
+
+                    </v-flex>
+
+                    <v-flex xs12 sm6>
+                        <label>Parentesco</label>
+                        <v-radio-group
+                                v-model="itens.geral.parentesco.grau"
+                                :mandatory="false"
+                                v-validate="'required'"
+                                data-vv-name="Parentesco"
+                                :error-messages="errors.collect('Parentesco')" >
+                            <v-radio label="Pai" value="1"></v-radio>
+                            <v-radio label="Mãe" value="2"></v-radio>
+                            <v-radio label="Conjuge" value="3"></v-radio>
+                            <v-radio label="Outra pessoa próxima" value="4"></v-radio>
+                        </v-radio-group>
+
+                        <v-text-field v-if="itens.geral.parentesco.grau === '4'"
+                                v-validate="'required'"
+                                v-model="itens.geral.parentesco.proximidade"
+                                :rules="[() => validInput(itens.geral.parentesco.proximidade) || error]"
+                                :error-messages="errors.collect('Proximidade')"
+                                data-vv-name="Proximidade"
+                                label="Relação de Proximidade"
+                                key="input-add-parentesco-grau"
+                                required
+                        ></v-text-field>
+                    </v-flex>
+
+                    <v-flex xs12 sm6>
+                        <label>Ocupação</label>
+
+                        <v-radio-group
+                                v-model="itens.geral.parentesco.ocupacao.opcao"
+                                :mandatory="false"
+                                v-validate="'required'"
+                                data-vv-name="Ocupacao"
+                                :error-messages="errors.collect('Ocupacao')" >
+                            <v-radio label="Aposentado" value="1"></v-radio>
+                            <v-radio label="Pensionista" value="2"></v-radio>
+                            <v-radio label="Forças Armadas" value="3"></v-radio>
+                            <v-radio label="Funcionário Publico Federal" value="4"></v-radio>
+                            <v-radio label="Funcionário Publico Estadual" value="5"></v-radio>
+                            <v-radio label="Funcionário Publico Municipal" value="6"></v-radio>
+                            <v-radio label="Funcionário Empresa Privada" value="7"></v-radio>
+                            <v-radio label="Autônomo/Liberal" value="8"></v-radio>
+                            <v-radio label="Não trabalha/ Desempregado" value="9"></v-radio>
+                        </v-radio-group>
+
+                        <div v-if="itens.geral.parentesco.ocupacao.opcao === '5'" >
+                            <v-select
+                                    v-validate="'required'"
+                                    v-model="itens.geral.parentesco.ocupacao.estado"
+                                    :items="states"
+                                    :rules="[() => validInput(itens.geral.parentesco.ocupacao.estado) || error]"
+                                    :error-messages="errors.collect('Estado')"
+                                    data-vv-name="Estado"
+                                    label="Qual o estado?"
+                                    key="input-add-ocupacao-estado"
+                            ></v-select>
+                        </div>
+                        <div v-else-if="itens.geral.parentesco.ocupacao.opcao === '6'" >
+                            <v-text-field
+                                    v-validate="'required'"
+                                    v-model="itens.geral.parentesco.ocupacao.cidade"
+                                    :rules="[() => validInput(itens.geral.parentesco.ocupacao.cidade) || error]"
+                                    :error-messages="errors.collect('Cidade')"
+                                    data-vv-name="Cidade"
+                                    label="Qual a cidade?"
+                                    key="input-add-ocupacao-cidade"
+                            ></v-text-field>
+                        </div>
+                        <div v-else-if="itens.geral.parentesco.ocupacao.opcao === '7'" >
+                            <v-text-field
+                                    v-validate="'required'"
+                                    v-model="itens.geral.parentesco.ocupacao.empresa"
+                                    :rules="[() => validInput(itens.geral.parentesco.ocupacao.empresa) || error]"
+                                    :error-messages="errors.collect('empresa')"
+                                    data-vv-name="empresa"
+                                    label="Qual a empresa?"
+                                    key="input-add-ocupacao-empresa"
+                            ></v-text-field>
+                        </div>
+                    </v-flex>
+
+
+                </v-layout>
+            </div>
+
         </v-card>
 
         <v-btn color="primary" @click="nextPage(4)">
@@ -115,16 +416,36 @@
             error:"",
             showError: false,
             passshow: false,
+            banks: ['Caixa', 'Banco do Brasil', 'Santander'],
             itens:{
                 geral: {
-                    pessoa: "",
-                    nome: "",
-                    cpf: "",
-                    ocupacao: {
-                        opcao: false,
-                        estado: "",
-                        cidade: "",
-                        empresa: ""
+                    parentesco: {
+                        grau: "",
+                        proximidade: "",
+                        nome: "",
+                        cpf: "",
+                        telefone: "",
+                        nascimento: "",
+                        ocupacao: {
+                            opcao: null,
+                            estado: "",
+                            cidade: "",
+                            empresa: ""
+                        },
+                    },
+                    financeiras:{
+                        spc: null,
+                        cheque: null,
+                        chequeDev: null,
+                        emprego: null,
+                        rendaComprovada: null,
+                        banck: {
+                            possui: null,
+                            banco: '',
+                            tempoConta: null,
+                            agencia: "",
+                            conta: "",
+                        }
                     },
                 },
                 estadual:{
@@ -136,12 +457,17 @@
                         imageName: "",
                         imageUrl: "",
                         imageFile: "",
-                    },
+                    }
                 },
             },
         }),
         mounted () {
             this.$validator.localize('en', myDictionary)
+        },
+        computed:{
+            hasBanck :function () {
+                return (this.itens.geral.financeiras.banck.possui === '1' || this.itens.geral.financeiras.banck.possui === '2')
+            }
         },
         methods: {
             nextPage(page){
