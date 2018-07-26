@@ -27,6 +27,9 @@ const dictionary = {
         limite: {
             required: () => 'Informe o limite atual do seu cartão!',
         },
+        margemRadio: {
+            required: () => 'Precisamos saber sua margem para que o empréstimo seja aprovado.',
+        }
     }
 
 }
