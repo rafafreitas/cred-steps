@@ -63,7 +63,7 @@
                         data-vv-name="Telefone"
                         placeholder="(__) ____-____"
                         label="Telefone"
-                        v-mask="'(##)#####-####'"
+                        v-mask="['(##) ####-####', '(##) #####-####']"
                         required
                 ></v-text-field>
 
