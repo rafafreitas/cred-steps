@@ -22,7 +22,6 @@ const dictionary = {
             required: () => 'Precisamos saber sua margem para que o empréstimo seja aprovado.',
         }
     }
-
 }
 
 export default dictionary

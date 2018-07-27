@@ -153,7 +153,7 @@
 </template>
 
 <script>
-    import myDictionary from '../../helpers/dictionary'
+    import myDictionary from '../../validations/dicionary'
     export default {
         name: "Page-2",
         data: () => ({
