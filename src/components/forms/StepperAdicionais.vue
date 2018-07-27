@@ -394,7 +394,7 @@
                                 data-vv-name="Telefone"
                                 placeholder="(__) ____-____"
                                 label="Telefone"
-                                mask="(##) #####-####"
+                                v-mask="'(##)#####-####'"
                                 class="text-field-limite"
                                 key="input-add-parentesco-telefone"
                                 required

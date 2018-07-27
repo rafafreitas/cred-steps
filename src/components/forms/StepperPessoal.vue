@@ -63,7 +63,7 @@
                         data-vv-name="Telefone"
                         placeholder="(__) ____-____"
                         label="Telefone"
-                        mask="(##) #####-####"
+                        v-mask="'(##)#####-####'"
                         required
                 ></v-text-field>
 
@@ -75,7 +75,7 @@
                         data-vv-name="CPF"
                         placeholder="___.___.___-__"
                         label="CPF"
-                        mask="###.###.###-##"
+                        v-mask="'###.###.###-##'"
                         required
                 ></v-text-field>
 
