@@ -9,7 +9,7 @@ export default {
         cpf: "",
         nascimento: "",
         ocupacao: {
-            opcao: "",
+            opcao: "6",
             estado: "",
             cidade: "",
             empresa: ""
@@ -25,14 +25,33 @@ export default {
     },
     stepperAdicionais: {
         geral: {
-            pessoa: "",
-            nome: "",
-            cpf: "",
-            ocupacao: {
-                opcao: false,
-                estado: "",
-                cidade: "",
-                empresa: ""
+            parentesco: {
+                grau: "",
+                proximidade: "",
+                nome: "",
+                cpf: "",
+                telefone: "",
+                nascimento: "",
+                ocupacao: {
+                    opcao: null,
+                    estado: "",
+                    cidade: "",
+                    empresa: ""
+                },
+            },
+            financeiras:{
+                spc: null,
+                cheque: null,
+                chequeDev: null,
+                emprego: null,
+                rendaComprovada: null,
+                banck: {
+                    possui: null,
+                    banco: '',
+                    tempoConta: null,
+                    agencia: "",
+                    conta: "",
+                }
             },
         },
         estadual:{
@@ -40,8 +59,22 @@ export default {
             margem: "",
             matricula: "",
             password: "",
-            file: "",
+            file: {
+                imageName: "",
+                imageUrl: "",
+                imageFile: "",
+            }
         },
-
+        municipal: {
+            margemRadio: null,
+            margem: "",
+            matricula: "",
+            password: "",
+            file: {
+                imageName: "",
+                imageUrl: "",
+                imageFile: "",
+            }
+        }
     },
 }

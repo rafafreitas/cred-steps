@@ -31,9 +31,5 @@ export const setStepperMotivo = (state, itens) => {
 
 
 export const setStepperAdicionais = (state, itens) => {
-    state.stepperAdicionais.estadual.margemRadio = itens.estadual.margemRadio
-    state.stepperAdicionais.estadual.margem = itens.estadual.margem
-    state.stepperAdicionais.estadual.matricula  = itens.estadual.matricula
-    state.stepperAdicionais.estadual.password  = itens.estadual.password
-    state.stepperAdicionais.estadual.file  = itens.estadual.file
+    state.stepperAdicionais = itens
 }
