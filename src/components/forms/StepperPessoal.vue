@@ -68,7 +68,7 @@
                 ></v-text-field>
 
                 <v-text-field
-                        v-validate="'required'"
+                        v-validate="'required|cpf'"
                         v-model="itens.cpf"
                         :rules="[() => validInput(itens.cpf) || error]"
                         :error-messages="errors.collect('CPF')"

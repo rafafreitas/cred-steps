@@ -3,7 +3,7 @@ import 'vuetify/dist/vuetify.min.css'
 import Vue from 'vue'
 import Vuetify from 'vuetify'
 import money from  './directives/v-money'
-import VeeValidate from 'vee-validate';
+import Validator from './validations'
 import VueTheMask from 'vue-the-mask'
 import App from './App.vue'
 import router from './router'
@@ -12,7 +12,7 @@ import mixin from './helpers/mixin'
 
 Vue.config.productionTip = false
 
-Vue.use(VeeValidate);
+Vue.use(Validator);
 Vue.use(VueTheMask)
 Vue.use(money);
 Vue.use(Vuetify, {
