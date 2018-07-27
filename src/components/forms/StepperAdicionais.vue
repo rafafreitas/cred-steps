@@ -92,17 +92,122 @@
                            accept="image/*"
                            capture="camera"
                            ref="getImage"
+                           key="input-file-municipal"
                            @change="onFilePicked"/>
 
                 </div>
-
-            </div>
-
-            <!--Para Func Público Estadual / Municipal / EMPRESA PRIVADA / AUTONOMO OU LIBERAL / NÃO TRABALHA OU DESEMPREGADO -->
-            <!--Questões Financeiras-->
-            <div>
                 <hr>
                 <br>
+            </div>
+
+            <!--Para Func Público Municipal  -->
+            <div v-if="this.$store.getters.hasThirdCategory">
+                <h2>Dados necessários para Funcionários Públicos Municipais</h2>
+                <br>
+                <p>
+                    Selecione abaixo como vai nos informar sua margem de empréstimo livre: <br>
+                    Para descobrir a margem ou ver o contracheque acesse: <br>
+                    <span v-if="this.$store.getters.hasCityMunicipal === 1">
+                        <a href="http://www.recife.pe.gov.br/pser/" target="_blank">O Portal do Servidor de Recife</a>
+                        e digite a Matrícula e Senha.<br>
+                    </span>
+                    <span v-if="this.$store.getters.hasCityMunicipal === 2">
+                        <a href="https://www.faciltecnologia.com.br/consigfacil/jaboatao/index_servidor.php" target="_blank">
+                            O Portal do Servidor de Jaboatão dos Guararapes</a>
+                            e digite a Matrícula e Senha.
+                    </span>
+
+                </p>
+                <v-radio-group
+                        v-model="itens.municipal.margemRadio"
+                        :mandatory="false"
+                        v-validate="'required'"
+                        data-vv-name="margemRadio"
+                        :error-messages="errors.collect('margemRadio')" >
+                    <v-radio label="Digite sua Margem Livre" value="1"></v-radio>
+                    <v-radio label="Matrícula + Senha do Portal do Servidor " value="2"></v-radio>
+                    <v-radio label="Foto do Contracheque " value="3"></v-radio>
+
+                </v-radio-group>
+
+                <div v-if="itens.estadual.margemRadio === '1'" >
+                    <v-text-field
+                            v-validate="'required'"
+                            class="text-field-limite margin-top-none"
+                            v-model="itens.estadual.margem"
+                            :rules="[() => validInput(itens.estadual.margem) || error]"
+                            :error-messages="errors.collect('margem')"
+                            data-vv-name="margem"
+                            v-money
+                            required
+                            key="input-margin"
+                    ></v-text-field>
+                    <p class="error-credito" v-if="showError">Informe o valor da margem.</p>
+                </div>
+                <div v-if="itens.municipal.margemRadio === '2'" >
+
+                    <v-text-field
+                            v-validate="'required'"
+                            :error-messages="errors.collect('Matricula')"
+                            data-vv-name="Matricula"
+                            v-model="itens.municipal.matricula"
+                            :rules="[() => validInput(itens.municipal.matricula) || error]"
+                            label="Matrícula"
+                            hint="Informe sua matrícula"
+                            class="text-field-limite"
+                            key="input-matricula-municipal"
+                    ></v-text-field>
+
+                    <v-text-field
+                            v-validate="'required'"
+                            :error-messages="errors.collect('Senha')"
+                            data-vv-name="Senha"
+                            v-model="itens.municipal.password"
+                            :append-icon="passshow ? 'visibility_off' : 'visibility'"
+                            :rules="[() => validInput(itens.municipal.password) || error]"
+                            :type="passshow ? 'text' : 'password'"
+                            label="Senha"
+                            hint="Informe a senha do seu portal"
+                            class="text-field-limite"
+                            counter
+                            @click:append="passshow = !passshow"
+                            key="input-senha-municipal"
+                    ></v-text-field>
+
+                </div>
+                <div v-if="itens.municipal.margemRadio === '3'" >
+
+                    <img height="150"
+                         :src="itens.municipal.file.imageUrl"
+                         v-if="itens.municipal.file.imageUrl"/>
+                    <v-text-field
+                            v-validate="'required'"
+                            :error-messages="errors.collect('Foto-Contracheque')"
+                            data-vv-name="Foto-Contracheque"
+                            v-model="itens.municipal.file.imageName"
+                            :rules="[() => validInput(itens.municipal.file.imageName) || error]"
+                            label="Selecione a imagem."
+                            class="text-field-limite"
+                            @click='pickFile(false)'
+                            prepend-icon='attach_file'
+                            key="input-contracheque-municipal"
+                    ></v-text-field>
+                    <input type="file"
+                           style="display: none;"
+                           accept="image/*"
+                           capture="camera"
+                           ref="getImageMunicipal"
+                           key="input-file-municipal"
+                           @change="onFilePickedMunicipal"/>
+                </div>
+                <hr>
+                <br>
+            </div>
+
+            <!--Para todas as categorias -->
+            <!--Questões Financeiras-->
+            <div>
+
                 <v-layout class="card-content-row-credito" row xs12 wrap>
                     <v-flex xs12 sm12>
                         <label>
@@ -459,7 +564,19 @@
                         imageFile: "",
                     }
                 },
+                municipal: {
+                    margemRadio: null,
+                    margem: "",
+                    matricula: "",
+                    password: "",
+                    file: {
+                        imageName: "",
+                        imageUrl: "",
+                        imageFile: "",
+                    }
+                }
             },
+            states: ['Acre', 'Pernambuco'],
         }),
         mounted () {
             this.$validator.localize('en', myDictionary)
@@ -510,10 +627,30 @@
                     this.itens.estadual.file.imageUrl = ''
                 }
             },
+            onFilePickedMunicipal (e) {
+                const files = e.target.files
+                if(files[0] !== undefined) {
+                    this.itens.municipal.file.imageName = files[0].name
+                    if(this.itens.municipal.file.imageName.lastIndexOf('.') <= 0) {
+                        return
+                    }
+                    const fr = new FileReader ()
+                    fr.readAsDataURL(files[0])
+                    fr.addEventListener('load', () => {
+                        this.itens.municipal.file.imageUrl = fr.result
+                        this.itens.municipal.file.imageFile = files[0] // this is an image file that can be sent to server...
+                    })
+                } else {
+                    this.itens.municipal.file.imageName = ''
+                    this.itens.municipal.file.imageFile = ''
+                    this.itens.municipal.file.imageUrl = ''
+                }
+            },
             checkMoney(){
-                if (this.itens.estadual.margem.includes("R$")){
+                if (this.itens.estadual.margem.includes("R$") || this.itens.municipal.margem.includes("R$")){
                     console.log('Entrei aqui')
-                    if (this.itens.estadual.margem === 'R$ 0,00' && this.itens.estadual.margemRadio === "1"){
+                    if ((this.itens.estadual.margem === 'R$ 0,00' && this.itens.estadual.margemRadio === "1") ||
+                        this.itens.municipal.margem === 'R$ 0,00' && this.itens.municipal.margemRadio === "1"){
                         this.showError = true
                         return false
                     }else{

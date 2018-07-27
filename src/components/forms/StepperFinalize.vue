@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-card class="mb-5" height="200px" >
-
+            <h2>Faça o upload dos comprovantes!</h2>
         </v-card>
 
         <v-btn color="primary">
