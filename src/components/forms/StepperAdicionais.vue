@@ -1,8 +1,9 @@
 <template>
     <div>
         <v-card class="mb-5" height="auto" >
+
             <!--Para Func. Públicos Estaduais-->
-            <div class="container-data-public">
+            <div class="container-data-public" v-if="this.$store.getters.hasSecondCategory">
                 <h2>Dados necessários para Funcionários Públicos Estaduais</h2>
                 <br>
                 <p>
@@ -82,7 +83,7 @@
                             :rules="[() => validInput(itens.estadual.file.imageName) || error]"
                             label="Selecione a imagem."
                             class="text-field-limite"
-                            @click='pickFile'
+                            @click='pickFile(true)'
                             prepend-icon='attach_file'
                             key="input-contracheque"
                     ></v-text-field>
@@ -358,8 +359,6 @@
 
                 </v-layout>
             </div>
-
-            <!--Para todas as categorias -->
             <!--Dados de Pessoas proximas-->
             <div>
                 <hr>
@@ -605,8 +604,12 @@
                     return false
                 }
             },
-            pickFile () {
-                this.$refs.getImage.click ()
+            pickFile (flag) {
+                if (flag){
+                    this.$refs.getImage.click ()
+                }else{
+                    this.$refs.getImageMunicipal.click ()
+                }
             },
             onFilePicked (e) {
                 const files = e.target.files
