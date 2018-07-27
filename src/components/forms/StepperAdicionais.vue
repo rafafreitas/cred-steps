@@ -70,7 +70,7 @@
                     ></v-text-field>
 
                 </div>
-                <div v-if="itens.estadual.margemRadio === '3'" >
+                <div v-if="itens.estadual.margemRadio === '3'" class="text-field-limite" @click='pickFile(true)'>
 
                     <img height="150"
                          :src="itens.estadual.file.imageUrl"
@@ -83,9 +83,9 @@
                             :rules="[() => validInput(itens.estadual.file.imageName) || error]"
                             label="Selecione a imagem."
                             class="text-field-limite"
-                            @click='pickFile(true)'
                             prepend-icon='attach_file'
                             key="input-contracheque"
+                            readonly
                     ></v-text-field>
 
                     <input type="file"
@@ -176,7 +176,7 @@
                     ></v-text-field>
 
                 </div>
-                <div v-if="itens.municipal.margemRadio === '3'" >
+                <div v-if="itens.municipal.margemRadio === '3'" class="text-field-limite" @click='pickFile(false)'>
 
                     <img height="150"
                          :src="itens.municipal.file.imageUrl"
@@ -189,9 +189,9 @@
                             :rules="[() => validInput(itens.municipal.file.imageName) || error]"
                             label="Selecione a imagem."
                             class="text-field-limite"
-                            @click='pickFile(false)'
                             prepend-icon='attach_file'
                             key="input-contracheque-municipal"
+                            readonly
                     ></v-text-field>
                     <input type="file"
                            style="display: none;"
@@ -408,7 +408,7 @@
                                 data-vv-name="CPF"
                                 placeholder="___.___.___-__"
                                 label="CPF"
-                                mask="###.###.###-##"
+                                v-mask="'###.###.###-##'"
                                 class="text-field-limite"
                                 key="input-add-parentesco-cpf"
                                 required
