@@ -93,8 +93,8 @@
                             v-validate="'required|dateBet'"
                             v-model="compDateFormated"
                             :rules="[() => validInput(compDateFormated) || error]"
-                            :error-messages="errors.collect('nascimento')"
-                            data-vv-name="nascimento"
+                            :error-messages="errors.collect('Data')"
+                            data-vv-name="Data"
                             label="Data de Nascimento"
                             prepend-icon="event"
                             readonly

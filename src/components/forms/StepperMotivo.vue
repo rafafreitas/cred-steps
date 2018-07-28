@@ -64,6 +64,7 @@
                                     data-vv-name="tratamento"
                                     placeholder="Descreva o procedimento."
                                     label="Tratamento"
+                                    key="input-motivo-tratamento"
                                     required
                             ></v-text-field>
                         </div>
@@ -80,22 +81,23 @@
                                     lazy
                                     full-width
                                     width="290px"
+                                    key="input-motivo-festa"
                             >
                                 <v-text-field
                                         slot="activator"
                                         v-validate="'required'"
                                         v-model="compDateFormated"
                                         :rules="[() => validInput(compDateFormated) || error]"
-                                        :error-messages="errors.collect('nascimento')"
-                                        data-vv-name="nascimento"
-                                        label="Data de Nascimento"
+                                        :error-messages="errors.collect('Data')"
+                                        data-vv-name="Data"
+                                        label="Data da festa"
                                         prepend-icon="event"
                                         readonly
                                 ></v-text-field>
-                                <v-date-picker v-model="itens.nascimento" scrollable locale="pt-br">
+                                <v-date-picker v-model="itens.datepicker" scrollable locale="pt-br">
                                     <v-spacer></v-spacer>
                                     <v-btn flat color="primary" @click="modal = false">Cancelar</v-btn>
-                                    <v-btn flat color="primary" @click="$refs.dialog.save(itens.nascimento)">OK</v-btn>
+                                    <v-btn flat color="primary" @click="$refs.dialog.save(itens.datepicker)">OK</v-btn>
                                 </v-date-picker>
                             </v-dialog>
                         </div>
@@ -174,7 +176,7 @@
         },
         computed: {
             compDateFormated: function () {
-                return this.formatDate(this.itens.nascimento)
+                return this.formatDate(this.itens.datepicker)
             },
             checkArray: function () {
                 if (this.itens.checkbox.length === 0 && this.errorCredito){
