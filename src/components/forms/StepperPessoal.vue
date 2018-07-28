@@ -93,16 +93,16 @@
                             v-validate="'required|dateBet'"
                             v-model="compDateFormated"
                             :rules="[() => validInput(compDateFormated) || error]"
-                            :error-messages="errors.collect('Data')"
-                            data-vv-name="Data"
+                            :error-messages="errors.collect('Data-Nascimento')"
+                            data-vv-name="Data-Nascimento"
                             label="Data de Nascimento"
                             prepend-icon="event"
                             readonly
                     ></v-text-field>
                     <v-date-picker v-model="itens.nascimento" scrollable locale="pt-br">
                         <v-spacer></v-spacer>
-                        <v-btn flat color="primary" @click="modal = false">Cancelar</v-btn>
-                        <v-btn flat color="primary" @click="$refs.dialog.save(itens.nascimento)">OK</v-btn>
+                        <v-btn flat color="primary" @click="checkdate(false)">Cancelar</v-btn>
+                        <v-btn flat color="primary" @click="checkdate(true)">OK</v-btn>
                     </v-date-picker>
                 </v-dialog>
 
@@ -258,6 +258,22 @@
                     return false
                 }
             },
+            checkdate(flag){
+                if (flag) {
+                    this.$refs.dialog.save(this.itens.nascimento)
+                    this.$validator.validate('Data-Nascimento', this.compDateFormated).then((result) =>{
+                        if (result) {
+                            console.log('Data corrigida!')
+                        }else{
+                            console.log('Data não corrigida!')
+                        }
+                    })
+
+                }else{
+                    this.modal = false
+                }
+
+            }
         }
     }
 </script>

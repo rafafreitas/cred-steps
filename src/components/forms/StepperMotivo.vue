@@ -88,16 +88,16 @@
                                         v-validate="'required|dateAfter'"
                                         v-model="compDateFormated"
                                         :rules="[() => validInput(compDateFormated) || error]"
-                                        :error-messages="errors.collect('Data')"
-                                        data-vv-name="Data"
+                                        :error-messages="errors.collect('Data-Festa')"
+                                        data-vv-name="Data-Festa"
                                         label="Data da festa"
                                         prepend-icon="event"
                                         readonly
                                 ></v-text-field>
                                 <v-date-picker v-model="itens.datepicker" scrollable locale="pt-br">
                                     <v-spacer></v-spacer>
-                                    <v-btn flat color="primary" @click="modal = false">Cancelar</v-btn>
-                                    <v-btn flat color="primary" @click="$refs.dialog.save(itens.datepicker)">OK</v-btn>
+                                    <v-btn flat color="primary" @click="checkdate(false)">Cancelar</v-btn>
+                                    <v-btn flat color="primary" @click="checkdate(true)">OK</v-btn>
                                 </v-date-picker>
                             </v-dialog>
                         </div>
@@ -226,6 +226,22 @@
                 }else{
                     return true
                 }
+            },
+            checkdate(flag){
+                if (flag) {
+                    this.$refs.dialog.save(this.itens.datepicker)
+                    this.$validator.validate('Data-Festa', this.compDateFormated).then((result) =>{
+                        if (result) {
+                            console.log('Data corrigida!')
+                        }else{
+                            console.log('Data não corrigida!')
+                        }
+                    })
+
+                }else{
+                    this.modal = false
+                }
+
             }
         }
     }
