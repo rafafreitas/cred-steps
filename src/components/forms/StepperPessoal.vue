@@ -45,7 +45,7 @@
                 </p>
 
                 <v-text-field
-                        v-validate="'required'"
+                        v-validate="'required|alpha_spaces|min:6'"
                         v-model="itens.nome"
                         :rules="[() => validInput(itens.nome) || error]"
                         :error-messages="errors.collect('Nome')"
@@ -56,7 +56,7 @@
                 ></v-text-field>
 
                 <v-text-field
-                        v-validate="'required'"
+                        v-validate="'required|min:14|max:15'"
                         v-model="itens.telefone"
                         :rules="[() => validInput(itens.telefone) || error]"
                         :error-messages="errors.collect('Telefone')"
@@ -143,7 +143,7 @@
                 </div>
                 <div v-else-if="itens.ocupacao.opcao === '6'" >
                     <v-text-field
-                            v-validate="'required'"
+                            v-validate="'required|alpha_spaces|min:3'"
                             v-model="itens.ocupacao.cidade"
                             :rules="[() => validInput(itens.ocupacao.cidade) || error]"
                             :error-messages="errors.collect('Cidade')"
@@ -154,7 +154,7 @@
                 </div>
                 <div v-else-if="itens.ocupacao.opcao === '7'" >
                     <v-text-field
-                            v-validate="'required'"
+                            v-validate="'required|min:3'"
                             v-model="itens.ocupacao.empresa"
                             :rules="[() => validInput(itens.ocupacao.empresa) || error]"
                             :error-messages="errors.collect('empresa')"
