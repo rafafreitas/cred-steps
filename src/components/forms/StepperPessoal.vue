@@ -90,7 +90,7 @@
                 >
                     <v-text-field
                             slot="activator"
-                            v-validate="'required'"
+                            v-validate="'required|dateBet'"
                             v-model="compDateFormated"
                             :rules="[() => validInput(compDateFormated) || error]"
                             :error-messages="errors.collect('nascimento')"
