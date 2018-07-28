@@ -85,7 +85,7 @@
                             >
                                 <v-text-field
                                         slot="activator"
-                                        v-validate="'required'"
+                                        v-validate="'required|dateAfter'"
                                         v-model="compDateFormated"
                                         :rules="[() => validInput(compDateFormated) || error]"
                                         :error-messages="errors.collect('Data')"
