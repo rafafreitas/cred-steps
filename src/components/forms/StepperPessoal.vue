@@ -52,7 +52,7 @@
                         :error-messages="errors.collect('Nome')"
                         data-vv-name="Nome"
                         label="Nome"
-                        placeholder="Informe seu nome completo."
+                        placeholder="Informe seu nome completo"
                         required
                 ></v-text-field>
 
@@ -64,6 +64,7 @@
                         data-vv-name="Telefone"
                         placeholder="(__) ____-____"
                         label="Telefone"
+                        type="tel"
                         v-mask="['(##) ####-####', '(##) #####-####']"
                         required
                 ></v-text-field>
@@ -77,6 +78,7 @@
                         placeholder="___.___.___-__"
                         label="CPF"
                         v-mask="'###.###.###-##'"
+                        type="tel"
                         required
                 ></v-text-field>
 
@@ -91,6 +93,7 @@
                         v-mask="'##/##/####'"
                         @change="checkdate(true)"
                         prepend-icon="event"
+                        type="tel"
                 ></v-text-field>
 
                 <label class="stepper-label-parc">
@@ -195,14 +198,16 @@
                 }
 
             },
-            states: ['Acre', 'Pernambuco'],
+            states: ["Acre", "Alagoas", "Amazonas", "Amapá", "Bahia", "Ceará", "Distrito Federal", "Espírito Santo",
+                     "Goiás", "Maranhão", "Mato Grosso", "Mato Grosso do Sul", "Minas Gerais", "Pará", "Paraíba",
+                     "Paraná", "Pernambuco", "Piauí", "Rio de Janeiro", "Rio Grande do Norte", "Rondônia",
+                     "Rio Grande do Sul", "Roraima", "Santa Catarina", "Sergipe", "São Paulo", "Tocantins"],
         }),
         mounted () {
             this.$validator.localize('en', myDictionary)
         },
         computed: {
             firstParcel: function () {
-                console.log(this.calcularJuros(0.008))
                 return new Intl.NumberFormat('pt-BR',
                     { style: 'currency', currency: 'BRL' }).format(parseFloat(this.calcularJuros(0.008).replace(",",".")));
             },

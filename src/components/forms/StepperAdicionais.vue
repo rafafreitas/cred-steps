@@ -237,8 +237,8 @@
                                 v-validate="'required'"
                                 data-vv-name="Emprego Carteira Assinada"
                                 :error-messages="errors.collect('Emprego Carteira Assinada')">
-                            <v-radio label="Sim, mais de 6 meses." value="1"></v-radio>
-                            <v-radio label="Sim, menos de 6 meses." value="2"></v-radio>
+                            <v-radio label="Sim, mais de 6 meses" value="1"></v-radio>
+                            <v-radio label="Sim, menos de 6 meses" value="2"></v-radio>
                             <v-radio label="Não" value="3"></v-radio>
                         </v-radio-group>
                     </v-flex>
@@ -251,8 +251,8 @@
                                 v-validate="'required'"
                                 data-vv-name="Renda Comprovada"
                                 :error-messages="errors.collect('Renda Comprovada')">
-                            <v-radio label="Sim, contracheque." value="1"></v-radio>
-                            <v-radio label="Sim, Imposto de Renda." value="2"></v-radio>
+                            <v-radio label="Sim, contracheque" value="1"></v-radio>
+                            <v-radio label="Sim, Imposto de Renda" value="2"></v-radio>
                             <v-radio label="Sim, Extrato  Bancário" value="3"></v-radio>
                             <v-radio label="Não" value="4"></v-radio>
                         </v-radio-group>
@@ -300,8 +300,8 @@
                                 data-vv-name="Conta em Banco"
                                 :error-messages="errors.collect('Conta em Banco')"
                                 key="input-add-cheque">
-                            <v-radio label="Sim, Conta Corrente." value="1"></v-radio>
-                            <v-radio label="Sim, Conta Poupança." value="2"></v-radio>
+                            <v-radio label="Sim, Conta Corrente" value="1"></v-radio>
+                            <v-radio label="Sim, Conta Poupança" value="2"></v-radio>
                             <v-radio label="Não" value="3"></v-radio>
                         </v-radio-group>
                     </v-flex>
@@ -373,6 +373,33 @@
                     </v-flex>
 
                     <v-flex xs12 sm6>
+                        <label>Parentesco</label>
+                        <v-radio-group
+                                v-model="itens.geral.parentesco.grau"
+                                :mandatory="false"
+                                v-validate="'required'"
+                                data-vv-name="Parentesco"
+                                :error-messages="errors.collect('Parentesco')" >
+                            <v-radio label="Pai" value="1"></v-radio>
+                            <v-radio label="Mãe" value="2"></v-radio>
+                            <v-radio label="Conjuge" value="3"></v-radio>
+                            <v-radio label="Outra pessoa próxima" value="4"></v-radio>
+                        </v-radio-group>
+
+                        <v-text-field v-if="itens.geral.parentesco.grau === '4'"
+                                      v-validate="'required'"
+                                      v-model="itens.geral.parentesco.proximidade"
+                                      :rules="[() => validInput(itens.geral.parentesco.proximidade) || error]"
+                                      :error-messages="errors.collect('Proximidade')"
+                                      data-vv-name="Proximidade"
+                                      label="Relação de Proximidade"
+                                      key="input-add-parentesco-grau"
+                                      class="text-field-limite"
+                                      required
+                        ></v-text-field>
+                    </v-flex>
+
+                    <v-flex xs12 sm6>
                         <label>Dados</label>
                         <v-text-field
                                 v-validate="'required'"
@@ -414,32 +441,6 @@
                                 required
                         ></v-text-field>
 
-                    </v-flex>
-
-                    <v-flex xs12 sm6>
-                        <label>Parentesco</label>
-                        <v-radio-group
-                                v-model="itens.geral.parentesco.grau"
-                                :mandatory="false"
-                                v-validate="'required'"
-                                data-vv-name="Parentesco"
-                                :error-messages="errors.collect('Parentesco')" >
-                            <v-radio label="Pai" value="1"></v-radio>
-                            <v-radio label="Mãe" value="2"></v-radio>
-                            <v-radio label="Conjuge" value="3"></v-radio>
-                            <v-radio label="Outra pessoa próxima" value="4"></v-radio>
-                        </v-radio-group>
-
-                        <v-text-field v-if="itens.geral.parentesco.grau === '4'"
-                                v-validate="'required'"
-                                v-model="itens.geral.parentesco.proximidade"
-                                :rules="[() => validInput(itens.geral.parentesco.proximidade) || error]"
-                                :error-messages="errors.collect('Proximidade')"
-                                data-vv-name="Proximidade"
-                                label="Relação de Proximidade"
-                                key="input-add-parentesco-grau"
-                                required
-                        ></v-text-field>
                     </v-flex>
 
                     <v-flex xs12 sm6>

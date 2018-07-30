@@ -4,13 +4,6 @@
             <p class="stepper-text-p">
                 Cada item respondido ajuda seu empréstimo a ser aprovado.
             </p>
-            <p class="stepper-text-parc">
-                Parcelas entre: *
-                <br/>
-                <label class="stepper-label-parc">
-                    <!--R$ {{firstParcel}} e R$ {{secondParcel}}-->
-                </label>
-            </p>
             <div class="card-content">
 
                 <v-layout row xs12 wrap>
