@@ -16,9 +16,10 @@
                                 class="slider-valor"
                                 v-model="itens.initialValue"
                                 thumb-size="40"
+                                tick-size="2"
                                 thumb-label
                                 min="500"
-                                max="10000"
+                                max="200000"
                                 step="250"
                         ></v-slider>
                     </v-flex>
@@ -40,7 +41,7 @@
                     Parcelas entre: *
                     <br/>
                     <label class="stepper-label-parc">
-                        R$ {{firstParcel}} e R$ {{secondParcel}}
+                        {{firstParcel}} e {{secondParcel}}
                     </label>
                 </p>
 
@@ -79,32 +80,18 @@
                         required
                 ></v-text-field>
 
-                <v-dialog
-                        ref="dialog"
-                        v-model="modal"
-                        :return-value.sync="itens.nascimento"
-                        persistent
-                        lazy
-                        full-width
-                        width="290px"
-                >
-                    <v-text-field
-                            slot="activator"
-                            v-validate="'required|dateBet'"
-                            v-model="compDateFormated"
-                            :rules="[() => validInput(compDateFormated) || error]"
-                            :error-messages="errors.collect('Data-Nascimento')"
-                            data-vv-name="Data-Nascimento"
-                            label="Data de Nascimento"
-                            prepend-icon="event"
-                            readonly
-                    ></v-text-field>
-                    <v-date-picker v-model="itens.nascimento" scrollable locale="pt-br">
-                        <v-spacer></v-spacer>
-                        <v-btn flat color="primary" @click="checkdate(false)">Cancelar</v-btn>
-                        <v-btn flat color="primary" @click="checkdate(true)">OK</v-btn>
-                    </v-date-picker>
-                </v-dialog>
+                <v-text-field
+                        v-validate="'required|dateBet|date_format:DD/MM/YYYY'"
+                        v-model="itens.nascimento"
+                        :rules="[() => validInput(itens.nascimento) || error]"
+                        :error-messages="errors.collect('Data-Nascimento')"
+                        data-vv-name="Data-Nascimento"
+                        label="Data de Nascimento"
+                        placeholder="__/__/____"
+                        v-mask="'##/##/####'"
+                        @change="checkdate(true)"
+                        prepend-icon="event"
+                ></v-text-field>
 
                 <label class="stepper-label-parc">
                     Qual a sua ocupação?
@@ -215,15 +202,14 @@
         },
         computed: {
             firstParcel: function () {
-                return this.calcularJuros(0.008)
-
+                console.log(this.calcularJuros(0.008))
+                return new Intl.NumberFormat('pt-BR',
+                    { style: 'currency', currency: 'BRL' }).format(parseFloat(this.calcularJuros(0.008).replace(",",".")));
             },
             secondParcel: function () {
-                return this.calcularJuros(0.05)
+                return new Intl.NumberFormat('pt-BR',
+                    { style: 'currency', currency: 'BRL' }).format(parseFloat(this.calcularJuros(0.05).replace(",",".")));
             },
-            compDateFormated: function () {
-                return this.formatDate(this.itens.nascimento)
-            }
         },
         methods: {
             nextPage(page){
@@ -246,11 +232,6 @@
 
                 return ((valor + juros) / qtd).toFixed(2).replace(".",",");
             },
-            formatDate (date) {
-                if (!date) return null
-                const [year, month, day] = date.split('-')
-                return `${day}/${month}/${year}`
-            },
             validInput(input){
                 if (input){
                     return true
@@ -260,8 +241,7 @@
             },
             checkdate(flag){
                 if (flag) {
-                    this.$refs.dialog.save(this.itens.nascimento)
-                    this.$validator.validate('Data-Nascimento', this.compDateFormated).then((result) =>{
+                    this.$validator.validate('Data-Nascimento', this.itens.nascimento).then((result) =>{
                         if (result) {
                             console.log('Data corrigida!')
                         }else{

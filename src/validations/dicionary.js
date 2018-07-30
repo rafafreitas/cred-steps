@@ -4,6 +4,7 @@ const dictionary = {
         min: (field) => `O campo ${field} está incompleto.`,
         max: (field) => `O campo ${field} tem um limite de caracteres.`,
         alpha_spaces: (field) => `O campo ${field} pode conter apenas caracteres alfabéticos e espaços.`,
+        date_format: (field, [format]) => `O campo ${field} deve estar no formato ${format}.`,
 
     },
     custom: {

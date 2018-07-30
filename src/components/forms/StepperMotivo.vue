@@ -73,33 +73,18 @@
                             <label>
                                 Qual a data da Festa/Casamento? <br><br>
                             </label>
-                            <v-dialog
-                                    ref="dialog"
-                                    v-model="modal"
-                                    :return-value.sync="itens.datepicker"
-                                    persistent
-                                    lazy
-                                    full-width
-                                    width="290px"
-                                    key="input-motivo-festa"
-                            >
-                                <v-text-field
-                                        slot="activator"
-                                        v-validate="'required|dateAfter'"
-                                        v-model="compDateFormated"
-                                        :rules="[() => validInput(compDateFormated) || error]"
-                                        :error-messages="errors.collect('Data-Festa')"
-                                        data-vv-name="Data-Festa"
-                                        label="Data da festa"
-                                        prepend-icon="event"
-                                        readonly
-                                ></v-text-field>
-                                <v-date-picker v-model="itens.datepicker" scrollable locale="pt-br">
-                                    <v-spacer></v-spacer>
-                                    <v-btn flat color="primary" @click="checkdate(false)">Cancelar</v-btn>
-                                    <v-btn flat color="primary" @click="checkdate(true)">OK</v-btn>
-                                </v-date-picker>
-                            </v-dialog>
+                            <v-text-field
+                                    v-validate="'required|dateAfter|date_format:DD/MM/YYYY'"
+                                    v-model="itens.datepicker"
+                                    :rules="[() => validInput(itens.datepicker) || error]"
+                                    :error-messages="errors.collect('Data-Festa')"
+                                    data-vv-name="Data-Festa"
+                                    label="Data da Festa"
+                                    placeholder="__/__/____"
+                                    v-mask="'##/##/####'"
+                                    @change="checkdate(true)"
+                                    prepend-icon="event"
+                            ></v-text-field>
                         </div>
 
                     </v-flex>
@@ -175,9 +160,6 @@
             this.$validator.localize('en', myDictionary)
         },
         computed: {
-            compDateFormated: function () {
-                return this.formatDate(this.itens.datepicker)
-            },
             checkArray: function () {
                 if (this.itens.checkbox.length === 0 && this.errorCredito){
                     return true
@@ -202,11 +184,6 @@
                     }
                 })
             },
-            formatDate (date) {
-                if (!date) return null
-                const [year, month, day] = date.split('-')
-                return `${day}/${month}/${year}`
-            },
             validInput(input){
                 if (input){
                     return true
@@ -229,8 +206,7 @@
             },
             checkdate(flag){
                 if (flag) {
-                    this.$refs.dialog.save(this.itens.datepicker)
-                    this.$validator.validate('Data-Festa', this.compDateFormated).then((result) =>{
+                    this.$validator.validate('Data-Festa', this.datepicker).then((result) =>{
                         if (result) {
                             console.log('Data corrigida!')
                         }else{
