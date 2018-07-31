@@ -16,13 +16,13 @@
 
             <v-stepper-items>
                 <v-stepper-content step="1">
-                    <page-1 @alterTab="alterEl"></page-1>
+                    <page-1 @alterTab="alterEl" @backE1="backE1"></page-1>
                 </v-stepper-content>
                 <v-stepper-content step="2">
-                    <page-2 @alterTab="alterEl"></page-2>
+                    <page-2 @alterTab="alterEl" @backE1="backE1"></page-2>
                 </v-stepper-content>
                 <v-stepper-content step="3">
-                    <Page-3 @alterTab="alterEl"></Page-3>
+                    <Page-3 @alterTab="alterEl" @backE1="backE1"></Page-3>
                 </v-stepper-content>
                 <v-stepper-content step="4">
                     <Page-4></Page-4>
@@ -42,10 +42,13 @@
         name: "Contato",
         components: {Page1,Page2,Page3,Page4},
         data: () => ({
-            tab: 1,
+            tab: 3,
         }),
         methods: {
             alterEl(page) {
+                this.tab = page
+            },
+            backE1(page){
                 this.tab = page
             }
         }

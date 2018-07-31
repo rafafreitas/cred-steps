@@ -128,7 +128,7 @@
             Continuar
         </v-btn>
 
-        <v-btn flat>Cancel</v-btn>
+        <v-btn flat @click="$emit('backE1', 1)">Voltar</v-btn>
     </div>
 </template>
 

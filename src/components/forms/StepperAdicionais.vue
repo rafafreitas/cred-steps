@@ -509,7 +509,7 @@
             Enviar informações
         </v-btn>
 
-        <v-btn flat>Cancelar</v-btn>
+        <v-btn flat @click="$emit('backE1', 2)">Voltar</v-btn>
     </div>
 </template>
 
