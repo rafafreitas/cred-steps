@@ -363,145 +363,164 @@
             <div>
                 <hr>
                 <br>
-                <v-layout class="card-content-row-credito" row xs12 wrap>
-                    <v-flex xs12 sm12>
-                        <b>Pessoas Proximas</b><br><br>
-                        <p>
-                            Poderemos melhorar as condições do seu crédito com uma maior quantidade de dados de pessoas próximas.
-                            preencha abaixo o máximo de dados possíveis para que agilizemos a aprovação do seu crédito
-                        </p>
-                    </v-flex>
-
-                    <v-flex xs12 sm6>
-                        <label>Parentesco</label>
-                        <v-radio-group
-                                v-model="itens.geral.parentesco.grau"
-                                :mandatory="false"
-                                v-validate="'required'"
-                                data-vv-name="Parentesco"
-                                :error-messages="errors.collect('Parentesco')" >
-                            <v-radio label="Pai" value="1"></v-radio>
-                            <v-radio label="Mãe" value="2"></v-radio>
-                            <v-radio label="Conjuge" value="3"></v-radio>
-                            <v-radio label="Outra pessoa próxima" value="4"></v-radio>
-                        </v-radio-group>
-
-                        <v-text-field v-if="itens.geral.parentesco.grau === '4'"
-                                      v-validate="'required'"
-                                      v-model="itens.geral.parentesco.proximidade"
-                                      :rules="[() => validInput(itens.geral.parentesco.proximidade) || error]"
-                                      :error-messages="errors.collect('Proximidade')"
-                                      data-vv-name="Proximidade"
-                                      label="Relação de Proximidade"
-                                      key="input-add-parentesco-grau"
-                                      class="text-field-limite"
-                                      required
-                        ></v-text-field>
-                    </v-flex>
-
-                    <v-flex xs12 sm6>
-                        <label>Dados</label>
-                        <v-text-field
-                                v-validate="'required'"
-                                v-model="itens.geral.parentesco.nome"
-                                :rules="[() => validInput(itens.geral.parentesco.nome) || error]"
-                                :error-messages="errors.collect('Nome')"
-                                data-vv-name="Nome"
-                                label="Nome"
-                                class="v-flex-conainer-med"
-                                key="input-add-parentesco-nome"
-                                required
-                        ></v-text-field>
-
-                        <v-text-field
-                                v-validate="'required'"
-                                v-model="itens.geral.parentesco.telefone"
-                                :rules="[() => validInput(itens.geral.parentesco.telefone) || error]"
-                                :error-messages="errors.collect('Telefone')"
-                                data-vv-name="Telefone"
-                                placeholder="(__) ____-____"
-                                label="Telefone"
-                                v-mask="'(##)#####-####'"
-                                class="text-field-limite"
-                                key="input-add-parentesco-telefone"
-                                required
-                        ></v-text-field>
-
-                        <v-text-field
-                                v-validate="'required'"
-                                v-model="itens.geral.parentesco.cpf"
-                                :rules="[() => validInput(itens.geral.parentesco.cpf) || error]"
-                                :error-messages="errors.collect('CPF')"
-                                data-vv-name="CPF"
-                                placeholder="___.___.___-__"
-                                label="CPF"
-                                v-mask="'###.###.###-##'"
-                                class="text-field-limite"
-                                key="input-add-parentesco-cpf"
-                                required
-                        ></v-text-field>
-
-                    </v-flex>
-
-                    <v-flex xs12 sm6>
-                        <label>Ocupação</label>
-
-                        <v-radio-group
-                                v-model="itens.geral.parentesco.ocupacao.opcao"
-                                :mandatory="false"
-                                v-validate="'required'"
-                                data-vv-name="Ocupacao"
-                                :error-messages="errors.collect('Ocupacao')" >
-                            <v-radio label="Aposentado" value="1"></v-radio>
-                            <v-radio label="Pensionista" value="2"></v-radio>
-                            <v-radio label="Forças Armadas" value="3"></v-radio>
-                            <v-radio label="Funcionário Publico Federal" value="4"></v-radio>
-                            <v-radio label="Funcionário Publico Estadual" value="5"></v-radio>
-                            <v-radio label="Funcionário Publico Municipal" value="6"></v-radio>
-                            <v-radio label="Funcionário Empresa Privada" value="7"></v-radio>
-                            <v-radio label="Autônomo/Liberal" value="8"></v-radio>
-                            <v-radio label="Não trabalha/ Desempregado" value="9"></v-radio>
-                        </v-radio-group>
-
-                        <div v-if="itens.geral.parentesco.ocupacao.opcao === '5'" >
-                            <v-select
-                                    v-validate="'required'"
-                                    v-model="itens.geral.parentesco.ocupacao.estado"
-                                    :items="states"
-                                    :rules="[() => validInput(itens.geral.parentesco.ocupacao.estado) || error]"
-                                    :error-messages="errors.collect('Estado')"
-                                    data-vv-name="Estado"
-                                    label="Qual o estado?"
-                                    key="input-add-ocupacao-estado"
-                            ></v-select>
-                        </div>
-                        <div v-else-if="itens.geral.parentesco.ocupacao.opcao === '6'" >
-                            <v-text-field
-                                    v-validate="'required'"
-                                    v-model="itens.geral.parentesco.ocupacao.cidade"
-                                    :rules="[() => validInput(itens.geral.parentesco.ocupacao.cidade) || error]"
-                                    :error-messages="errors.collect('Cidade')"
-                                    data-vv-name="Cidade"
-                                    label="Qual a cidade?"
-                                    key="input-add-ocupacao-cidade"
-                            ></v-text-field>
-                        </div>
-                        <div v-else-if="itens.geral.parentesco.ocupacao.opcao === '7'" >
-                            <v-text-field
-                                    v-validate="'required'"
-                                    v-model="itens.geral.parentesco.ocupacao.empresa"
-                                    :rules="[() => validInput(itens.geral.parentesco.ocupacao.empresa) || error]"
-                                    :error-messages="errors.collect('empresa')"
-                                    data-vv-name="empresa"
-                                    label="Qual a empresa?"
-                                    key="input-add-ocupacao-empresa"
-                            ></v-text-field>
-                        </div>
-                    </v-flex>
-
-
-                </v-layout>
+                <b>Pessoas Proximas</b><br><br>
+                <p>
+                    Poderemos melhorar as condições do seu crédito com uma maior quantidade de dados de pessoas próximas.
+                    Preencha abaixo o máximo de dados possíveis para que agilizemos a aprovação do seu crédito
+                </p>
             </div>
+
+            <div class="v-for-parentesco" v-for="(item, index) in itens.geral.parentescos">
+                <v-layout class="card-content-row-credito" row xs12 wrap>
+                        <v-flex xs12 sm12>
+                            <p>{{index+1}}º Indicação</p>
+                        </v-flex>
+
+                        <v-flex xs12 sm6>
+                            <label>Grau de Parentesco</label>
+                            <v-radio-group
+                                    v-model="itens.geral.parentescos[index].grau"
+                                    :mandatory="false"
+                                    v-validate="'required'"
+                                    data-vv-name="Parentesco"
+                                    :error-messages="errors.collect('Parentesco')" >
+                                <v-radio label="Pai" value="1"></v-radio>
+                                <v-radio label="Mãe" value="2"></v-radio>
+                                <v-radio label="Conjuge" value="3"></v-radio>
+                                <v-radio label="Outra pessoa próxima" value="4"></v-radio>
+                            </v-radio-group>
+
+                        </v-flex>
+
+                        <v-flex xs12 sm6 v-if="itens.geral.parentescos[index].grau !== ''">
+                            <label>Dados</label>
+
+                            <v-text-field v-if="itens.geral.parentescos[index].grau === '4'"
+                                          v-validate="'required'"
+                                          v-model="itens.geral.parentescos[index].proximidade"
+                                          :rules="[() => validInput(itens.geral.parentescos[index].proximidade) || error]"
+                                          :error-messages="errors.collect('Proximidade')"
+                                          data-vv-name="Proximidade"
+                                          label="Relação de Proximidade"
+                                          placeholder="O que ela é para você?"
+                                          key="input-add-parentesco-grau"
+                                          class="text-field-limite"
+                                          required
+                            ></v-text-field>
+
+                            <v-text-field
+                                    v-validate="'required'"
+                                    v-model="itens.geral.parentescos[index].nome"
+                                    :rules="[() => validInput(itens.geral.parentescos[index].nome) || error]"
+                                    :error-messages="errors.collect('Nome')"
+                                    data-vv-name="Nome"
+                                    label="Nome"
+                                    placeholder="Informe o nome completo"
+                                    class="v-flex-conainer-med"
+                                    key="input-add-parentesco-nome"
+                                    required
+                            ></v-text-field>
+
+                            <v-text-field
+                                    v-validate="'required'"
+                                    v-model="itens.geral.parentescos[index].telefone"
+                                    :rules="[() => validInput(itens.geral.parentescos[index].telefone) || error]"
+                                    :error-messages="errors.collect('Telefone')"
+                                    data-vv-name="Telefone"
+                                    placeholder="(__) ____-____"
+                                    label="Telefone"
+                                    v-mask="'(##)#####-####'"
+                                    class="text-field-limite"
+                                    key="input-add-parentesco-telefone"
+                                    required
+                            ></v-text-field>
+
+                            <v-text-field
+                                    v-validate="'required'"
+                                    v-model="itens.geral.parentescos[index].cpf"
+                                    :rules="[() => validInput(itens.geral.parentescos[index].cpf) || error]"
+                                    :error-messages="errors.collect('CPF')"
+                                    data-vv-name="CPF"
+                                    placeholder="___.___.___-__"
+                                    label="CPF"
+                                    v-mask="'###.###.###-##'"
+                                    class="text-field-limite"
+                                    key="input-add-parentesco-cpf"
+                                    required
+                            ></v-text-field>
+
+                        </v-flex>
+
+                        <v-flex xs12 sm12>
+                            <label>Ocupação</label>
+
+                            <v-radio-group
+                                    v-model="itens.geral.parentescos[index].ocupacao.opcao"
+                                    :mandatory="false"
+                                    v-validate="'required'"
+                                    data-vv-name="Ocupacao"
+                                    :error-messages="errors.collect('Ocupacao')" >
+                                <v-radio label="Aposentado" value="1"></v-radio>
+                                <v-radio label="Pensionista" value="2"></v-radio>
+                                <v-radio label="Forças Armadas" value="3"></v-radio>
+                                <v-radio label="Funcionário Publico Federal" value="4"></v-radio>
+                                <v-radio label="Funcionário Publico Estadual" value="5"></v-radio>
+                                <v-radio label="Funcionário Publico Municipal" value="6"></v-radio>
+                                <v-radio label="Funcionário Empresa Privada" value="7"></v-radio>
+                                <v-radio label="Autônomo/Liberal" value="8"></v-radio>
+                                <v-radio label="Não trabalha/ Desempregado" value="9"></v-radio>
+                            </v-radio-group>
+
+                            <div v-if="itens.geral.parentescos[index].ocupacao.opcao === '5'" >
+                                <v-select
+                                        v-validate="'required'"
+                                        v-model="itens.geral.parentescos[index].ocupacao.estado"
+                                        :items="states"
+                                        :rules="[() => validInput(itens.geral.parentescos[index].ocupacao.estado) || error]"
+                                        :error-messages="errors.collect('Estado')"
+                                        data-vv-name="Estado"
+                                        label="Qual o estado?"
+                                        key="input-add-ocupacao-estado"
+                                ></v-select>
+                            </div>
+                            <div v-else-if="itens.geral.parentescos[index].ocupacao.opcao === '6'" >
+                                <v-text-field
+                                        v-validate="'required'"
+                                        v-model="itens.geral.parentescos[index].ocupacao.cidade"
+                                        :rules="[() => validInput(itens.geral.parentescos[index].ocupacao.cidade) || error]"
+                                        :error-messages="errors.collect('Cidade')"
+                                        data-vv-name="Cidade"
+                                        label="Qual a cidade?"
+                                        key="input-add-ocupacao-cidade"
+                                ></v-text-field>
+                            </div>
+                            <div v-else-if="itens.geral.parentescos[index].ocupacao.opcao === '7'" >
+                                <v-text-field
+                                        v-validate="'required'"
+                                        v-model="itens.geral.parentescos[index].ocupacao.empresa"
+                                        :rules="[() => validInput(itens.geral.parentescos[index].ocupacao.empresa) || error]"
+                                        :error-messages="errors.collect('empresa')"
+                                        data-vv-name="empresa"
+                                        label="Qual a empresa?"
+                                        key="input-add-ocupacao-empresa"
+                                ></v-text-field>
+                            </div>
+                        </v-flex>
+
+                        <v-flex xs12 sm12>
+                            <v-btn v-if="index > 0" class="btn-del-parentesco" color="error" @click="cloneParentesco(index)">
+                                Remover esta referência
+                            </v-btn>
+                        </v-flex>
+
+                    </v-layout>
+                <hr>
+            </div>
+
+            <v-btn class="btn-add-parentesco" color="secondary" @click="cloneParentesco(null)">
+                <v-icon>add</v-icon>
+                Informe outra referência
+            </v-btn>
 
         </v-card>
 
@@ -519,12 +538,13 @@
         name: "Page-3",
         data: () => ({
             error:"",
+            clone: 2,
             showError: false,
             passshow: false,
             banks: ['Caixa', 'Banco do Brasil', 'Santander'],
             itens:{
                 geral: {
-                    parentesco: {
+                    parentescos: [{
                         grau: "",
                         proximidade: "",
                         nome: "",
@@ -537,7 +557,7 @@
                             cidade: "",
                             empresa: ""
                         },
-                    },
+                    }],
                     financeiras:{
                         spc: null,
                         cheque: null,
@@ -665,12 +685,43 @@
                     console.log('Entrei nesse')
                     return true
                 }
+            },
+            cloneParentesco(index){
+                if (!index){
+                    this.clone++
+                    this.itens.geral.parentescos.push({
+                        grau: "",
+                        proximidade: "",
+                        nome: "",
+                        cpf: "",
+                        telefone: "",
+                        nascimento: "",
+                        ocupacao: {
+                            opcao: null,
+                            estado: "",
+                            cidade: "",
+                            empresa: ""
+                        },
+                    })
+                }else{
+                    this.itens.geral.parentescos.splice(index, 1)
+                }
             }
         }
 
     }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+    .v-for-parentesco{
+        border-right: solid .01rem #02a099;
+        border-left: solid 1px #02a099;
+        padding: 20px 10px 0px 10px;
+    }
+    .btn-add-parentesco{
+        margin-top: 30px;
+    }
+    .btn-del-parentesco{
+        margin-bottom: 20px;
+    }
 </style>

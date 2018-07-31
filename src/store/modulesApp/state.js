@@ -25,7 +25,7 @@ export default {
     },
     stepperAdicionais: {
         geral: {
-            parentesco: {
+            parentescos: [{
                 grau: "",
                 proximidade: "",
                 nome: "",
@@ -38,7 +38,7 @@ export default {
                     cidade: "",
                     empresa: ""
                 },
-            },
+            }],
             financeiras:{
                 spc: null,
                 cheque: null,
