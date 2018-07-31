@@ -19,7 +19,7 @@
                         v-validate="'required'"
                         data-vv-name="margemRadio"
                         :error-messages="errors.collect('margemRadio')" >
-                    <v-radio label="Digite sua Margem Livre" value="1"></v-radio>
+                    <v-radio label="Valor da Margem Livre" value="1"></v-radio>
                     <v-radio label="Matrícula + Senha do Portal PE Consig " value="2"></v-radio>
                     <v-radio label="Foto do Contracheque " value="3"></v-radio>
 
@@ -91,7 +91,6 @@
                     <input type="file"
                            style="display: none;"
                            accept="image/*"
-                           capture="camera"
                            ref="getImage"
                            key="input-file-municipal"
                            @change="onFilePicked"/>
