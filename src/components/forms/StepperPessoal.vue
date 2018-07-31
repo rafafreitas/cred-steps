@@ -174,7 +174,6 @@
     export default {
         name: "Page-1",
         data: () => ({
-            modal: false,
             error:"Este campo é obrigatório!",
             itens:{
                 initialValue: 5000,
@@ -255,7 +254,7 @@
                     })
 
                 }else{
-                    this.modal = false
+
                 }
 
             }
