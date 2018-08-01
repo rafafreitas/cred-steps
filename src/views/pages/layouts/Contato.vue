@@ -44,6 +44,9 @@
         data: () => ({
             tab: 1,
         }),
+        mounted() {
+            console.log('Env-URL',process.env)
+        },
         methods: {
             alterEl(page) {
                 this.tab = page
