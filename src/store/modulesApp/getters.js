@@ -10,6 +10,33 @@ export const getStepperPessoal = (state) => {
     return state.stepperPessoal
 }
 
+export const hasFuncMuniciapal = (state) => {
+    // Funcionário Publico Municipal
+    if (state.stepperPessoal.ocupacao.opcao === '6'){
+        return true
+    }else{
+        return false
+    }
+}
+
+export const hasFuncPrivate = (state) => {
+    // Funcionário Empresa Privada
+    if (state.stepperPessoal.ocupacao.opcao === '7'){
+        return true
+    }else{
+        return false
+    }
+}
+
+export const hasDesempregado = (state) => {
+    // Funcionário Empresa Privada
+    if (state.stepperPessoal.ocupacao.opcao === '9'){
+        return true
+    }else{
+        return false
+    }
+}
+
 export const hasFirstCategory = (state) => {
     // Aposentado - Pensionista - Forças Armadas - Funcionário Publico Federal
     if (state.stepperPessoal.ocupacao.opcao === '1' || state.stepperPessoal.ocupacao.opcao === '2' ||

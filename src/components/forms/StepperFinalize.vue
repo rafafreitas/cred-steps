@@ -1,46 +1,191 @@
 <template>
     <div>
-        <v-card class="mb-5" height="200px" >
+        <v-card class="mb-5" height="auto" >
             <h2>Tire foto ou faça o upload dos comprovantes!</h2>
             <h3>Os dados são necessários para que ocorra a aprovação.</h3>
             <br>
 
             <v-layout class="card-content-row-credito" row xs12 wrap>
-                <v-flex xs12 sm12 @click='pickFile(1)'>
-                    <img height="150"
-                         :src="fotos.rg.imageUrl"
-                         v-if="fotos.rg.imageUrl"/>
-                    <v-text-field
-                            v-validate="'required'"
-                            :error-messages="errors.collect('Foto-Contracheque')"
-                            data-vv-name="Foto-Contracheque"
-                            v-model="fotos.rg.imageName"
-                            :rules="[() => validInput(fotos.rg.imageName) || error]"
-                            label="Foto do RG"
-                            class="text-field-limite"
-                            prepend-icon='attach_file'
-                            key="input-rg"
-                            readonly
-                    ></v-text-field>
+                <v-flex xs12 sm12>
+                    <div class="text-field-limite" @click='pickFile(1)'>
+                        <img height="150"
+                             :src="fotos.rg.imageUrl"
+                             v-if="fotos.rg.imageUrl"/>
+                        <v-text-field
+                                v-validate="'required'"
+                                :error-messages="errors.collect('Foto-Rg')"
+                                data-vv-name="Foto-Rg"
+                                v-model="fotos.rg.imageName"
+                                :rules="[() => validInput(fotos.rg.imageName) || error]"
+                                label="Foto do RG"
+                                class="text-field-limite"
+                                prepend-icon='account_box'
+                                key="input-rg"
+                                readonly
+                        ></v-text-field>
 
-                    <input type="file"
-                           style="display: none;"
-                           accept="image/*"
-                           ref="getImageRg"
-                           key="input-file-rg"
-                           @change="onFilePicked($event, 'rg')"/>
+                        <input type="file"
+                               style="display: none;"
+                               accept="image/*"
+                               ref="getImageRg"
+                               key="input-file-rg"
+                               @change="onFilePicked($event, 'rg')"/>
+                    </div>
                 </v-flex>
 
+                <v-flex xs12 sm12>
+                    <div class="text-field-limite" @click='pickFile(2)'>
+                        <img height="150"
+                             :src="fotos.cpf.imageUrl"
+                             v-if="fotos.cpf.imageUrl"/>
+                        <v-text-field
+                                v-validate="'required'"
+                                :error-messages="errors.collect('Foto-Cpf')"
+                                data-vv-name="Foto-Cpf"
+                                v-model="fotos.cpf.imageName"
+                                :rules="[() => validInput(fotos.cpf.imageName) || error]"
+                                label="Foto do CPF"
+                                class="text-field-limite"
+                                prepend-icon='account_balance_wallet'
+                                key="input-cpf"
+                                readonly
+                        ></v-text-field>
+
+                        <input type="file"
+                               style="display: none;"
+                               accept="image/*"
+                               ref="getImageCpf"
+                               key="input-file-cpf"
+                               @change="onFilePicked($event, 'cpf')"/>
+                    </div>
+                </v-flex>
+
+                <v-flex xs12 sm12>
+                    <div class="text-field-limite" @click='pickFile(3)'>
+                        <img height="150"
+                             :src="fotos.comprovante.imageUrl"
+                             v-if="fotos.comprovante.imageUrl"/>
+                        <v-text-field
+                                v-validate="'required'"
+                                :error-messages="errors.collect('Foto-Comprovante')"
+                                data-vv-name="Foto-Comprovante"
+                                v-model="fotos.comprovante.imageName"
+                                :rules="[() => validInput(fotos.comprovante.imageName) || error]"
+                                label="Comp. de Residência"
+                                class="text-field-limite"
+                                prepend-icon='attach_file'
+                                key="input-comprovante"
+                                readonly
+                        ></v-text-field>
+
+                        <input type="file"
+                               style="display: none;"
+                               accept="image/*"
+                               ref="getImageComp"
+                               key="input-file-comprovante"
+                               @change="onFilePicked($event, 'comprovante')"/>
+                    </div>
+                </v-flex>
+
+                <v-flex xs12 sm12
+                        v-if="this.$store.getters.hasSecondCategory ||
+                              this.$store.getters.hasFuncMuniciapal ||
+                              this.$store.getters.hasFuncPrivate">
+                    <div class="text-field-limite" @click='pickFile(4)'>
+                        <img height="150"
+                             :src="fotos.contraCheque.imageUrl"
+                             v-if="fotos.contraCheque.imageUrl"/>
+                        <v-text-field
+                                v-validate="'required'"
+                                :error-messages="errors.collect('Foto-Contracheque')"
+                                data-vv-name="Foto-Contracheque"
+                                v-model="fotos.contraCheque.imageName"
+                                :rules="[() => validInput(fotos.contraCheque.imageName) || error]"
+                                label="Último Contracheque"
+                                class="text-field-limite"
+                                prepend-icon='assignment'
+                                key="input-contra"
+                                readonly
+                        ></v-text-field>
+
+                        <input type="file"
+                               style="display: none;"
+                               accept="image/*"
+                               ref="getImageCont"
+                               key="input-file-contra"
+                               @change="onFilePicked($event, 'contraCheque')"/>
+                    </div>
+                </v-flex>
+
+                <v-flex xs12 sm12
+                        v-if="this.$store.getters.hasFuncPrivate">
+                    <div class="text-field-limite" @click='pickFile(5)'>
+                        <img height="150"
+                             :src="fotos.ctps.imageUrl"
+                             v-if="fotos.ctps.imageUrl"/>
+                        <v-text-field
+                                v-validate="'required'"
+                                :error-messages="errors.collect('Foto-Carteira')"
+                                data-vv-name="Foto-Carteira"
+                                v-model="fotos.ctps.imageName"
+                                :rules="[() => validInput(fotos.ctps.imageName) || error]"
+                                label="Carteira de Trabalho"
+                                class="text-field-limite"
+                                prepend-icon='chrome_reader_mode'
+                                key="input-ctps"
+                                readonly
+                        ></v-text-field>
+
+                        <input type="file"
+                               style="display: none;"
+                               accept="image/*"
+                               ref="getImageCtps"
+                               key="input-file-ctps"
+                               @change="onFilePicked($event, 'ctps')"/>
+                    </div>
+            </v-flex>
+
+                <v-flex xs12 sm12
+                        v-if="this.$store.getters.hasDesempregado">
+                    <div class="text-field-limite" @click='pickFile(6)'>
+                        <img height="150"
+                             :src="fotos.imposto.imageUrl"
+                             v-if="fotos.imposto.imageUrl"/>
+                        <v-text-field
+                                v-validate="'required'"
+                                :error-messages="errors.collect('Foto-Extrato')"
+                                data-vv-name="Foto-Extrato"
+                                v-model="fotos.imposto.imageName"
+                                :rules="[() => validInput(fotos.imposto.imageName) || error]"
+                                label="Imposto de Renda ou Extrato Bancário"
+                                class="text-field-limite"
+                                prepend-icon='attach_file'
+                                key="input-imposto"
+                                readonly
+                        ></v-text-field>
+
+                        <input type="file"
+                               style="display: none;"
+                               accept="image/*"
+                               ref="getImageImposto"
+                               key="input-file-imposto"
+                               @change="onFilePicked($event, 'imposto')"/>
+                    </div>
+                </v-flex>
+
+                <v-flex xs12 sm12>
+                    <br>
+                    <p>Obrigado pelas informações, faremos contato em breve!</p>
+                </v-flex>
 
             </v-layout>
 
         </v-card>
 
-        <v-btn color="primary">
+        <v-btn color="primary" @click="nextPage()">
             Enviar informações
         </v-btn>
 
-        <v-btn flat>Cancelar</v-btn>
     </div>
 </template>
 
@@ -65,6 +210,11 @@
                     imageUrl: "",
                     imageFile: "",
                     },
+                contraCheque: {
+                    imageName: "",
+                    imageUrl: "",
+                    imageFile: "",
+                },
                 ctps: {
                     imageName: "",
                     imageUrl: "",
@@ -78,6 +228,17 @@
             }
         }),
         methods: {
+            nextPage(){
+                this.$validator.validateAll().then((result) =>{
+                    console.log('Validate Finalize', result)
+                    if (result) {
+                        this.$store.commit('setStepperFinalize', this.fotos)
+                        this.$emit('finish')
+                    }else{
+                        console.log('Campos não validados')
+                    }
+                })
+            },
             validInput(input){
                 if (input){
                     return true
@@ -91,7 +252,19 @@
                         this.$refs.getImageRg.click()
                         break;
                     case 2:
-                        this.$refs.getImage.click()
+                        this.$refs.getImageCpf.click()
+                        break;
+                    case 3:
+                        this.$refs.getImageComp.click()
+                        break;
+                    case 4:
+                        this.$refs.getImageCont.click()
+                        break;
+                    case 5:
+                        this.$refs.getImageCtps.click()
+                        break;
+                    case 6:
+                        this.$refs.getImageImposto.click()
                         break;
                 }
             },
