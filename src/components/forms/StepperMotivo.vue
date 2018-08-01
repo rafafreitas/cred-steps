@@ -90,8 +90,8 @@
                         </label>
                     </v-flex>
                     <v-flex xs12 sm12 class="container-flex container-checkbox-credito">
-                        <v-checkbox v-validate="'required'" data-vv-name="credito" :error-messages="errors.collect('credito')" class="container-checkbox" v-model="itens.checkbox" label="Crédito Consignado P/ Aposentado, Pensionista, Funcionário Público ou Forças Armadas" value="1"></v-checkbox>
-                        <v-checkbox v-validate="'required'" data-vv-name="credito" :error-messages="errors.collect('credito')" class="container-checkbox" v-model="itens.checkbox" label="Pelo Limite do Cartão de Crédito" value="2"></v-checkbox>
+                        <v-checkbox v-validate="'required'" data-vv-name="credito" :error-messages="errors.collect('credito')" class="container-checkbox" v-model="itens.checkbox" label="Crédito consignado para aposentado, pensionista, funcionário público ou forças armadas" value="1"></v-checkbox>
+                        <v-checkbox v-validate="'required'" data-vv-name="credito" :error-messages="errors.collect('credito')" class="container-checkbox" v-model="itens.checkbox" label="Pelo limite do cartão de crédito" value="2"></v-checkbox>
                         <div v-if="itens.checkbox.includes('2')" >
                             <label>
                                 Qual o limite?<br>
@@ -110,10 +110,10 @@
 
 
                         </div>
-                        <v-checkbox v-validate="'required'" data-vv-name="credito" :error-messages="errors.collect('credito')" class="container-checkbox" v-model="itens.checkbox" label="Desconto em Folha de Pagamento" value="3"></v-checkbox>
+                        <v-checkbox v-validate="'required'" data-vv-name="credito" :error-messages="errors.collect('credito')" class="container-checkbox" v-model="itens.checkbox" label="Desconto em folha de pagamento" value="3"></v-checkbox>
                         <v-checkbox v-validate="'required'" data-vv-name="credito" :error-messages="errors.collect('credito')" class="container-checkbox" v-model="itens.checkbox" label="Cheque" value="4"></v-checkbox>
                         <v-checkbox v-validate="'required'" data-vv-name="credito" :error-messages="errors.collect('credito')" class="container-checkbox" v-model="itens.checkbox" label="Boleto" value="5"></v-checkbox>
-                        <v-checkbox v-validate="'required'" data-vv-name="credito" :error-messages="errors.collect('credito')" class="container-checkbox" v-model="itens.checkbox" label="Débito em Conta" value="6"></v-checkbox>
+                        <v-checkbox v-validate="'required'" data-vv-name="credito" :error-messages="errors.collect('credito')" class="container-checkbox" v-model="itens.checkbox" label="Débito em conta" value="6"></v-checkbox>
 
                         <p class="error-credito" v-if="checkArray">Informe como pretende conseguir o crédito!</p>
                     </v-flex>

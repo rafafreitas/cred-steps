@@ -71,7 +71,7 @@
                                 data-vv-name="Foto-Comprovante"
                                 v-model="fotos.comprovante.imageName"
                                 :rules="[() => validInput(fotos.comprovante.imageName) || error]"
-                                label="Comp. de Residência"
+                                label="Comp. de residência"
                                 class="text-field-limite"
                                 prepend-icon='attach_file'
                                 key="input-comprovante"
@@ -101,7 +101,7 @@
                                 data-vv-name="Foto-Contracheque"
                                 v-model="fotos.contraCheque.imageName"
                                 :rules="[() => validInput(fotos.contraCheque.imageName) || error]"
-                                label="Último Contracheque"
+                                label="Último contracheque"
                                 class="text-field-limite"
                                 prepend-icon='assignment'
                                 key="input-contra"
@@ -129,7 +129,7 @@
                                 data-vv-name="Foto-Carteira"
                                 v-model="fotos.ctps.imageName"
                                 :rules="[() => validInput(fotos.ctps.imageName) || error]"
-                                label="Carteira de Trabalho"
+                                label="Carteira de trabalho"
                                 class="text-field-limite"
                                 prepend-icon='chrome_reader_mode'
                                 key="input-ctps"
@@ -157,7 +157,7 @@
                                 data-vv-name="Foto-Extrato"
                                 v-model="fotos.imposto.imageName"
                                 :rules="[() => validInput(fotos.imposto.imageName) || error]"
-                                label="Imposto de Renda ou Extrato Bancário"
+                                label="Imposto de renda ou extrato bancário"
                                 class="text-field-limite"
                                 prepend-icon='attach_file'
                                 key="input-imposto"

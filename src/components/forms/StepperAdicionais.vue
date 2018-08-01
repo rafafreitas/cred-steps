@@ -251,8 +251,8 @@
                                 data-vv-name="Renda Comprovada"
                                 :error-messages="errors.collect('Renda Comprovada')">
                             <v-radio label="Sim, contracheque" value="1"></v-radio>
-                            <v-radio label="Sim, Imposto de Renda" value="2"></v-radio>
-                            <v-radio label="Sim, Extrato  Bancário" value="3"></v-radio>
+                            <v-radio label="Sim, imposto de renda" value="2"></v-radio>
+                            <v-radio label="Sim, extrato  bancário" value="3"></v-radio>
                             <v-radio label="Não" value="4"></v-radio>
                         </v-radio-group>
                     </v-flex>
@@ -479,13 +479,13 @@
                                 :error-messages="errors.collect('parentesco-ocupacao-'+index)">
                             <v-radio label="Aposentado" value="1"></v-radio>
                             <v-radio label="Pensionista" value="2"></v-radio>
-                            <v-radio label="Forças Armadas" value="3"></v-radio>
-                            <v-radio label="Funcionário Publico Federal" value="4"></v-radio>
-                            <v-radio label="Funcionário Publico Estadual" value="5"></v-radio>
-                            <v-radio label="Funcionário Publico Municipal" value="6"></v-radio>
-                            <v-radio label="Funcionário Empresa Privada" value="7"></v-radio>
+                            <v-radio label="Forças armadas" value="3"></v-radio>
+                            <v-radio label="Funcionário público federal" value="4"></v-radio>
+                            <v-radio label="Funcionário público estadual" value="5"></v-radio>
+                            <v-radio label="Funcionário público municipal" value="6"></v-radio>
+                            <v-radio label="Funcionário empresa privada" value="7"></v-radio>
                             <v-radio label="Autônomo/Liberal" value="8"></v-radio>
-                            <v-radio label="Não trabalha/ Desempregado" value="9"></v-radio>
+                            <v-radio label="Não trabalha/Desempregado" value="9"></v-radio>
                         </v-radio-group>
 
                         <div v-if="itens.geral.parentescos[index].ocupacao.opcao === '5'" >

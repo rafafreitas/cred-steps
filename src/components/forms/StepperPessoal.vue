@@ -172,7 +172,7 @@
         <p class="stepper-text-footer">
             * Os valores apresentados acima são apenas fins comparativos.
             Para calcular a sua taxa real clique em "Continuar" e finalize
-            seu pedido sem compromisso
+            seu pedido sem compromisso.
         </p>
     </div>
 </template>
