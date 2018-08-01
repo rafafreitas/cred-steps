@@ -25,7 +25,7 @@
                     <Page-3 @alterTab="alterEl" @backE1="backE1"></Page-3>
                 </v-stepper-content>
                 <v-stepper-content step="4">
-                    <Page-4></Page-4>
+                    <Page-4 @finish="finish"></Page-4>
                 </v-stepper-content>
 
             </v-stepper-items>
@@ -42,7 +42,7 @@
         name: "Contato",
         components: {Page1,Page2,Page3,Page4},
         data: () => ({
-            tab: 3,
+            tab: 1,
         }),
         methods: {
             alterEl(page) {
@@ -50,6 +50,9 @@
             },
             backE1(page){
                 this.tab = page
+            },
+            finish(){
+                this.$router.push('/finish')
             }
         }
     }
