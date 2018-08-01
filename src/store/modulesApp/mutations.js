@@ -33,3 +33,7 @@ export const setStepperMotivo = (state, itens) => {
 export const setStepperAdicionais = (state, itens) => {
     state.stepperAdicionais = itens
 }
+
+export const setStepperFinalize = (state, fotos) => {
+    state.stepperFinalize = fotos
+}

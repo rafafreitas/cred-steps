@@ -77,4 +77,36 @@ export default {
             }
         }
     },
+    stepperFinalize: {
+        rg : {
+            imageName: "",
+            imageUrl: "",
+            imageFile: "",
+        },
+        cpf: {
+            imageName: "",
+            imageUrl: "",
+            imageFile: "",
+        },
+        comprovante: {
+            imageName: "",
+            imageUrl: "",
+            imageFile: "",
+        },
+        contraCheque: {
+            imageName: "",
+            imageUrl: "",
+            imageFile: "",
+        },
+        ctps: {
+            imageName: "",
+            imageUrl: "",
+            imageFile: "",
+        },
+        imposto: {
+            imageName: "",
+            imageUrl: "",
+            imageFile: "",
+        }
+    }
 }
