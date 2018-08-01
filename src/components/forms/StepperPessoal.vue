@@ -19,8 +19,8 @@
                                 tick-size="2"
                                 thumb-label
                                 min="500"
-                                max="200000"
-                                step="250"
+                                max="50000"
+                                step="500"
                         ></v-slider>
                     </v-flex>
 
@@ -67,6 +67,14 @@
                         type="tel"
                         v-mask="['(##) ####-####', '(##) #####-####']"
                         required
+                ></v-text-field>
+
+                <v-text-field
+                        v-validate="'email'"
+                        v-model="itens.email"
+                        :error-messages="errors.collect('E-mail')"
+                        data-vv-name="E-mail"
+                        label="E-mail"
                 ></v-text-field>
 
                 <v-text-field
@@ -178,16 +186,24 @@
             itens:{
                 initialValue: 5000,
                 parcelas: [
+                    '1 Parcela',
+                    '3 Parcelas',
+                    '6 Parcelas',
+                    '9 Parcelas',
                     '12 Parcelas',
                     '18 Parcelas',
                     '24 Parcelas',
-                    '30 Parcelas',
-                    '36 Parcelas'
+                    '36 Parcelas',
+                    '48 Parcelas',
+                    '60 Parcelas',
+                    '72 Parcelas',
+                    '96 Parcelas'
                 ],
                 parcela: "12 Parcelas",
                 nome: "",
                 telefone: "",
                 cpf: "",
+                email: "",
                 nascimento: "",
                 ocupacao: {
                     opcao: null,
