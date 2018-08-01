@@ -17,7 +17,7 @@
             </v-flex>
             <v-flex xs12 sm12>
                 <div class="btn">
-                    <v-btn color="info" @click="$router.push('/')">Fazer uma nova solicitação!</v-btn>
+                    <v-btn color="secondary" @click="$router.push('/')">Voltar para o inicio!</v-btn>
                 </div>
             </v-flex>
         </v-layout>
@@ -51,7 +51,7 @@
             text-align: center;
         }
         .btn{
-            max-width: 259px;
+            max-width: 200px;
             margin-left: auto;
             margin-right: auto;
         }

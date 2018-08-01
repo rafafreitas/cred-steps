@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-toolbar app class="toolbar-main">
-
+            <img class="toolbar-img" src="../../../assets/clinical.jpg">
             <v-toolbar-title v-text="title"></v-toolbar-title>
             <v-spacer></v-spacer>
         </v-toolbar>
@@ -18,7 +18,7 @@
         name: "container",
         data () {
             return {
-                title: 'Clinical Cred'
+                title: ''
             }
         }
     }
@@ -29,5 +29,8 @@
         color: #fff;
         /*background-color: #02a099;*/
         background-color: #154456;
+    }
+    .toolbar-img{
+        max-width: 169px;
     }
 </style>
