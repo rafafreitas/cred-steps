@@ -3,8 +3,8 @@ import Finish from '../layouts/Finish';
 
 export default [
     {
-        name: 'Contato',
-        path: '/contato',
+        name: 'Formulario',
+        path: '/formulario',
         component: Contato,
         meta: {
             auth: false,
