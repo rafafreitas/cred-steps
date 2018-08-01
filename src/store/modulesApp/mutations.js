@@ -12,6 +12,7 @@ export const setStepperPessoal = (state, itens) => {
     state.stepperPessoal.nome = itens.nome
     state.stepperPessoal.telefone = itens.telefone
     state.stepperPessoal.cpf = itens.cpf
+    state.stepperPessoal.email = itens.email
     state.stepperPessoal.nascimento = itens.nascimento
 
     state.stepperPessoal.ocupacao.opcao = itens.ocupacao.opcao

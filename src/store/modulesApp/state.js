@@ -7,6 +7,7 @@ export default {
         nome: "",
         telefone: "",
         cpf: "",
+        email: "",
         nascimento: "",
         ocupacao: {
             opcao: "6",
