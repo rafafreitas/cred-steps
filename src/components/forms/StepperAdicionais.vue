@@ -19,9 +19,9 @@
                         v-validate="'required'"
                         data-vv-name="margemRadio"
                         :error-messages="errors.collect('margemRadio')" >
-                    <v-radio label="Valor da Margem Livre" value="1"></v-radio>
-                    <v-radio label="Matrícula + Senha do Portal PE Consig " value="2"></v-radio>
-                    <v-radio label="Foto do Contracheque " value="3"></v-radio>
+                    <v-radio label="Valor da margem livre" value="1"></v-radio>
+                    <v-radio label="Matrícula + senha do portal PE Consig " value="2"></v-radio>
+                    <v-radio label="Foto do contracheque " value="3"></v-radio>
 
                 </v-radio-group>
 
@@ -216,7 +216,7 @@
                     </v-flex>
 
                     <v-flex xs12 sm6>
-                        <label>Possui Restrição SPC/Serasa?</label>
+                        <label>Possui restrição SPC/Serasa?</label>
                         <v-radio-group
                                 v-model="itens.geral.financeiras.spc"
                                 :mandatory="false"
@@ -229,7 +229,7 @@
                     </v-flex>
 
                     <v-flex xs12 sm6>
-                        <label>Emprego Carteira Assinada?</label>
+                        <label>Emprego carteira assinada?</label>
                         <v-radio-group
                                 v-model="itens.geral.financeiras.emprego"
                                 :mandatory="false"
@@ -243,7 +243,7 @@
                     </v-flex>
 
                     <v-flex xs12 sm6>
-                        <label>Renda Comprovada?</label>
+                        <label>Renda comprovada?</label>
                         <v-radio-group
                                 v-model="itens.geral.financeiras.rendaComprovada"
                                 :mandatory="false"
@@ -260,7 +260,7 @@
                     <v-flex xs12 sm6>
                         <v-layout class="card-content-row-credito" row xs12 wrap>
                             <v-flex xs12 sm6>
-                                <label>Possui Cheque?</label>
+                                <label>Possui cheque?</label>
                                 <v-radio-group
                                         v-model="itens.geral.financeiras.cheque"
                                         :mandatory="false"
@@ -273,7 +273,7 @@
                             </v-flex>
                             <v-flex xs12 sm6>
                                 <div v-if="itens.geral.financeiras.cheque === 'true'" >
-                                    <label>Cheques Devolvidos nos Últimos 6 meses?</label>
+                                    <label>Cheques devolvidos nos últimos 6 meses?</label>
                                     <v-radio-group
                                             v-model="itens.geral.financeiras.chequeDev"
                                             :mandatory="false"
@@ -291,7 +291,7 @@
                     </v-flex>
 
                     <v-flex xs12 sm6>
-                        <label>Conta em Banco?</label>
+                        <label>Conta em banco?</label>
                         <v-radio-group
                                 v-model="itens.geral.financeiras.banck.possui"
                                 :mandatory="false"
@@ -299,14 +299,14 @@
                                 data-vv-name="Conta em Banco"
                                 :error-messages="errors.collect('Conta em Banco')"
                                 key="input-add-cheque">
-                            <v-radio label="Sim, Conta Corrente" value="1"></v-radio>
-                            <v-radio label="Sim, Conta Poupança" value="2"></v-radio>
+                            <v-radio label="Sim, conta corrente" value="1"></v-radio>
+                            <v-radio label="Sim, conta poupança" value="2"></v-radio>
                             <v-radio label="Não" value="3"></v-radio>
                         </v-radio-group>
                     </v-flex>
 
                     <v-flex xs12 sm6  v-if="hasBanck">
-                        <label>Tempo de Conta</label>
+                        <label>Tempo de conta</label>
                         <v-radio-group
                                 v-model="itens.geral.financeiras.banck.tempoConta"
                                 :mandatory="false"
@@ -327,7 +327,7 @@
                                 :rules="[() => validInput(itens.geral.financeiras.banck.banco) || error]"
                                 :error-messages="errors.collect('Banco')"
                                 data-vv-name="Banco"
-                                label="Qual o Banco?"
+                                label="Qual o banco?"
                                 key="input-add-banco-banck"
                         ></v-select>
                     </v-flex>

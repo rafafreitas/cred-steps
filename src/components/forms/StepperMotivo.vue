@@ -23,19 +23,19 @@
                                 :error-messages="errors.collect('motivo')" >
                             <v-layout row xs12 wrap>
                                 <v-flex xs12 sm6 class="container-flex">
-                                    <v-radio label="Tratamento Médico" value="1"></v-radio>
-                                    <v-radio label="Tratamento Odontológico" value="2"></v-radio>
-                                    <v-radio label="Construção/Reforma ou Decoração" value="3"></v-radio>
+                                    <v-radio label="Tratamento médico" value="1"></v-radio>
+                                    <v-radio label="Tratamento odontológico" value="2"></v-radio>
+                                    <v-radio label="Construção/Reforma ou decoração" value="3"></v-radio>
                                     <v-radio label="Viagem" value="4"></v-radio>
                                     <v-radio label="Festa/Casamento" value="5"></v-radio>
                                     <v-radio label="Pagar uma dívida" value="6"></v-radio>
                                 </v-flex>
 
                                 <v-flex xs12 sm6>
-                                    <v-radio label="Empréstimo Pessoal" value="7"></v-radio>
-                                    <v-radio label="Pagar Cartão de Crédito" value="8"></v-radio>
-                                    <v-radio label="Pagar Cheque Especial" value="9"></v-radio>
-                                    <v-radio label="Curso ou Intercâmbio" value="10"></v-radio>
+                                    <v-radio label="Empréstimo pessoal" value="7"></v-radio>
+                                    <v-radio label="Pagar cartão de crédito" value="8"></v-radio>
+                                    <v-radio label="Pagar cheque especial" value="9"></v-radio>
+                                    <v-radio label="Curso ou intercâmbio" value="10"></v-radio>
                                     <v-radio label="Outro" value="11"></v-radio>
                                 </v-flex>
                             </v-layout>
