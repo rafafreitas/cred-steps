@@ -75,6 +75,7 @@
                                     label="Data da Festa"
                                     placeholder="__/__/____"
                                     v-mask="'##/##/####'"
+                                    type="tel"
                                     @change="checkdate(true)"
                                     prepend-icon="event"
                             ></v-text-field>
@@ -103,6 +104,7 @@
                                     :rules="[() => validInput(itens.limite) || error]"
                                     :error-messages="errors.collect('limite')"
                                     data-vv-name="limite"
+                                    type="tel"
                                     v-money
                                     required
                             ></v-text-field>

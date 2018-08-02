@@ -67,7 +67,7 @@ export const hasSecondCategory = (state) => {
 export const hasThirdCategory = (state) => {
     // Funcionário Publico Municipal
     if (state.stepperPessoal.ocupacao.opcao === '6'){
-        if (state.stepperPessoal.ocupacao.cidade === 'Recife' || state.stepperPessoal.ocupacao.cidade === 'Jaboatão'){
+        if (state.stepperPessoal.ocupacao.cidade === '1597' || state.stepperPessoal.ocupacao.cidade === '1553'){
             return true
         }else{
             return false
@@ -79,9 +79,9 @@ export const hasThirdCategory = (state) => {
 
 export const hasCityMunicipal = (state) => {
     // Funcionário Publico Municipal
-    if (state.stepperPessoal.ocupacao.cidade === 'Recife'){
+    if (state.stepperPessoal.ocupacao.cidade === '1597'){
         return 1
-    }else if (state.stepperPessoal.ocupacao.cidade === 'Jaboatão'){
+    }else if (state.stepperPessoal.ocupacao.cidade === '1553'){
         return 2
     }else{
         return false

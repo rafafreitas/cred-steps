@@ -33,6 +33,7 @@
                             :rules="[() => validInput(itens.estadual.margem) || error]"
                             :error-messages="errors.collect('margem')"
                             data-vv-name="margem"
+                            type="tel"
                             v-money
                             required
                             key="input-margin"
@@ -130,16 +131,17 @@
 
                 </v-radio-group>
 
-                <div v-if="itens.estadual.margemRadio === '1'" >
+                <div v-if="itens.municipal.margemRadio === '1'" >
                     <v-text-field
                             v-validate="'required'"
                             class="text-field-limite margin-top-none"
-                            v-model="itens.estadual.margem"
-                            :rules="[() => validInput(itens.estadual.margem) || error]"
+                            v-model="itens.municipal.margem"
+                            :rules="[() => validInput(itens.municipal.margem) || error]"
                             :error-messages="errors.collect('margem')"
                             data-vv-name="margem"
                             v-money
                             required
+                            type="tel"
                             key="input-margin"
                     ></v-text-field>
                     <p class="error-credito" v-if="showError">Informe o valor da margem.</p>
