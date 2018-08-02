@@ -10,6 +10,10 @@ export const setStates = (state, estados) => {
     state.estados = estados
 }
 
+export const setCitys = (state, cidades) => {
+  state.cidades = cidades
+}
+
 export const setStepperPessoal = (state, itens) => {
     state.stepperPessoal.money = itens.initialValue
     state.stepperPessoal.parcela = itens.parcela
@@ -33,7 +37,6 @@ export const setStepperMotivo = (state, itens) => {
     state.stepperMotivo.checkbox = itens.checkbox
     state.stepperMotivo.limite = itens.limite
 }
-
 
 export const setStepperAdicionais = (state, itens) => {
     state.stepperAdicionais = itens

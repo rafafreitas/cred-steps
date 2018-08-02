@@ -10,6 +10,10 @@ export const getEstados = (state) => {
     return state.estados
 }
 
+export const getCidades = (state) => {
+  return state.cidades
+}
+
 export const getStepperPessoal = (state) => {
     return state.stepperPessoal
 }

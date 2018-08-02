@@ -20,3 +20,24 @@ export const getStates = (context) => {
             })
     })
 }
+
+export const getCitys = (context, uf) => {
+  return new Promise((resolve, reject) => {
+    Enderecos.getCitys(uf)
+      .then(
+        (result) => {
+          context.commit('setCitys', result.data.result)
+          console.log('Cidades Carregadas')
+          resolve(result)
+        },
+        (error) => {
+          console.log('Cidades_Erro', error)
+          reject(error)
+        }
+      ).catch(
+      (err) =>{
+        console.log('Catch Action_Erro', error)
+        reject(err)
+      })
+  })
+}

@@ -2,6 +2,7 @@ export default {
     auth: false,
     userType: null,
     estados: [],
+    cidades: [],
     stepperPessoal: {
         money: "",
         parcela: "",
