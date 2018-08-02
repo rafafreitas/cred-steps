@@ -6,6 +6,10 @@ export const hasUserType = (state, type) => {
     state.userType = type
 }
 
+export const setStates = (state, estados) => {
+    state.estados = estados
+}
+
 export const setStepperPessoal = (state, itens) => {
     state.stepperPessoal.money = itens.initialValue
     state.stepperPessoal.parcela = itens.parcela

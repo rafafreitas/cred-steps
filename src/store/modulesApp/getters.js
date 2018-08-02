@@ -6,6 +6,10 @@ export const getUserType = (state) => {
     return state.userType
 }
 
+export const getEstados = (state) => {
+    return state.estados
+}
+
 export const getStepperPessoal = (state) => {
     return state.stepperPessoal
 }

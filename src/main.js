@@ -10,8 +10,8 @@ import router from './router'
 import store from './store'
 import mixin from './helpers/mixin'
 
-Vue.config.productionTip = false
-
+// Vue.config.productionTip = false
+Vue.config.productionTip = process.env.NODE_ENV === 'development'
 Vue.use(Validator);
 Vue.use(VueTheMask)
 Vue.use(money);
