@@ -46,6 +46,7 @@
         }),
         mounted() {
             console.log('Env-URL',process.env)
+            this.callApi()
         },
         methods: {
             alterEl(page) {
@@ -56,6 +57,15 @@
             },
             finish(){
                 this.$router.push('/finish')
+            },
+            callApi(){
+                this.$store.dispatch('getStates')
+                    .then(result => {
+                        console.log('Estados:', result.data.result)
+                    })
+                    .catch(err => {
+                        console.log('View_Erro', err)
+                    })
             }
         }
     }

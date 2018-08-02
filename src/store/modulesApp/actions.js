@@ -10,7 +10,7 @@ export const getStates = (context) => {
                     resolve(result)
                 },
                 (error) => {
-                    console.log('Action_Erro', error)
+                    console.log('Estados_Erro', error)
                     reject(error)
                 }
             ).catch(

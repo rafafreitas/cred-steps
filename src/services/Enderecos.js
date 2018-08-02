@@ -14,7 +14,7 @@ class EnderecosService {
                 .catch(error => {
                     reject(error)
                 })
-                .finally(() => console.log('Fim'))
+                .finally(() => console.log('Finally'))
         })
     }
 }

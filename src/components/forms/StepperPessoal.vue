@@ -131,7 +131,9 @@
                     <v-select
                             v-validate="'required'"
                             v-model="itens.ocupacao.estado"
-                            :items="states"
+                            :items="this.$store.getters.getEstados"
+                            item-text="Nome"
+                            item-value="Uf"
                             :rules="[() => validInput(itens.ocupacao.estado) || error]"
                             :error-messages="errors.collect('Estado')"
                             data-vv-name="Estado"
@@ -213,10 +215,6 @@
                 }
 
             },
-            states: ["Acre", "Alagoas", "Amazonas", "Amapá", "Bahia", "Ceará", "Distrito Federal", "Espírito Santo",
-                     "Goiás", "Maranhão", "Mato Grosso", "Mato Grosso do Sul", "Minas Gerais", "Pará", "Paraíba",
-                     "Paraná", "Pernambuco", "Piauí", "Rio de Janeiro", "Rio Grande do Norte", "Rondônia",
-                     "Rio Grande do Sul", "Roraima", "Santa Catarina", "Sergipe", "São Paulo", "Tocantins"],
         }),
         mounted () {
             this.$validator.localize('en', myDictionary)
