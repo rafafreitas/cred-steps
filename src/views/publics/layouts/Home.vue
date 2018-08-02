@@ -54,4 +54,26 @@
         }
     }
 
+    @media screen and (max-width: 670px) {
+      .logo-404{
+        max-width: 350px;
+      }
+      .card-content-404{
+        margin-top: 50px;
+        .logo{
+          max-width: 350px;
+        }
+        .text{
+          max-width: 350px;
+          text-align: center;
+          h1{
+            font-size: 12pt;
+          }
+        }
+        .btn{
+          margin-top: 20px;
+          max-width: 187px;
+        }
+      }
+    }
 </style>
