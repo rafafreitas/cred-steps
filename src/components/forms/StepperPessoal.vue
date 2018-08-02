@@ -113,6 +113,7 @@
                         :mandatory="false"
                         v-validate="'required'"
                         data-vv-name="ocupacao"
+                        @change="changeOption()"
                         :error-messages="errors.collect('ocupacao')" >
                     <v-radio label="Aposentado" value="1"></v-radio>
                     <v-radio label="Pensionista" value="2"></v-radio>
@@ -127,32 +128,42 @@
                     <v-radio label="Não trabalha/Desempregado" value="9"></v-radio>
                 </v-radio-group>
 
-                <div v-if="itens.ocupacao.opcao === '5'" >
+                <div v-if="itens.ocupacao.opcao === '5' || itens.ocupacao.opcao === '6'" >
                     <v-select
-                            v-validate="'required'"
-                            v-model="itens.ocupacao.estado"
-                            :items="this.$store.getters.getEstados"
-                            item-text="Nome"
-                            item-value="Uf"
-                            :rules="[() => validInput(itens.ocupacao.estado) || error]"
-                            :error-messages="errors.collect('Estado')"
-                            data-vv-name="Estado"
-                            label="Qual o estado?"
-                            key="input-pessoal-estado"
+                      v-validate="'required'"
+                      v-model="itens.ocupacao.estado"
+                      :items="this.$store.getters.getEstados"
+                      item-text="Nome"
+                      item-value="Uf"
+                      no-data-text="Carregando lista de estados..."
+                      :rules="[() => validInput(itens.ocupacao.estado) || error]"
+                      :error-messages="errors.collect('Estado')"
+                      data-vv-name="Estado"
+                      label="Qual o estado?"
+                      key="input-pessoal-estado-2"
+                      class="text-field-limite-more"
+                      @change="callApi($event)"
                     ></v-select>
                 </div>
-                <div v-else-if="itens.ocupacao.opcao === '6'" >
-                    <v-text-field
-                            v-validate="'required|alpha_spaces|min:3'"
-                            v-model="itens.ocupacao.cidade"
-                            :rules="[() => validInput(itens.ocupacao.cidade) || error]"
-                            :error-messages="errors.collect('Cidade')"
-                            data-vv-name="Cidade"
-                            label="Qual a cidade?"
-                            key="input-pessoal-cidade"
-                    ></v-text-field>
+                <div v-if="itens.ocupacao.opcao === '6'" >
+                    <v-select
+                      v-validate="'required'"
+                      v-model="itens.ocupacao.cidade"
+                      :items="this.$store.getters.getCidades"
+                      item-text="Nome"
+                      item-value="Id"
+                      no-data-text="Escolha o estado"
+                      :rules="[() => validInput(itens.ocupacao.estado) || error]"
+                      :error-messages="errors.collect('Cidade')"
+                      data-vv-name="Cidade"
+                      label="Qual o cidade?"
+                      class="text-field-limite-more"
+                      key="input-pessoal-cidade"
+                      :loading="loading"
+                    ></v-select>
+
                 </div>
-                <div v-else-if="itens.ocupacao.opcao === '7'" >
+                <div v-if="itens.ocupacao.opcao === '7'" >
                     <v-text-field
                             v-validate="'required|min:3'"
                             v-model="itens.ocupacao.empresa"
@@ -160,6 +171,7 @@
                             :error-messages="errors.collect('empresa')"
                             data-vv-name="empresa"
                             label="Qual a empresa?"
+                            class="text-field-limite-more"
                             key="input-pessoal-empresa"
                     ></v-text-field>
                 </div>
@@ -184,6 +196,7 @@
     export default {
         name: "Page-1",
         data: () => ({
+            loading: false,
             error:"Este campo é obrigatório!",
             itens:{
                 initialValue: 5000,
@@ -271,6 +284,22 @@
 
                 }
 
+            },
+            callApi(uf){
+              if (this.itens.ocupacao.opcao === '6'){
+                this.loading = true
+                this.$store.dispatch('getCitys', uf)
+                  .then(result => {
+                    this.loading = false
+                  })
+                  .catch(err => {
+                    this.loading = false
+                  })
+              }
+            },
+            changeOption(){
+              this.$store.commit('setCitys', [])
+              this.itens.ocupacao.estado = ""
             }
         }
     }

@@ -45,7 +45,6 @@
             tab: 1,
         }),
         mounted() {
-            console.log('Env-URL',process.env)
             this.callApi()
         },
         methods: {
@@ -61,10 +60,8 @@
             callApi(){
                 this.$store.dispatch('getStates')
                     .then(result => {
-                        console.log('Estados:', result.data.result)
                     })
                     .catch(err => {
-                        console.log('View_Erro', err)
                     })
             }
         }
