@@ -478,6 +478,7 @@
                                 v-validate="'required'"
                                 data-vv-as="Ocupacao"
                                 :data-vv-name="'parentesco-ocupacao-'+index"
+                                @change="changeOption(index)"
                                 :error-messages="errors.collect('parentesco-ocupacao-'+index)">
                             <v-radio label="Aposentado" value="1"></v-radio>
                             <v-radio label="Pensionista" value="2"></v-radio>
@@ -490,32 +491,46 @@
                             <v-radio label="Não trabalha/Desempregado" value="9"></v-radio>
                         </v-radio-group>
 
-                        <div v-if="itens.geral.parentescos[index].ocupacao.opcao === '5'" >
+                        <div v-if="itens.geral.parentescos[index].ocupacao.opcao === '5' ||
+                                   itens.geral.parentescos[index].ocupacao.opcao === '6'" >
                             <v-select
                                     v-validate="'required'"
                                     v-model="itens.geral.parentescos[index].ocupacao.estado"
-                                    :items="states"
+                                    :items="$store.getters.getEstados"
+                                    item-text="Nome"
+                                    item-value="Uf"
+                                    no-data-text="Carregando lista de estados..."
                                     :rules="[() => validInput(itens.geral.parentescos[index].ocupacao.estado) || error]"
                                     data-vv-as="Estado"
                                     :data-vv-name="'parentesco-estado-'+index"
                                     :error-messages="errors.collect('parentesco-estado-'+index)"
                                     label="Qual o estado?"
+                                    class="text-field-limite-more"
                                     key="input-add-ocupacao-estado"
+                                    @change="callApi($event, index)"
                             ></v-select>
                         </div>
-                        <div v-else-if="itens.geral.parentescos[index].ocupacao.opcao === '6'" >
-                            <v-text-field
+
+                        <div v-if="itens.geral.parentescos[index].ocupacao.opcao === '6'" >
+                            <v-select
                                     v-validate="'required'"
                                     v-model="itens.geral.parentescos[index].ocupacao.cidade"
+                                    :items="citys[index].cidades"
+                                    item-text="Nome"
+                                    item-value="Id"
+                                    no-data-text="Escolha o estado"
                                     :rules="[() => validInput(itens.geral.parentescos[index].ocupacao.cidade) || error]"
                                     data-vv-as="Cidade"
                                     :data-vv-name="'parentesco-cidade-'+index"
                                     :error-messages="errors.collect('parentesco-cidade-'+index)"
-                                    label="Qual a cidade?"
+                                    label="Qual o cidade?"
+                                    class="text-field-limite-more"
                                     key="input-add-ocupacao-cidade"
-                            ></v-text-field>
+                                    :loading="loading[index].item"
+                            ></v-select>
                         </div>
-                        <div v-else-if="itens.geral.parentescos[index].ocupacao.opcao === '7'" >
+
+                        <div v-if="itens.geral.parentescos[index].ocupacao.opcao === '7'" >
                             <v-text-field
                                     v-validate="'required'"
                                     v-model="itens.geral.parentescos[index].ocupacao.empresa"
@@ -559,6 +574,9 @@
     export default {
         name: "Page-3",
         data: () => ({
+            loading: [{
+                item: false
+            }],
             error:"",
             clone: 2,
             showError: false,
@@ -618,7 +636,10 @@
                     }
                 }
             },
-            states: ['Acre', 'Pernambuco'],
+            states: [],
+            citys: [{
+              cidades: []
+            }]
         }),
         mounted () {
             this.$validator.localize('en', myDictionary)
@@ -725,6 +746,12 @@
             },
             cloneParentesco(index){
                 if (!index){
+                    this.citys.push({
+                      cidades: []
+                    })
+                    this.loading.push({
+                      item: false
+                    })
                     this.clone++
                     this.itens.geral.parentescos.push({
                         grau: "",
@@ -742,7 +769,27 @@
                     })
                 }else{
                     this.itens.geral.parentescos.splice(index, 1)
+                    this.citys.splice(index, 1)
+                    this.loading.splice(index, 1)
                 }
+            },
+            callApi(uf, index){
+              if (this.itens.geral.parentescos[index].ocupacao.opcao === '6'){
+                this.loading[index].item = true
+                this.$store.dispatch('getCitys',{uf: uf, flag: false})
+                  .then(result => {
+                    this.loading[index].item = false
+                    this.citys[index].cidades = result.data.result
+                  })
+                  .catch(err => {
+                    this.loading[index].item = false
+                  })
+              }
+            },
+            changeOption(index){
+              this.citys[index].cidades = []
+              this.itens.geral.parentescos[index].ocupacao.estado = ""
+              this.itens.geral.parentescos[index].ocupacao.cidade = ""
             }
         }
 

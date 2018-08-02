@@ -21,12 +21,12 @@ export const getStates = (context) => {
     })
 }
 
-export const getCitys = (context, uf) => {
+export const getCitys = (context, data) => {
   return new Promise((resolve, reject) => {
-    Enderecos.getCitys(uf)
+    Enderecos.getCitys(data.uf)
       .then(
         (result) => {
-          context.commit('setCitys', result.data.result)
+          if (data.flag) {context.commit('setCitys', result.data.result)}
           console.log('Cidades Carregadas')
           resolve(result)
         },
