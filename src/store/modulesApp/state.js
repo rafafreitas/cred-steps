@@ -1,4 +1,5 @@
 export default {
+    token: null,
     auth: false,
     userType: null,
     estados: [],

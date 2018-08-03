@@ -2,14 +2,14 @@
     <div>
         <v-card class="mb-5" height="auto">
             <p class="stepper-text-p">
-                Cada item respondido ajuda seu empréstimo a ser aprovado.
+                Cada item respondido ajudará na aprovação do seu crédito.
             </p>
             <div class="card-content">
 
                 <v-layout row xs12 wrap>
                     <v-flex xs12 sm12>
                         <label>
-                            Quanto o motivo do empréstimo? <br>
+                            A que se destina o crédito?<br>
                         </label>
                     </v-flex>
 

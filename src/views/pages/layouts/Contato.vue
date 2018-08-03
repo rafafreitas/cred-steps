@@ -2,7 +2,7 @@
     <div class="container-contato">
         <v-stepper v-model="tab">
             <v-stepper-header>
-                <v-stepper-step :complete="tab > 1" step="1">Empréstimo</v-stepper-step>
+                <v-stepper-step :complete="tab > 1" step="1">Crédito</v-stepper-step>
                 <v-divider></v-divider>
 
                 <v-stepper-step :complete="tab > 2" step="2">Motivo/Ocupação</v-stepper-step>

@@ -260,7 +260,7 @@
                     <v-flex xs12 sm6>
                         <v-layout class="card-content-row-credito" row xs12 wrap>
                             <v-flex xs12 sm6>
-                                <label>Possui cheque?</label>
+                                <label>Possui cheque, ou consegue tirar com banco?</label>
                                 <v-radio-group
                                         v-model="itens.geral.financeiras.cheque"
                                         :mandatory="false"

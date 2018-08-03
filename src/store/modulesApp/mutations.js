@@ -18,6 +18,10 @@ export const setBanks = (state, bancos) => {
   state.bancos = bancos
 }
 
+export const setToken = (state, token) => {
+  state.token = token
+}
+
 export const setStepperPessoal = (state, itens) => {
     state.stepperPessoal.money = itens.initialValue
     state.stepperPessoal.parcela = itens.parcela
