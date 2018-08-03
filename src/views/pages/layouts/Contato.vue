@@ -63,6 +63,12 @@
                     })
                     .catch(err => {
                     })
+                this.$store.dispatch('getBanks')
+                  .then(result => {
+                  })
+                  .catch(err => {
+
+                  })
             }
         }
     }

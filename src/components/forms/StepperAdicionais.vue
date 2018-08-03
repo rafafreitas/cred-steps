@@ -209,7 +209,6 @@
             <!--Para todas as categorias -->
             <!--Questões Financeiras-->
             <div>
-
                 <v-layout class="card-content-row-credito" row xs12 wrap>
                     <v-flex xs12 sm12>
                         <label>
@@ -325,7 +324,9 @@
                         <v-select
                                 v-validate="'required'"
                                 v-model="itens.geral.financeiras.banck.banco"
-                                :items="banks"
+                                :items="$store.getters.getBanks"
+                                item-text="banco"
+                                item-value="cod"
                                 :rules="[() => validInput(itens.geral.financeiras.banck.banco) || error]"
                                 :error-messages="errors.collect('Banco')"
                                 data-vv-name="Banco"
@@ -342,6 +343,7 @@
                                 :error-messages="errors.collect('Agencia')"
                                 data-vv-name="Agencia"
                                 label="Agência"
+                                type="tel"
                                 key="input-add-banco-agencia"
                         ></v-text-field>
                     </v-flex>
@@ -354,6 +356,7 @@
                                 :error-messages="errors.collect('Conta')"
                                 data-vv-name="Conta"
                                 label="Conta"
+                                type="tel"
                                 key="input-add-banco-Conta"
                         ></v-text-field>
                     </v-flex>
