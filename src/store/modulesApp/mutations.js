@@ -14,6 +14,10 @@ export const setCitys = (state, cidades) => {
   state.cidades = cidades
 }
 
+export const setBanks = (state, bancos) => {
+  state.bancos = bancos
+}
+
 export const setStepperPessoal = (state, itens) => {
     state.stepperPessoal.money = itens.initialValue
     state.stepperPessoal.parcela = itens.parcela

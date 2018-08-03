@@ -3,6 +3,7 @@ export default {
     userType: null,
     estados: [],
     cidades: [],
+    bancos: [],
     stepperPessoal: {
         money: "",
         parcela: "",

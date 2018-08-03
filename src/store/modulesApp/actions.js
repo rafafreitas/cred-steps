@@ -1,4 +1,5 @@
 import Enderecos from "./../../services/Enderecos"
+import Banks from "./../../services/Banks"
 
 export const getStates = (context) => {
     return new Promise((resolve, reject) => {
@@ -37,6 +38,27 @@ export const getCitys = (context, data) => {
       ).catch(
       (err) =>{
         console.log('Catch Action_Erro', error)
+        reject(err)
+      })
+  })
+}
+
+export const getBanks = (context) => {
+  return new Promise((resolve, reject) => {
+    Banks.getBanks()
+      .then(
+        (result) => {
+          context.commit('setBanks', result.data.result)
+          console.log('Bancos Carregados')
+          resolve(result)
+        },
+        (error) => {
+          console.log('Bancos_Erro', error)
+          reject(error)
+        }
+      ).catch(
+      (err) =>{
+        console.log('Catch Bank', error)
         reject(err)
       })
   })

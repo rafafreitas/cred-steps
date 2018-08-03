@@ -14,6 +14,10 @@ export const getCidades = (state) => {
   return state.cidades
 }
 
+export const getBanks = (state) => {
+  return state.bancos
+}
+
 export const getStepperPessoal = (state) => {
     return state.stepperPessoal
 }
