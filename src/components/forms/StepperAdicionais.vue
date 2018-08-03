@@ -93,7 +93,7 @@
                            style="display: none;"
                            accept="image/*"
                            ref="getImage"
-                           key="input-file-municipal"
+                           key="input-file-estudal"
                            @change="onFilePicked"/>
 
                 </div>
@@ -197,7 +197,6 @@
                     <input type="file"
                            style="display: none;"
                            accept="image/*"
-                           capture="camera"
                            ref="getImageMunicipal"
                            key="input-file-municipal"
                            @change="onFilePickedMunicipal"/>
