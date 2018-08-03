@@ -386,7 +386,6 @@
                         <v-radio-group
                                 v-model="itens.geral.parentescos[index].grau"
                                 :mandatory="false"
-                                v-validate="'required'"
                                 data-vv-as="Parentesco"
                                 :data-vv-name="'parentesco-radio-'+index"
                                 :error-messages="errors.collect('parentesco-radio-'+index)" >
@@ -402,7 +401,7 @@
                         <label>Dados</label>
 
                         <v-text-field v-if="itens.geral.parentescos[index].grau === '4'"
-                                      v-validate="'required|alpha_spaces'"
+                                      v-validate="'alpha_spaces'"
                                       v-model="itens.geral.parentescos[index].proximidade"
                                       :rules="[() => validInput(itens.geral.parentescos[index].proximidade) || error]"
                                       data-vv-as="Proximidade"
@@ -415,7 +414,7 @@
                         ></v-text-field>
 
                         <v-text-field
-                                v-validate="'required|alpha_spaces|min:6'"
+                                v-validate="'alpha_spaces|min:6'"
                                 v-model="itens.geral.parentescos[index].nome"
                                 :rules="[() => validInput(itens.geral.parentescos[index].nome) || error]"
                                 data-vv-as="Nome"
@@ -428,7 +427,7 @@
                         ></v-text-field>
 
                         <v-text-field
-                                v-validate="'required|min:14|max:15'"
+                                v-validate="'min:14|max:15'"
                                 v-model="itens.geral.parentescos[index].telefone"
                                 :rules="[() => validInput(itens.geral.parentescos[index].telefone) || error]"
                                 data-vv-as="Telefone"
@@ -437,12 +436,13 @@
                                 placeholder="(__) ____-____"
                                 label="Telefone"
                                 v-mask="'(##)#####-####'"
+                                type="tel"
                                 class="text-field-limite"
                                 required
                         ></v-text-field>
 
                         <v-text-field
-                                v-validate="'required|cpf'"
+                                v-validate="'cpf'"
                                 v-model="itens.geral.parentescos[index].cpf"
                                 :rules="[() => validInput(itens.geral.parentescos[index].cpf) || error]"
                                 data-vv-as="CPF"
@@ -451,12 +451,13 @@
                                 placeholder="___.___.___-__"
                                 label="CPF"
                                 v-mask="'###.###.###-##'"
+                                type="tel"
                                 class="text-field-limite"
                                 required
                         ></v-text-field>
 
                         <v-text-field
-                                v-validate="'required|dateBet|date_format:DD/MM/YYYY'"
+                                v-validate="'dateBet|date_format:DD/MM/YYYY'"
                                 v-model="itens.geral.parentescos[index].nascimento"
                                 :rules="[() => validInput(itens.geral.parentescos[index].nascimento) || error]"
                                 data-vv-as="Data Nascimento"
@@ -478,7 +479,6 @@
                         <v-radio-group
                                 v-model="itens.geral.parentescos[index].ocupacao.opcao"
                                 :mandatory="false"
-                                v-validate="'required'"
                                 data-vv-as="Ocupacao"
                                 :data-vv-name="'parentesco-ocupacao-'+index"
                                 @change="changeOption(index)"
@@ -497,7 +497,6 @@
                         <div v-if="itens.geral.parentescos[index].ocupacao.opcao === '5' ||
                                    itens.geral.parentescos[index].ocupacao.opcao === '6'" >
                             <v-select
-                                    v-validate="'required'"
                                     v-model="itens.geral.parentescos[index].ocupacao.estado"
                                     :items="$store.getters.getEstados"
                                     item-text="Nome"
@@ -516,7 +515,6 @@
 
                         <div v-if="itens.geral.parentescos[index].ocupacao.opcao === '6'" >
                             <v-select
-                                    v-validate="'required'"
                                     v-model="itens.geral.parentescos[index].ocupacao.cidade"
                                     :items="citys[index].cidades"
                                     item-text="Nome"
@@ -535,7 +533,6 @@
 
                         <div v-if="itens.geral.parentescos[index].ocupacao.opcao === '7'" >
                             <v-text-field
-                                    v-validate="'required'"
                                     v-model="itens.geral.parentescos[index].ocupacao.empresa"
                                     :rules="[() => validInput(itens.geral.parentescos[index].ocupacao.empresa) || error]"
                                     data-vv-as="Empresa"
