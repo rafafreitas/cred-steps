@@ -560,7 +560,7 @@
 
         </v-card>
 
-        <v-btn color="primary" @click="nextPage(4)">
+        <v-btn color="primary" @click="nextPage(4)" :loading="$store.getters.isLoadingG">
             Enviar
         </v-btn>
 

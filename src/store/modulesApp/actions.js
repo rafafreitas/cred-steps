@@ -106,3 +106,24 @@ export const reasonContext = (context) => {
       })
   })
 }
+
+export const additionalContext = (context) => {
+  return new Promise((resolve, reject) => {
+    Context.thirdFlux(context.getters.getStepperAdicionais)
+      .then(
+        (result) => {
+          context.commit('hasToken', result.data.token)
+          console.log('Third-Step =>', result.data.result)
+          resolve(result)
+        },
+        (error) => {
+          console.log('Third-Step => Erro', error)
+          reject(error)
+        }
+      ).catch(
+      (err) =>{
+        console.log('Catch Third-Step', error)
+        reject(err)
+      })
+  })
+}

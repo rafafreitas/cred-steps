@@ -72,6 +72,14 @@
                     })
                   break
                 case 4:
+                  this.$store.dispatch('additionalContext')
+                    .then(result => {
+                      this.$store.commit('hasLoadingG', false)
+                      this.tab = page
+                    })
+                    .catch(err => {
+                      this.$store.commit('hasLoadingG', false)
+                    })
                   break
               }
 

@@ -30,6 +30,10 @@ export const getStepperMotivo = (state) => {
   return state.stepperMotivo
 }
 
+export const getStepperAdicionais = (state) => {
+  return state.stepperAdicionais
+}
+
 export const hasFuncMuniciapal = (state) => {
     // Funcionário Publico Municipal
     if (state.stepperPessoal.ocupacao.opcao === '6'){
