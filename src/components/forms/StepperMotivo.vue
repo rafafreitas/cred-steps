@@ -20,7 +20,8 @@
                                 :mandatory="false"
                                 v-validate="'required'"
                                 data-vv-name="motivo"
-                                :error-messages="errors.collect('motivo')" >
+                                :error-messages="errors.collect('motivo')"
+                                @change="changeOption()">
                             <v-layout row xs12 wrap>
                                 <v-flex xs12 sm6 class="container-flex">
                                     <v-radio label="Tratamento médico" value="1"></v-radio>
@@ -126,7 +127,7 @@
 
         </v-card>
 
-        <v-btn color="primary" @click="nextPage(3)" >
+        <v-btn color="primary" @click="nextPage(3)" :loading="$store.getters.isLoadingG">
             Enviar
         </v-btn>
 
@@ -213,6 +214,10 @@
                     this.modal = false
                 }
 
+            },
+            changeOption(){
+              this.itens.tratamento = ""
+              this.itens.datepicker = ""
             }
         }
     }
