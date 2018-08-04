@@ -1,4 +1,5 @@
 import axios from 'axios';
+import store from '../store'
 
 const httpClient = axios.create({
     baseURL: process.env.API_URL,
@@ -7,7 +8,7 @@ const httpClient = axios.create({
 
 
 httpClient.interceptors.request.use(function (config) {
-    let token = null;
+    let token = store.getters.isToken
     if (token != null) {
         config.headers.Authorization = token;
     }

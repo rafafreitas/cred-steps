@@ -15,7 +15,7 @@ class ContextService {
           reject(error)
         })
         .finally(() => {
-          console.log('Finally-Bancos')
+          // console.log('Finally-FirstFlux')
         })
     })
   }

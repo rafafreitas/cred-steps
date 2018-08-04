@@ -70,8 +70,8 @@ export const initContext = (context) => {
     Context.firstFlux(context.getters.getStepperPessoal)
       .then(
         (result) => {
-          //context.commit('setBanks', result.data.result)
-          console.log('First-Step => Savedata')
+          context.commit('hasToken', result.data.token)
+          console.log('First-Step =>', result.data.result)
           resolve(result)
         },
         (error) => {

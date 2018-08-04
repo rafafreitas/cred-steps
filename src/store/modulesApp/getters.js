@@ -1,5 +1,5 @@
-export const isAuth = (state) => {
-    return state.auth
+export const isToken = (state) => {
+    return state.token
 }
 
 export const isLoadingG = (state) => {
