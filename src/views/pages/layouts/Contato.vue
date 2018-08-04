@@ -49,7 +49,17 @@
         },
         methods: {
             alterEl(page) {
-                this.tab = page
+              this.$store.commit('hasLoadingG', true)
+              this.$store.dispatch('initContext')
+                .then(result => {
+                  console.log('Seccess Persist data', result.data)
+                  this.$store.commit('hasLoadingG', false)
+                  this.tab = page
+                })
+                .catch(err => {
+                  console.log('Erro Persist data', err)
+                })
+
             },
             backE1(page){
                 this.tab = page

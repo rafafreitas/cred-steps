@@ -179,7 +179,7 @@
             </div>
         </v-card>
 
-        <v-btn color="primary" @click="nextPage(2)">
+        <v-btn color="primary" @click="nextPage(2)" :loading="$store.getters.isLoadingG">
             Enviar
         </v-btn>
 
@@ -300,6 +300,7 @@
             changeOption(){
               this.$store.commit('setCitys', [])
               this.itens.ocupacao.estado = ""
+              this.itens.ocupacao.cidade = ""
             }
         }
     }
