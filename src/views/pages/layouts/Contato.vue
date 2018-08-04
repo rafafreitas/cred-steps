@@ -50,14 +50,31 @@
         methods: {
             alterEl(page) {
               this.$store.commit('hasLoadingG', true)
-              this.$store.dispatch('initContext')
-                .then(result => {
-                  this.$store.commit('hasLoadingG', false)
-                  this.tab = page
-                })
-                .catch(err => {
-                  this.$store.commit('hasLoadingG', false)
-                })
+              switch (page){
+                case 2:
+                  this.$store.dispatch('initContext')
+                    .then(result => {
+                      this.$store.commit('hasLoadingG', false)
+                      this.tab = page
+                    })
+                    .catch(err => {
+                      this.$store.commit('hasLoadingG', false)
+                    })
+                  break
+                case 3:
+                  this.$store.dispatch('reasonContext')
+                    .then(result => {
+                      this.$store.commit('hasLoadingG', false)
+                      this.tab = page
+                    })
+                    .catch(err => {
+                      this.$store.commit('hasLoadingG', false)
+                    })
+                  break
+                case 4:
+                  break
+              }
+
 
             },
             backE1(page){

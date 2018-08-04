@@ -85,3 +85,24 @@ export const initContext = (context) => {
       })
   })
 }
+
+export const reasonContext = (context) => {
+  return new Promise((resolve, reject) => {
+    Context.secondFlux(context.getters.getStepperMotivo)
+      .then(
+        (result) => {
+          context.commit('hasToken', result.data.token)
+          console.log('Second-Step =>', result.data.result)
+          resolve(result)
+        },
+        (error) => {
+          console.log('Second-Step => Erro', error)
+          reject(error)
+        }
+      ).catch(
+      (err) =>{
+        console.log('Catch Second-Step', error)
+        reject(err)
+      })
+  })
+}

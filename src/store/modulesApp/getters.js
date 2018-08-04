@@ -26,6 +26,10 @@ export const getStepperPessoal = (state) => {
     return state.stepperPessoal
 }
 
+export const getStepperMotivo = (state) => {
+  return state.stepperMotivo
+}
+
 export const hasFuncMuniciapal = (state) => {
     // Funcionário Publico Municipal
     if (state.stepperPessoal.ocupacao.opcao === '6'){
@@ -33,6 +37,17 @@ export const hasFuncMuniciapal = (state) => {
     }else{
         return false
     }
+}
+
+export const hasCityMunicipal = (state) => {
+  // Funcionário Publico Municipal da cidade de Recife ou Jaboatão.
+  if (state.stepperPessoal.ocupacao.cidade === '1597'){
+    return 1
+  }else if (state.stepperPessoal.ocupacao.cidade === '1553'){
+    return 2
+  }else{
+    return false
+  }
 }
 
 export const hasFuncPrivate = (state) => {
@@ -45,7 +60,7 @@ export const hasFuncPrivate = (state) => {
 }
 
 export const hasDesempregado = (state) => {
-    // Funcionário Empresa Privada
+    // Funcionário Desempregado
     if (state.stepperPessoal.ocupacao.opcao === '9'){
         return true
     }else{
@@ -85,23 +100,16 @@ export const hasThirdCategory = (state) => {
     }
 }
 
-export const hasCityMunicipal = (state) => {
-    // Funcionário Publico Municipal
-    if (state.stepperPessoal.ocupacao.cidade === '1597'){
-        return 1
-    }else if (state.stepperPessoal.ocupacao.cidade === '1553'){
-        return 2
-    }else{
-        return false
-    }
+export const hasFourthCategory = (state) => {
+  // Funcionário Empresa Privada - Autônomo/Liberal - Não trabalha/ Desempregado
+  if (state.stepperPessoal.ocupacao.opcao === '7' || state.stepperPessoal.ocupacao.opcao === '8' ||
+    state.stepperPessoal.ocupacao.opcao === '9' ){
+    return true
+  }else{
+    return false
+  }
 }
 
-export const hasFourthCategory = (state) => {
-    // Funcionário Empresa Privada - Autônomo/Liberal - Não trabalha/ Desempregado
-    if (state.stepperPessoal.ocupacao.opcao === '7' || state.stepperPessoal.ocupacao.opcao === '8' ||
-        state.stepperPessoal.ocupacao.opcao === '9' ){
-        return true
-    }else{
-        return false
-    }
-}
+
+
+
