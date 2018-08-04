@@ -19,6 +19,20 @@ class ContextService {
         })
     })
   }
+  secondFlux(json) {
+    return new Promise((resolve, reject) => {
+      httpClient.post('/cliente/motivos', json)
+        .then(response => {
+          resolve(response)
+        })
+        .catch(error => {
+          reject(error)
+        })
+        .finally(() => {
+          // console.log('Finally-secondFlux')
+        })
+    })
+  }
 
 }
 
