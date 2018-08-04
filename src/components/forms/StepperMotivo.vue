@@ -127,7 +127,7 @@
         </v-card>
 
         <v-btn color="primary" @click="nextPage(3)" >
-            Continuar
+            Enviar
         </v-btn>
 
         <v-btn flat @click="$emit('backE1', 1)">Voltar</v-btn>

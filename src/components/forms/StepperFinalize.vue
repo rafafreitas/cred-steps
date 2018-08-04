@@ -183,7 +183,7 @@
         </v-card>
 
         <v-btn color="primary" @click="nextPage()">
-            Enviar informações
+              Enviar
         </v-btn>
 
     </div>

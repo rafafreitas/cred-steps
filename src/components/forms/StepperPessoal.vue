@@ -180,7 +180,7 @@
         </v-card>
 
         <v-btn color="primary" @click="nextPage(2)">
-            Continuar
+            Enviar
         </v-btn>
 
         <p class="stepper-text-footer">
