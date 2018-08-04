@@ -2,6 +2,10 @@ export const isAuth = (state) => {
     return state.auth
 }
 
+export const isLoadingG = (state) => {
+  return state.loadingG
+}
+
 export const getUserType = (state) => {
     return state.userType
 }

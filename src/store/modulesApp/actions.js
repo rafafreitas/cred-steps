@@ -1,4 +1,5 @@
 import Enderecos from "./../../services/Enderecos"
+import Context from "./../../services/Context"
 import Banks from "./../../services/Banks"
 
 export const getStates = (context) => {
@@ -59,6 +60,27 @@ export const getBanks = (context) => {
       ).catch(
       (err) =>{
         console.log('Catch Bank', error)
+        reject(err)
+      })
+  })
+}
+
+export const initContext = (context) => {
+  return new Promise((resolve, reject) => {
+    Context.firstFlux(context.getters.getStepperPessoal)
+      .then(
+        (result) => {
+          //context.commit('setBanks', result.data.result)
+          console.log('First-Step => Savedata')
+          resolve(result)
+        },
+        (error) => {
+          console.log('First-Step => Erro', error)
+          reject(error)
+        }
+      ).catch(
+      (err) =>{
+        console.log('Catch First-Step', error)
         reject(err)
       })
   })
