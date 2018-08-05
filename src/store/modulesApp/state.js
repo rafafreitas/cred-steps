@@ -15,7 +15,7 @@ export default {
         email: "",
         nascimento: "",
         ocupacao: {
-            opcao: "6",
+            opcao: "",
             estado: "",
             cidade: "",
             empresa: ""

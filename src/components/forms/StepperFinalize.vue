@@ -88,7 +88,7 @@
                 </v-flex>
 
                 <v-flex xs12 sm12
-                        v-if="this.$store.getters.hasSecondCategory ||
+                        v-if="this.$store.getters.hasFuncEstadual ||
                               this.$store.getters.hasFuncMuniciapal ||
                               this.$store.getters.hasFuncPrivate">
                     <div class="text-field-limite" @click='pickFile(4)'>

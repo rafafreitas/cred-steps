@@ -34,13 +34,22 @@ export const getStepperAdicionais = (state) => {
   return state.stepperAdicionais
 }
 
+export const hasFuncEstadual = (state) => {
+  // Funcionário Publico Estadual
+  if (state.stepperPessoal.ocupacao.opcao === '5'){
+    return true
+  }else{
+    return false
+  }
+}
+
 export const hasFuncMuniciapal = (state) => {
-    // Funcionário Publico Municipal
-    if (state.stepperPessoal.ocupacao.opcao === '6'){
-        return true
-    }else{
-        return false
-    }
+  // Funcionário Publico Municipal
+  if (state.stepperPessoal.ocupacao.opcao === '6'){
+    return true
+  }else{
+    return false
+  }
 }
 
 export const hasCityMunicipal = (state) => {
@@ -82,14 +91,7 @@ export const hasFirstCategory = (state) => {
     }
 }
 
-export const hasSecondCategory = (state) => {
-    // Funcionário Publico Estadual
-    if (state.stepperPessoal.ocupacao.opcao === '5'){
-        return true
-    }else{
-        return false
-    }
-}
+
 
 export const hasThirdCategory = (state) => {
     // Funcionário Publico Municipal
