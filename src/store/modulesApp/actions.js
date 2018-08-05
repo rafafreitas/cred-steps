@@ -109,7 +109,10 @@ export const reasonContext = (context) => {
 
 export const additionalContext = (context) => {
   return new Promise((resolve, reject) => {
-    Context.thirdFlux(context.getters.getStepperAdicionais)
+    let objStepper = context.getters.getStepperAdicionais
+    if (context.getters.hasFuncEstadual) { objStepper.ocupacao = 5}
+    if (context.getters.hasFuncMuniciapal && context.getters.hasCityMunicipal) { objStepper.ocupacao = 6}
+    Context.thirdFlux(objStepper)
       .then(
         (result) => {
           context.commit('hasToken', result.data.token)
