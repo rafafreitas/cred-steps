@@ -298,6 +298,7 @@
                                 v-validate="'required'"
                                 data-vv-name="Conta em Banco"
                                 :error-messages="errors.collect('Conta em Banco')"
+                                @change="cleanBank($event)"
                                 key="input-add-cheque">
                             <v-radio label="Sim, conta corrente" value="1"></v-radio>
                             <v-radio label="Sim, conta poupança" value="2"></v-radio>
@@ -591,7 +592,7 @@
                         telefone: "",
                         nascimento: "",
                         ocupacao: {
-                            opcao: null,
+                            opcao: "",
                             estado: "",
                             cidade: "",
                             empresa: ""
@@ -789,6 +790,14 @@
               this.citys[index].cidades = []
               this.itens.geral.parentescos[index].ocupacao.estado = ""
               this.itens.geral.parentescos[index].ocupacao.cidade = ""
+            },
+            cleanBank(value){
+              if (value == 3){
+                this.itens.geral.financeiras.banck.tempoConta = ""
+                this.itens.geral.financeiras.banck.banco = ""
+                this.itens.geral.financeiras.banck.agencia = ""
+                this.itens.geral.financeiras.banck.conta = ""
+              }
             }
         }
 
