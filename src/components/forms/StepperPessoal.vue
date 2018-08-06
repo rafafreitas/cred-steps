@@ -176,6 +176,17 @@
                     ></v-text-field>
                 </div>
 
+                <v-text-field
+                  v-validate="'required|alpha_spaces|min:6'"
+                  v-model="itens.indicacao"
+                  :rules="[() => validInput(itens.indicacao) || error]"
+                  :error-messages="errors.collect('Indicação')"
+                  data-vv-name="Indicação"
+                  label="Nome da clínica ou médico"
+                  placeholder="Informe o nome da clínica ou médico que realizou a indicação."
+                  required
+                ></v-text-field>
+
             </div>
         </v-card>
 
@@ -220,6 +231,7 @@
                 cpf: "",
                 email: "",
                 nascimento: "",
+                indicacao: "",
                 ocupacao: {
                     opcao: null,
                     estado: "",

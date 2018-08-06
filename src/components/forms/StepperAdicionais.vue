@@ -3,7 +3,7 @@
         <v-card class="mb-5" height="auto" >
 
             <!--Para Func. Públicos Estaduais-->
-            <div class="container-data-public" v-if="this.$store.getters.hasSecondCategory">
+            <div class="container-data-public" v-if="this.$store.getters.hasFuncEstadual">
                 <h2>Dados necessários para Funcionários Públicos Estaduais</h2>
                 <br>
                 <p>
@@ -223,8 +223,8 @@
                                 v-validate="'required'"
                                 data-vv-name="SPC-Serasa"
                                 :error-messages="errors.collect('SPC-Serasa')" >
-                            <v-radio label="Sim" value="true"></v-radio>
-                            <v-radio label="Não" value="false"></v-radio>
+                            <v-radio label="Sim" value="1"></v-radio>
+                            <v-radio label="Não" value="0"></v-radio>
                         </v-radio-group>
                     </v-flex>
 
@@ -267,12 +267,12 @@
                                         v-validate="'required'"
                                         data-vv-name="Possui Cheque"
                                         :error-messages="errors.collect('Possui Cheque')" >
-                                    <v-radio label="Sim" value="true"></v-radio>
-                                    <v-radio label="Não" value="false"></v-radio>
+                                    <v-radio label="Sim" value="1"></v-radio>
+                                    <v-radio label="Não" value="0"></v-radio>
                                 </v-radio-group>
                             </v-flex>
                             <v-flex xs12 sm6>
-                                <div v-if="itens.geral.financeiras.cheque === 'true'" >
+                                <div v-if="itens.geral.financeiras.cheque === '1'" >
                                     <label>Cheques devolvidos nos últimos 6 meses?</label>
                                     <v-radio-group
                                             v-model="itens.geral.financeiras.chequeDev"
@@ -281,8 +281,8 @@
                                             data-vv-name="Cheques Devolvidos"
                                             :error-messages="errors.collect('Cheques Devolvidos')"
                                             key="input-add-cheque">
-                                        <v-radio label="Sim" value="true"></v-radio>
-                                        <v-radio label="Não" value="false"></v-radio>
+                                        <v-radio label="Sim" value="1"></v-radio>
+                                        <v-radio label="Não" value="0"></v-radio>
                                     </v-radio-group>
                                 </div>
                             </v-flex>
@@ -314,8 +314,8 @@
                                 data-vv-name="Tempo de Conta"
                                 :error-messages="errors.collect('Tempo de Conta')"
                                 key="input-add-banco-tempo">
-                            <v-radio label="Mais de 1 ano" value="true"></v-radio>
-                            <v-radio label="Menos de 1 ano" value="false"></v-radio>
+                            <v-radio label="Mais de 1 ano" value="1"></v-radio>
+                            <v-radio label="Menos de 1 ano" value="2"></v-radio>
                         </v-radio-group>
                     </v-flex>
 
