@@ -47,6 +47,20 @@ class ContextService {
         })
     })
   }
+  finalFlux(json) {
+    return new Promise((resolve, reject) => {
+      httpClient.post('/cliente/finalize', json)
+        .then(response => {
+          resolve(response)
+        })
+        .catch(error => {
+          reject(error)
+        })
+        .finally(() => {
+          // console.log('Finally-secondFlux')
+        })
+    })
+  }
 
 }
 

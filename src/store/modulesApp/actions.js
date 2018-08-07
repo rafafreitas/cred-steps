@@ -130,3 +130,24 @@ export const additionalContext = (context) => {
       })
   })
 }
+
+export const finalContext = (context) => {
+  return new Promise((resolve, reject) => {
+    Context.finalFlux(context.getters.getStepperFinal)
+      .then(
+        (result) => {
+          context.commit('hasToken', result.data.token)
+          console.log('Final-Step =>', result.data.result)
+          resolve(result)
+        },
+        (error) => {
+          console.log('Final-Step => Erro', error)
+          reject(error)
+        }
+      ).catch(
+      (err) =>{
+        console.log('Catch Final-Step', error)
+        reject(err)
+      })
+  })
+}
