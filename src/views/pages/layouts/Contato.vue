@@ -59,6 +59,8 @@
                     })
                     .catch(err => {
                       this.$store.commit('hasLoadingG', false)
+                      this.$store.commit('hasAlertError', true, page-1)
+                      setTimeout(function(){this.$store.commit('hasAlertError', false, page-1)}, 2000);
                     })
                   break
                 case 3:
@@ -69,6 +71,8 @@
                     })
                     .catch(err => {
                       this.$store.commit('hasLoadingG', false)
+                      this.$store.commit('hasAlertError', true, page-1)
+                      setTimeout(function(){this.$store.commit('hasAlertError', false, page-1)}, 2000);
                     })
                   break
                 case 4:
@@ -79,17 +83,28 @@
                     })
                     .catch(err => {
                       this.$store.commit('hasLoadingG', false)
+                      this.$store.commit('hasAlertError', true, page-1)
+                      setTimeout(function(){this.$store.commit('hasAlertError', false, page-1)}, 2000);
                     })
                   break
               }
-
-
             },
             backE1(page){
                 this.tab = page
             },
             finish(){
-                this.$router.push('/finish')
+              this.$store.commit('hasLoadingG', true)
+              this.$store.dispatch('finalContext')
+                .then(result => {
+                  this.$store.commit('hasLoadingG', false)
+                  this.$router.push('/finish')
+                })
+                .catch(err => {
+                  this.$store.commit('hasLoadingG', false)
+                  this.$store.commit('hasAlertError', true, 4)
+                  setTimeout(function(){this.$store.commit('hasAlertError', false, 4)}, 2000);
+                })
+
             },
             callApi(){
                 this.$store.dispatch('getStates')

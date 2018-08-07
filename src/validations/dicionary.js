@@ -1,12 +1,13 @@
 const dictionary = {
     messages:{
-        required: (field) => `O campo ${field} é obrigatório.`,
-        min: (field) => `O campo ${field} está incompleto.`,
-        max: (field) => `O campo ${field} tem um limite de caracteres.`,
-        email: (field) => `O campo ${field} deve ser um email válido.`,
         alpha_spaces: (field) => `O campo ${field} pode conter apenas caracteres alfabéticos e espaços.`,
         date_format: (field, [format]) => `O campo ${field} deve estar no formato ${format}.`,
-
+        digits: (field, [length]) => `O campo ${field} deve ser numérico e ter exatamente ${length} dígitos.`,
+        email: (field) => `O campo ${field} deve ser um email válido.`,
+        max: (field) => `O campo ${field} tem um limite de caracteres.`,
+        min: (field) => `O campo ${field} está incompleto.`,
+        numeric: (field) => `O campo ${field} deve conter apenas números`,
+        required: (field) => `O campo ${field} é obrigatório.`,
     },
     custom: {
         tratamento: {
