@@ -6,6 +6,23 @@ export const isLoadingG = (state) => {
   return state.loadingG
 }
 
+export const alertsErros = (state) => (id) =>{
+  switch (id) {
+    case 1:
+      return state.alerts.pessoal
+      break
+    case 2:
+      return state.alerts.motivo
+      break
+    case 3:
+      return state.alerts.adicionais
+      break
+    case 4:
+      return state.alerts.finalize
+      break
+  }
+}
+
 export const getUserType = (state) => {
     return state.userType
 }
@@ -32,6 +49,10 @@ export const getStepperMotivo = (state) => {
 
 export const getStepperAdicionais = (state) => {
   return state.stepperAdicionais
+}
+
+export const getStepperFinal = (state) => {
+  return state.stepperFinalize
 }
 
 export const hasFuncEstadual = (state) => {
@@ -90,8 +111,6 @@ export const hasFirstCategory = (state) => {
         return false
     }
 }
-
-
 
 export const hasThirdCategory = (state) => {
     // Funcionário Publico Municipal

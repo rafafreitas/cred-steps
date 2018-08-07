@@ -189,6 +189,13 @@
 
             </div>
         </v-card>
+        <v-alert
+          v-model="$store.getters.alertsErros(1)"
+          dismissible
+          type="error"
+        >
+          Ocorreu um erro no envio das informações. Tente novamente!
+        </v-alert>
 
         <v-btn color="primary" @click="nextPage(2)" :loading="$store.getters.isLoadingG">
             Enviar

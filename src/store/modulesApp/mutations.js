@@ -6,6 +6,23 @@ export const hasLoadingG = (state, flag) => {
   state.loadingG = flag
 }
 
+export const hasAlertError = (state, flag, type) => {
+  switch (type) {
+    case 1:
+      state.alerts.pessoal = flag
+      break
+    case 2:
+      state.alerts.motivo = flag
+      break
+    case 3:
+      state.alerts.adicionais = flag
+      break
+    case 4:
+      state.alerts.finalize = flag
+      break
+  }
+}
+
 export const hasUserType = (state, type) => {
     state.userType = type
 }

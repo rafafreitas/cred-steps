@@ -3,6 +3,12 @@ export default {
     loadingG: false,
     auth: false,
     userType: null,
+    alerts: {
+      pessoal: false,
+      motivo: false,
+      adicionais: false,
+      finalize: false
+    },
     estados: [],
     cidades: [],
     bancos: [],

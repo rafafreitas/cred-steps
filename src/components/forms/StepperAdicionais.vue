@@ -337,7 +337,7 @@
 
                     <v-flex xs12 sm4 class="v-flex-conainer-low"  v-if="hasBanck">
                         <v-text-field
-                                v-validate="'required'"
+                                v-validate="'required|numeric'"
                                 v-model="itens.geral.financeiras.banck.agencia"
                                 :rules="[() => validInput(itens.geral.financeiras.banck.agencia) || error]"
                                 :error-messages="errors.collect('Agencia')"
@@ -350,7 +350,7 @@
 
                     <v-flex xs12 sm4 class="v-flex-conainer-low"  v-if="hasBanck">
                         <v-text-field
-                                v-validate="'required'"
+                                v-validate="'required|numeric'"
                                 v-model="itens.geral.financeiras.banck.conta"
                                 :rules="[() => validInput(itens.geral.financeiras.banck.conta) || error]"
                                 :error-messages="errors.collect('Conta')"
@@ -560,6 +560,14 @@
             </v-btn>
 
         </v-card>
+
+        <v-alert
+          v-model="$store.getters.alertsErros(3)"
+          dismissible
+          type="error"
+        >
+          Ocorreu um erro no envio das informações. Tente novamente!
+        </v-alert>
 
         <v-btn color="primary" @click="nextPage(4)" :loading="$store.getters.isLoadingG">
             Enviar

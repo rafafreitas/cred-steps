@@ -181,8 +181,15 @@
             </v-layout>
 
         </v-card>
+        <v-alert
+          v-model="$store.getters.alertsErros(4)"
+          dismissible
+          type="error"
+        >
+          Ocorreu um erro no envio das informações. Tente novamente!
+        </v-alert>
 
-        <v-btn color="primary" @click="nextPage()">
+        <v-btn color="primary" @click="nextPage()" :loading="$store.getters.isLoadingG">
               Enviar
         </v-btn>
 
@@ -194,6 +201,7 @@
         name: "Page-4",
         data: () => ({
             error:"",
+            alert: false,
             fotos: {
                 rg : {
                     imageName: "",
