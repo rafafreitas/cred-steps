@@ -46,6 +46,7 @@
                 </p>
 
                 <v-text-field
+
                         v-validate="'required|alpha_spaces|min:6'"
                         v-model="itens.nome"
                         :rules="[() => validInput(itens.nome) || error]"

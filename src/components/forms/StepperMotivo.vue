@@ -26,18 +26,18 @@
                                 <v-flex xs12 sm6 class="container-flex">
                                     <v-radio label="Tratamento médico" value="1"></v-radio>
                                     <v-radio label="Tratamento odontológico" value="2"></v-radio>
-                                    <v-radio label="Construção/Reforma ou decoração" value="3"></v-radio>
-                                    <v-radio label="Viagem" value="4"></v-radio>
-                                    <v-radio label="Festa/Casamento" value="5"></v-radio>
-                                    <v-radio label="Pagar uma dívida" value="6"></v-radio>
+                                    <v-radio v-if="verifyRouter" label="Construção/Reforma ou decoração" value="3"></v-radio>
+                                    <v-radio v-if="verifyRouter" label="Viagem" value="4"></v-radio>
+                                    <v-radio v-if="verifyRouter" label="Festa/Casamento" value="5"></v-radio>
+                                    <v-radio v-if="verifyRouter" label="Pagar uma dívida" value="6"></v-radio>
                                 </v-flex>
 
                                 <v-flex xs12 sm6>
-                                    <v-radio label="Empréstimo pessoal" value="7"></v-radio>
-                                    <v-radio label="Pagar cartão de crédito" value="8"></v-radio>
-                                    <v-radio label="Pagar cheque especial" value="9"></v-radio>
-                                    <v-radio label="Curso ou intercâmbio" value="10"></v-radio>
-                                    <v-radio label="Outro" value="11"></v-radio>
+                                    <v-radio v-if="verifyRouter" label="Empréstimo pessoal" value="7"></v-radio>
+                                    <v-radio v-if="verifyRouter" label="Pagar cartão de crédito" value="8"></v-radio>
+                                    <v-radio v-if="verifyRouter" label="Pagar cheque especial" value="9"></v-radio>
+                                    <v-radio v-if="verifyRouter" label="Curso ou intercâmbio" value="10"></v-radio>
+                                    <v-radio v-if="verifyRouter" label="Outro" value="11"></v-radio>
                                 </v-flex>
                             </v-layout>
 
@@ -170,6 +170,13 @@
                 }else{
                     return false
                 }
+            },
+            verifyRouter: function () {
+              if (this.$router.currentRoute.name === 'Formulario2' ){
+                return true
+              } else {
+                return false
+              }
             }
         },
         methods: {

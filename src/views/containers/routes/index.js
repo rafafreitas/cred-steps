@@ -3,7 +3,7 @@ import {routes as pages} from '../../pages'
 
 export default [
     {
-        name: 'Home',
+        name: 'Container',
         path: '/',
         component: Container,
         children: [

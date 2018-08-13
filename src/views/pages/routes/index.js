@@ -12,6 +12,15 @@ export default [
         }
     },
     {
+      name: 'Formulario2',
+      path: '/formulario2',
+      component: Contato,
+      meta: {
+        auth: false,
+        userType: null
+      }
+    },
+    {
         name: 'Finish',
         path: '/Finish',
         component: Finish,
