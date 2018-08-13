@@ -13,6 +13,7 @@ export default {
     cidades: [],
     bancos: [],
     stepperPessoal: {
+        router: "",
         money: "",
         parcela: "",
         nome: "",

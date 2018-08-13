@@ -46,6 +46,16 @@
         }),
         mounted() {
             this.callApi()
+            this.$store.commit('setRouterForm', this.verifyRouter)
+        },
+        computed: {
+          verifyRouter: function () {
+            if (this.$router.currentRoute.name === 'Formulario2' ){
+              return 2
+            } else {
+              return 1
+            }
+          }
         },
         methods: {
             alterEl(page) {

@@ -43,6 +43,10 @@ export const setToken = (state, token) => {
   state.token = token
 }
 
+export const setRouterForm = (state, router) => {
+  state.stepperPessoal.router = router
+}
+
 export const setStepperPessoal = (state, itens) => {
     state.stepperPessoal.money = itens.initialValue
     state.stepperPessoal.parcela = itens.parcela
