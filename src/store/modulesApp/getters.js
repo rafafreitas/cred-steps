@@ -23,6 +23,10 @@ export const alertsErros = (state) => (id) =>{
   }
 }
 
+export const showErrorMoney = (state) =>  {
+  return state.errorMoney
+}
+
 export const getUserType = (state) => {
     return state.userType
 }

@@ -3,6 +3,7 @@ export default {
     loadingG: false,
     auth: false,
     userType: null,
+    errorMoney: false,
     alerts: {
       pessoal: false,
       motivo: false,

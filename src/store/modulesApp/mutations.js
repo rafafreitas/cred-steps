@@ -2,6 +2,10 @@ export const hasToken = (state, token) => {
     state.token = token
 }
 
+export const hasErrorMoney = (state, flag) => {
+  state.errorMoney = flag
+}
+
 export const hasLoadingG = (state, flag) => {
   state.loadingG = flag
 }
