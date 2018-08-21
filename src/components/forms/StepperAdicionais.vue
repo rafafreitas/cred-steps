@@ -26,19 +26,20 @@
                 </v-radio-group>
 
                 <div v-if="itens.estadual.margemRadio === '1'" >
-                    <v-text-field
-                            v-validate="'required'"
-                            class="text-field-limite margin-top-none"
-                            v-model="itens.estadual.margem"
-                            :rules="[() => validInput(itens.estadual.margem) || error]"
-                            :error-messages="errors.collect('margem')"
-                            data-vv-name="margem"
-                            type="tel"
-                            v-money
-                            required
-                            key="input-margin"
-                    ></v-text-field>
-                    <p class="error-credito" v-if="showError">Informe o valor da margem.</p>
+                  <v-text-field
+                    v-validate="'required|money'"
+                    class="text-field-limite margin-top-none"
+                    v-model="itens.estadual.margem"
+                    :rules="[() => validInput(itens.estadual.margem) || error]"
+                    :error-messages="errors.collect('margem')"
+                    data-vv-name="margem"
+                    label="Informe o valor da margem"
+                    type="tel"
+                    v-money
+                    required
+                    key="input-margem-estadual"
+                    ref="Valor"
+                  ></v-text-field>
                 </div>
                 <div v-if="itens.estadual.margemRadio === '2'" >
 
@@ -133,18 +134,20 @@
 
                 <div v-if="itens.municipal.margemRadio === '1'" >
                     <v-text-field
-                            v-validate="'required'"
+                            v-validate="'required|money'"
                             class="text-field-limite margin-top-none"
                             v-model="itens.municipal.margem"
                             :rules="[() => validInput(itens.municipal.margem) || error]"
                             :error-messages="errors.collect('margem')"
+                            label="Informe o valor da margem"
                             data-vv-name="margem"
                             v-money
                             required
                             type="tel"
-                            key="input-margin"
+                            key="input-margem-municipal"
+                            ref="Valor"
                     ></v-text-field>
-                    <p class="error-credito" v-if="showError">Informe o valor da margem.</p>
+
                 </div>
                 <div v-if="itens.municipal.margemRadio === '2'" >
 
@@ -255,6 +258,21 @@
                             <v-radio label="Sim, extrato  bancário" value="3"></v-radio>
                             <v-radio label="Não" value="4"></v-radio>
                         </v-radio-group>
+
+                        <v-text-field
+                          v-if="hasRenda"
+                          v-validate="'required|money'"
+                          v-model.lazy="itens.geral.financeiras.rendaValor"
+                          :rules="[() => validInput(itens.geral.financeiras.rendaValor) || error]"
+                          :error-messages="errors.collect('Renda')"
+                          data-vv-name="Renda"
+                          type="tel"
+                          label="Valor da renda mensal"
+                          class="text-field-limite"
+                          v-money
+                          ref="Valor"
+                          required
+                        ></v-text-field>
                     </v-flex>
 
                     <v-flex xs12 sm6>
@@ -291,7 +309,49 @@
                     </v-flex>
 
                     <v-flex xs12 sm6>
-                        <label>Conta em banco?</label>
+                      <label>Conta no Banco do Brasil</label>
+                      <v-radio-group
+                        v-model="itens.geral.financeiras.banckBrasil.possui"
+                        :mandatory="false"
+                        v-validate="'required'"
+                        data-vv-name="Conta em Banco"
+                        :error-messages="errors.collect('Conta em Banco')"
+                        @change="cleanBankBB($event)"
+                        key="input-add-banco-bb">
+                        <v-radio label="Sim" value="1"></v-radio>
+                        <v-radio label="Não" value="2"></v-radio>
+                      </v-radio-group>
+
+                      <v-text-field
+                        v-if="hasBanckBrasil"
+                        v-validate="'required|numeric'"
+                        v-model="itens.geral.financeiras.banckBrasil.agencia"
+                        :rules="[() => validInput(itens.geral.financeiras.banckBrasil.agencia) || error]"
+                        :error-messages="errors.collect('Agencia')"
+                        data-vv-name="Agencia"
+                        label="Agência Banco do Brasil"
+                        type="num"
+                        class="text-field-limite"
+                        key="input-add-banco-bb-agencia"
+                      ></v-text-field>
+
+                      <v-text-field
+                        v-if="hasBanckBrasil"
+                        v-validate="'required|numeric'"
+                        v-model="itens.geral.financeiras.banckBrasil.conta"
+                        :rules="[() => validInput(itens.geral.financeiras.banckBrasil.conta) || error]"
+                        :error-messages="errors.collect('Conta')"
+                        data-vv-name="Conta"
+                        label="Conta Banco do Brasil"
+                        type="num"
+                        class="text-field-limite"
+                        key="input-add-banco-bb-Conta"
+                      ></v-text-field>
+
+                    </v-flex>
+
+                    <v-flex xs12 sm6>
+                        <label>Conta em outro banco?</label>
                         <v-radio-group
                                 v-model="itens.geral.financeiras.banck.possui"
                                 :mandatory="false"
@@ -304,61 +364,61 @@
                             <v-radio label="Sim, conta poupança" value="2"></v-radio>
                             <v-radio label="Não" value="3"></v-radio>
                         </v-radio-group>
-                    </v-flex>
 
-                    <v-flex xs12 sm6  v-if="hasBanck">
-                        <label>Tempo de conta</label>
+                        <label v-if="hasBanck">Tempo de conta</label>
                         <v-radio-group
-                                v-model="itens.geral.financeiras.banck.tempoConta"
-                                :mandatory="false"
-                                v-validate="'required'"
-                                data-vv-name="Tempo de Conta"
-                                :error-messages="errors.collect('Tempo de Conta')"
-                                key="input-add-banco-tempo">
-                            <v-radio label="Mais de 1 ano" value="1"></v-radio>
-                            <v-radio label="Menos de 1 ano" value="2"></v-radio>
+                          v-if="hasBanck"
+                          v-model="itens.geral.financeiras.banck.tempoConta"
+                          :mandatory="false"
+                          v-validate="'required'"
+                          data-vv-name="Tempo de Conta"
+                          :error-messages="errors.collect('Tempo de Conta')"
+                          key="input-add-banco-tempo">
+                          <v-radio label="Mais de 1 ano" value="1"></v-radio>
+                          <v-radio label="Menos de 1 ano" value="2"></v-radio>
                         </v-radio-group>
-                    </v-flex>
 
-                    <v-flex xs12 sm4 class="v-flex-conainer-low" v-if="hasBanck">
                         <v-select
-                                v-validate="'required'"
-                                v-model="itens.geral.financeiras.banck.banco"
-                                :items="$store.getters.getBanks"
-                                item-text="banco"
-                                item-value="cod"
-                                :rules="[() => validInput(itens.geral.financeiras.banck.banco) || error]"
-                                :error-messages="errors.collect('Banco')"
-                                data-vv-name="Banco"
-                                label="Qual o banco?"
-                                key="input-add-banco-banck"
+                          v-if="hasBanck"
+                          v-validate="'required'"
+                          v-model="itens.geral.financeiras.banck.banco"
+                          :items="$store.getters.getBanks"
+                          item-text="banco"
+                          item-value="cod"
+                          :rules="[() => validInput(itens.geral.financeiras.banck.banco) || error]"
+                          :error-messages="errors.collect('Banco')"
+                          data-vv-name="Banco"
+                          label="Qual o banco?"
+                          key="input-add-banco-banck"
+                          class="text-field-limite-more"
                         ></v-select>
-                    </v-flex>
 
-                    <v-flex xs12 sm4 class="v-flex-conainer-low"  v-if="hasBanck">
                         <v-text-field
-                                v-validate="'required|numeric'"
-                                v-model="itens.geral.financeiras.banck.agencia"
-                                :rules="[() => validInput(itens.geral.financeiras.banck.agencia) || error]"
-                                :error-messages="errors.collect('Agencia')"
-                                data-vv-name="Agencia"
-                                label="Agência"
-                                type="tel"
-                                key="input-add-banco-agencia"
+                          v-if="hasBanck"
+                          v-validate="'required|numeric'"
+                          v-model="itens.geral.financeiras.banck.agencia"
+                          :rules="[() => validInput(itens.geral.financeiras.banck.agencia) || error]"
+                          :error-messages="errors.collect('Agencia')"
+                          data-vv-name="Agencia"
+                          label="Agência"
+                          type="tel"
+                          key="input-add-banco-agencia"
+                          class="text-field-limite"
                         ></v-text-field>
-                    </v-flex>
 
-                    <v-flex xs12 sm4 class="v-flex-conainer-low"  v-if="hasBanck">
                         <v-text-field
-                                v-validate="'required|numeric'"
-                                v-model="itens.geral.financeiras.banck.conta"
-                                :rules="[() => validInput(itens.geral.financeiras.banck.conta) || error]"
-                                :error-messages="errors.collect('Conta')"
-                                data-vv-name="Conta"
-                                label="Conta"
-                                type="tel"
-                                key="input-add-banco-Conta"
+                          v-if="hasBanck"
+                          v-validate="'required|numeric'"
+                          v-model="itens.geral.financeiras.banck.conta"
+                          :rules="[() => validInput(itens.geral.financeiras.banck.conta) || error]"
+                          :error-messages="errors.collect('Conta')"
+                          data-vv-name="Conta"
+                          label="Conta"
+                          type="tel"
+                          key="input-add-banco-Conta"
+                          class="text-field-limite"
                         ></v-text-field>
+
                     </v-flex>
 
                 </v-layout>
@@ -587,7 +647,6 @@
             }],
             error:"",
             clone: 2,
-            showError: false,
             passshow: false,
             banks: ['Caixa', 'Banco do Brasil', 'Santander'],
             itens:{
@@ -612,6 +671,12 @@
                         chequeDev: null,
                         emprego: null,
                         rendaComprovada: null,
+                        rendaValor: null,
+                        banckBrasil: {
+                          possui: null,
+                          agencia: "",
+                          conta: "",
+                        },
                         banck: {
                             possui: null,
                             banco: '',
@@ -655,21 +720,28 @@
         computed:{
             hasBanck :function () {
                 return (this.itens.geral.financeiras.banck.possui === '1' || this.itens.geral.financeiras.banck.possui === '2')
+            },
+            hasBanckBrasil :function () {
+              return (this.itens.geral.financeiras.banckBrasil.possui === '1')
+            },
+            hasRenda :function () {
+              return (this.itens.geral.financeiras.rendaComprovada !== '4' && this.itens.geral.financeiras.rendaComprovada !== null)
             }
         },
         methods: {
             nextPage(page){
-                this.$validator.validateAll().then((result) =>{
-                    console.log('Validate Adicionais', result)
-                    if (result && this.checkMoney()) {
-                        this.$store.commit('setStepperAdicionais', this.itens)
-                        this.$emit('alterTab', page)
-                    }else{
-                        //
-                    }
-                })
+              this.$store.commit('hasErrorMoney', true)
+              this.$validator.validateAll().then((result) =>{
+                console.log('Validate Adicionais', result)
+                if (result) {
+                  this.$store.commit('setStepperAdicionais', this.itens)
+                  this.$emit('alterTab', page)
+                }else{
+                  //
+                }
+              })
             },
-            validInput(input){
+      validInput(input){
                 if (input){
                     return true
                 } else{
@@ -721,22 +793,7 @@
                     this.itens.municipal.file.imageUrl = ''
                 }
             },
-            checkMoney(){
-                if (this.itens.estadual.margem.includes("R$") || this.itens.municipal.margem.includes("R$")){
-                    console.log('Entrei aqui')
-                    if ((this.itens.estadual.margem === 'R$ 0,00' && this.itens.estadual.margemRadio === "1") ||
-                        this.itens.municipal.margem === 'R$ 0,00' && this.itens.municipal.margemRadio === "1"){
-                        this.showError = true
-                        return false
-                    }else{
-                        this.showError = false
-                        return true
-                    }
-                }else{
-                    console.log('Entrei nesse')
-                    return true
-                }
-            },
+
             checkdate(flag, index){
                 if (flag) {
                     this.$validator.validate('parentesco-data-'+index, this.itens.geral.parentescos[index].nascimento).then((result) =>{
@@ -805,6 +862,12 @@
                 this.itens.geral.financeiras.banck.banco = ""
                 this.itens.geral.financeiras.banck.agencia = ""
                 this.itens.geral.financeiras.banck.conta = ""
+              }
+            },
+            cleanBankBB(value){
+              if (value == 2){
+                this.itens.geral.financeiras.banckBrasil.agencia = ""
+                this.itens.geral.financeiras.banckBrasil.conta = ""
               }
             }
         }

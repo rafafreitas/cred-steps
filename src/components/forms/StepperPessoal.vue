@@ -19,7 +19,7 @@
                                 tick-size="2"
                                 thumb-label
                                 min="500"
-                                max="50000"
+                                max="70000"
                                 step="500"
                         ></v-slider>
                     </v-flex>
@@ -44,9 +44,21 @@
                         {{firstParcel}} e {{secondParcel}}
                     </label>
                 </p>
+                <v-text-field
+                  v-validate="'required|money'"
+                  class="text-field-limite-more"
+                  v-model.lazy="itens.parcelaValor"
+                  :rules="[() => validInput(itens.parcelaValor) || error]"
+                  :error-messages="errors.collect('Valor')"
+                  data-vv-name="Valor"
+                  type="tel"
+                  label="Quanto gostaria de pagar por mês?"
+                  v-money
+                  ref="Valor"
+                  required
+                ></v-text-field>
 
                 <v-text-field
-
                         v-validate="'required|alpha_spaces|min:6'"
                         v-model="itens.nome"
                         :rules="[() => validInput(itens.nome) || error]"
@@ -234,6 +246,7 @@
                     '96 Parcelas'
                 ],
                 parcela: "12 Parcelas",
+                parcelaValor: "",
                 nome: "",
                 telefone: "",
                 cpf: "",
@@ -264,17 +277,19 @@
         },
         methods: {
             nextPage(page){
-                this.$validator.validateAll().then((result) =>{
-                    console.log('Validate Scope', result)
-                    if (result) {
-                        this.$store.commit('setStepperPessoal', this.itens)
-                        this.$emit('alterTab', page)
-                        // this.$emit('alterTab')
-                        // this.e1 = page
-                    }else{
-                        // this.e1 = page
-                    }
-                })
+              this.$store.commit('hasErrorMoney', true)
+              this.$validator.validateAll().then((result) =>{
+                console.log('Validate Scope', result)
+                if (result) {
+                  this.$store.commit('setStepperPessoal', this.itens)
+                  this.$store.commit('hasErrorMoney', false)
+                  this.$emit('alterTab', page)
+                    // this.$emit('alterTab')
+                    // this.e1 = page
+                }else{
+                  // this.e1 = page
+                  }
+              })
             },
             calcularJuros(taxa){
                 let qtd = parseInt(this.itens.parcela.split(" "))

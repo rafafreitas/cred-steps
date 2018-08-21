@@ -95,22 +95,19 @@
                         <v-checkbox v-validate="'required'" data-vv-name="credito" :error-messages="errors.collect('credito')" class="container-checkbox" v-model="itens.checkbox" label="Crédito consignado para aposentado, pensionista, funcionário público ou forças armadas" value="1"></v-checkbox>
                         <v-checkbox v-validate="'required'" data-vv-name="credito" :error-messages="errors.collect('credito')" class="container-checkbox" v-model="itens.checkbox" label="Pelo limite do cartão de crédito" value="2"></v-checkbox>
                         <div v-if="itens.checkbox.includes('2')" >
-                            <label>
-                                Qual o limite?<br>
-                            </label>
                             <v-text-field
-                                    v-validate="'required'"
+                                    v-validate="'required|money'"
                                     class="text-field-limite"
                                     v-model="itens.limite"
                                     :rules="[() => validInput(itens.limite) || error]"
                                     :error-messages="errors.collect('limite')"
                                     data-vv-name="limite"
                                     type="tel"
+                                    ref="Valor"
+                                    label="Qual o limite?"
                                     v-money
                                     required
                             ></v-text-field>
-                            <p class="error-credito" v-if="showError">Informe o valor do limite.</p>
-
 
                         </div>
                         <v-checkbox v-validate="'required'" data-vv-name="credito" :error-messages="errors.collect('credito')" class="container-checkbox" v-model="itens.checkbox" label="Desconto em folha de pagamento" value="3"></v-checkbox>
@@ -150,7 +147,6 @@
         data: () => ({
             error:"",
             errorCredito: false,
-            showError: false,
             modal: false,
             itens:{
                 radios: null,
@@ -181,38 +177,27 @@
         },
         methods: {
             nextPage(page){
-                this.$validator.validateAll().then((result) =>{
-                    console.log('Validate Motivo', result)
-                    if (result && this.checkMoney()) {
-                        this.$store.commit('setStepperMotivo', this.itens)
-                        this.$emit('alterTab', page)
+              this.$store.commit('hasErrorMoney', true)
+              this.$validator.validateAll().then((result) =>{
+                console.log('Validate Motivo', result)
+                if (result) {
+                  this.$store.commit('setStepperMotivo', this.itens)
+                  this.$store.commit('hasErrorMoney', false)
+                  this.$emit('alterTab', page)
 
-                    }else{
-                        if (this.itens.checkbox.length === 0){
-                            this.errorCredito = true;
-                        }
+                }else{
+                  if (this.itens.checkbox.length === 0){
+                    this.errorCredito = true;
+                  }
 
-                    }
-                })
+                }
+              })
             },
-            validInput(input){
+      validInput(input){
                 if (input){
                     return true
                 } else{
                     return false
-                }
-            },
-            checkMoney(){
-                if (this.itens.limite.includes("R$")){
-                    if (this.itens.limite === 'R$ 0,00' && this.itens.checkbox.includes('2')){
-                        this.showError = true
-                        return false
-                    }else{
-                        this.showError = false
-                        return true
-                    }
-                }else{
-                    return true
                 }
             },
             checkdate(flag){
