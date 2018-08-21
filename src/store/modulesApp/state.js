@@ -16,6 +16,7 @@ export default {
         router: "",
         money: "",
         parcela: "",
+        parcelaValor: "",
         nome: "",
         telefone: "",
         cpf: "",

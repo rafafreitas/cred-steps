@@ -50,6 +50,7 @@ export const setRouterForm = (state, router) => {
 export const setStepperPessoal = (state, itens) => {
     state.stepperPessoal.money = itens.initialValue
     state.stepperPessoal.parcela = itens.parcela
+    state.stepperPessoal.parcelaValor = itens.parcelaValor
     state.stepperPessoal.nome = itens.nome
     state.stepperPessoal.telefone = itens.telefone
     state.stepperPessoal.cpf = itens.cpf
