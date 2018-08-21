@@ -61,6 +61,12 @@ export default {
                 chequeDev: null,
                 emprego: null,
                 rendaComprovada: null,
+                rendaValor: null,
+                banckBrasil: {
+                    possui: null,
+                    agencia: "",
+                    conta: "",
+                },
                 banck: {
                     possui: null,
                     banco: '',

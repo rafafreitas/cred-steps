@@ -741,7 +741,7 @@
                 }
               })
             },
-      validInput(input){
+            validInput(input){
                 if (input){
                     return true
                 } else{
@@ -793,7 +793,6 @@
                     this.itens.municipal.file.imageUrl = ''
                 }
             },
-
             checkdate(flag, index){
                 if (flag) {
                     this.$validator.validate('parentesco-data-'+index, this.itens.geral.parentescos[index].nascimento).then((result) =>{
