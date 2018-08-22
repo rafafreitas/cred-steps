@@ -10,19 +10,13 @@ export const hasLoadingG = (state, flag) => {
   state.loadingG = flag
 }
 
-export const hasAlertError = (state, flag, type) => {
-  switch (type) {
+export const hasAlertError = (state, obj) => {
+  switch (obj.type) {
     case 1:
-      state.alerts.pessoal = flag
+      state.alerts.error = obj.flag
       break
     case 2:
-      state.alerts.motivo = flag
-      break
-    case 3:
-      state.alerts.adicionais = flag
-      break
-    case 4:
-      state.alerts.finalize = flag
+      state.alerts.warning = obj.flag
       break
   }
 }

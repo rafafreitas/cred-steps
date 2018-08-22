@@ -69,8 +69,8 @@
                     })
                     .catch(err => {
                       this.$store.commit('hasLoadingG', false)
-                      this.$store.commit('hasAlertError', true, page-1)
-                      setTimeout(function(){this.$store.commit('hasAlertError', false, page-1)}, 2000);
+                      this.$store.commit('hasAlertError', {flag: true, type: 1})
+                      setTimeout(()=>{this.$store.commit('hasAlertError', {flag: false, type: 1})}, 2000);
                     })
                   break
                 case 3:
@@ -81,8 +81,8 @@
                     })
                     .catch(err => {
                       this.$store.commit('hasLoadingG', false)
-                      this.$store.commit('hasAlertError', true, page-1)
-                      setTimeout(function(){this.$store.commit('hasAlertError', false, page-1)}, 2000);
+                      this.$store.commit('hasAlertError', {flag: true, type: 1})
+                      setTimeout(()=>{this.$store.commit('hasAlertError', {flag: false, type: 1})}, 2000);
                     })
                   break
                 case 4:
@@ -93,8 +93,8 @@
                     })
                     .catch(err => {
                       this.$store.commit('hasLoadingG', false)
-                      this.$store.commit('hasAlertError', true, page-1)
-                      setTimeout(function(){this.$store.commit('hasAlertError', false, page-1)}, 2000);
+                      this.$store.commit('hasAlertError', {flag: true, type: 1})
+                      setTimeout(()=>{this.$store.commit('hasAlertError', {flag: false, type: 1})}, 2000);
                     })
                   break
               }

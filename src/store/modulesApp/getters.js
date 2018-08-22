@@ -9,16 +9,10 @@ export const isLoadingG = (state) => {
 export const alertsErros = (state) => (id) =>{
   switch (id) {
     case 1:
-      return state.alerts.pessoal
+      return state.alerts.error
       break
     case 2:
-      return state.alerts.motivo
-      break
-    case 3:
-      return state.alerts.adicionais
-      break
-    case 4:
-      return state.alerts.finalize
+      return state.alerts.warning
       break
   }
 }

@@ -5,10 +5,8 @@ export default {
     userType: null,
     errorMoney: false,
     alerts: {
-      pessoal: false,
-      motivo: false,
-      adicionais: false,
-      finalize: false
+      error: false,
+      warning: false
     },
     estados: [],
     cidades: [],
