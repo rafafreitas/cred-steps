@@ -243,7 +243,8 @@
                         this.$store.commit('setStepperFinalize', this.fotos)
                         this.$emit('finish')
                     }else{
-                        console.log('Campos não validados')
+                        this.$store.commit('hasAlertError', {flag: true, type: 2})
+                        setTimeout(()=>{this.$store.commit('hasAlertError', {flag: false, type: 2})}, 3000);
                     }
                 })
             },

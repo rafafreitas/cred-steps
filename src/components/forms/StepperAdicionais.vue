@@ -309,7 +309,7 @@
                     </v-flex>
 
                     <v-flex xs12 sm6>
-                      <label>Conta no Banco do Brasil</label>
+                      <label>Possui conta no Banco do Brasil?</label>
                       <v-radio-group
                         v-model="itens.geral.financeiras.banckBrasil.possui"
                         :mandatory="false"
@@ -621,13 +621,7 @@
 
         </v-card>
 
-        <v-alert
-          v-model="$store.getters.alertsErros(3)"
-          dismissible
-          type="error"
-        >
-          Ocorreu um erro no envio das informações. Tente novamente!
-        </v-alert>
+        <Alerts></Alerts>
 
         <v-btn color="primary" @click="nextPage(4)" :loading="$store.getters.isLoadingG">
             Enviar
@@ -639,8 +633,10 @@
 
 <script>
     import myDictionary from '../../validations/dicionary'
+    import Alerts from "../Alerts";
     export default {
         name: "Page-3",
+        components: {Alerts},
         data: () => ({
             loading: [{
                 item: false
@@ -737,7 +733,8 @@
                   this.$store.commit('setStepperAdicionais', this.itens)
                   this.$emit('alterTab', page)
                 }else{
-                  //
+                  this.$store.commit('hasAlertError', {flag: true, type: 2})
+                  setTimeout(()=>{this.$store.commit('hasAlertError', {flag: false, type: 2})}, 3000);
                 }
               })
             },

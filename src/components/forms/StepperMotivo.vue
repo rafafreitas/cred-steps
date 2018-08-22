@@ -124,14 +124,7 @@
 
         </v-card>
 
-        <v-alert
-          v-model="$store.getters.alertsErros(2)"
-          dismissible
-          type="error"
-        >
-          Ocorreu um erro no envio das informações. Tente novamente!
-        </v-alert>
-
+        <Alerts></Alerts>
         <v-btn color="primary" @click="nextPage(3)" :loading="$store.getters.isLoadingG">
             Enviar
         </v-btn>
@@ -142,8 +135,10 @@
 
 <script>
     import myDictionary from '../../validations/dicionary'
+    import Alerts from "../Alerts";
     export default {
         name: "Page-2",
+        components: {Alerts},
         data: () => ({
             error:"",
             errorCredito: false,
@@ -189,7 +184,8 @@
                   if (this.itens.checkbox.length === 0){
                     this.errorCredito = true;
                   }
-
+                    this.$store.commit('hasAlertError', {flag: true, type: 2})
+                    setTimeout(()=>{this.$store.commit('hasAlertError', {flag: false, type: 2})}, 3000);
                 }
               })
             },

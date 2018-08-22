@@ -202,14 +202,7 @@
 
             </div>
         </v-card>
-        <v-alert
-          v-model="$store.getters.alertsErros(1)"
-          dismissible
-          type="error"
-        >
-          Ocorreu um erro no envio das informações. Tente novamente!
-        </v-alert>
-
+        <Alerts></Alerts>
         <v-btn color="primary" @click="nextPage(2)" :loading="$store.getters.isLoadingG">
             Enviar
         </v-btn>
@@ -224,8 +217,10 @@
 
 <script>
     import myDictionary from '../../validations/dicionary'
+    import Alerts from "../Alerts";
     export default {
         name: "Page-1",
+        components: {Alerts},
         data: () => ({
             loading: false,
             error:"Este campo é obrigatório!",
@@ -284,10 +279,9 @@
                   this.$store.commit('setStepperPessoal', this.itens)
                   this.$store.commit('hasErrorMoney', false)
                   this.$emit('alterTab', page)
-                    // this.$emit('alterTab')
-                    // this.e1 = page
                 }else{
-                  // this.e1 = page
+                  this.$store.commit('hasAlertError', {flag: true, type: 2})
+                  setTimeout(()=>{this.$store.commit('hasAlertError', {flag: false, type: 2})}, 3000);
                   }
               })
             },
