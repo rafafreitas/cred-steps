@@ -286,11 +286,10 @@
               })
             },
             calcularJuros(taxa){
-                let qtd = parseInt(this.itens.parcela.split(" "))
+                let parcela = parseInt(this.itens.parcela.split(" "))
                 let valor = this.itens.initialValue
-                let juros = (valor * taxa * qtd );
-
-                return ((valor + juros) / qtd).toFixed(2).replace(".",",");
+                let CF = taxa / (1 - (1 / Math.pow((1 + taxa), parcela)))
+                return (valor * CF).toFixed(2).replace(".",",");
             },
             validInput(input){
                 if (input){
