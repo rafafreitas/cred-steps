@@ -9,7 +9,7 @@
                 <p>
                     Selecione abaixo como vai nos informar sua margem de empréstimo livre: <br>
                     Para descobrir a margem ou ver contracheque acessar
-                    <a href="www.peconsig.gov.br" target="_blank">www.peconsig.gov.br</a>
+                    <a href="https://www.sare.pe.gov.br/ConsultarContraChequec.aspx" target="_blank">www.sare.pe.gov.br</a>
                     e digitar Matrícula e Senha
                 </p>
 
@@ -27,7 +27,7 @@
 
                 <div v-if="itens.estadual.margemRadio === '1'" >
                   <v-text-field
-                    v-validate="'required|money'"
+                    v-validate="'required'"
                     class="text-field-limite margin-top-none"
                     v-model="itens.estadual.margem"
                     :rules="[() => validInput(itens.estadual.margem) || error]"
@@ -134,7 +134,7 @@
 
                 <div v-if="itens.municipal.margemRadio === '1'" >
                     <v-text-field
-                            v-validate="'required|money'"
+                            v-validate="'required'"
                             class="text-field-limite margin-top-none"
                             v-model="itens.municipal.margem"
                             :rules="[() => validInput(itens.municipal.margem) || error]"
