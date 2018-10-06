@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-toolbar app class="toolbar-main">
+        <v-toolbar v-if="!isApp" app class="toolbar-main">
             <img class="toolbar-img" src="../../../assets/clinical.jpg">
             <v-toolbar-title v-text="title"></v-toolbar-title>
             <v-spacer></v-spacer>
@@ -14,13 +14,19 @@
 </template>
 
 <script>
+    import { mapGetters } from 'vuex'
     export default {
         name: "container",
         data () {
             return {
                 title: ''
             }
-        }
+        },
+        computed: {
+          ...mapGetters([
+            'isApp'
+          ])
+        },
     }
 </script>
 

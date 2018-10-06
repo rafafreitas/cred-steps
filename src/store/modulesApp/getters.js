@@ -6,6 +6,10 @@ export const isLoadingG = (state) => {
   return state.loadingG
 }
 
+export const isApp = (state) => {
+  return state.isApp
+}
+
 export const alertsErros = (state) => (id) =>{
   switch (id) {
     case 1:

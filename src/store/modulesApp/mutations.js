@@ -25,6 +25,10 @@ export const hasUserType = (state, type) => {
     state.userType = type
 }
 
+export const hasAppUse = (state, flag) => {
+  state.isApp = flag
+}
+
 export const setStates = (state, estados) => {
     state.estados = estados
 }

@@ -15,6 +15,11 @@ Router.beforeEach((to, from, next) => {
     console.log('Check Routers')
     console.log('Store - isAuth', store.getters.isAuth)
 
+    if (to.query.app) {
+      console.log('Query_Param', to.query.app)
+      store.commit('hasAppUse', true)
+    }
+
     let requiresAuth = to.meta.auth
     let currentUser = store.getters.isAuth;
 

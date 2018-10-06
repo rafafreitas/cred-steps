@@ -8,6 +8,7 @@ export default {
       error: false,
       warning: false
     },
+    isApp: false,
     estados: [],
     cidades: [],
     bancos: [],
