@@ -38,6 +38,7 @@
     import Page2 from "../../../components/forms/StepperMotivo";
     import Page3 from "../../../components/forms/StepperAdicionais";
     import Page4 from "../../../components/forms/StepperFinalize";
+    import { mapGetters } from 'vuex'
     export default {
         name: "Contato",
         components: {Page1,Page2,Page3,Page4},
@@ -49,11 +50,18 @@
             this.$store.commit('setRouterForm', this.verifyRouter)
         },
         computed: {
+          ...mapGetters([
+            'isApp'
+          ]),
           verifyRouter: function () {
             if (this.$router.currentRoute.name === 'Formulario2' ){
               return 2
             } else {
-              return 1
+              if (this.isApp){
+                return 3
+              }else{
+                return 1
+              }
             }
           }
         },
